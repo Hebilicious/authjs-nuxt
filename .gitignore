@@ -1,0 +1,5 @@
+node_modules
+dist
+.nuxt
+packages/*/README.md
+.eslintcache

@@ -1,0 +1,40 @@
+{
+  "name": "@hebilicious/authjs-nuxt",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@8.4.0",
+  "scripts": {
+    "build": "rimraf packages/*/dist && pnpm -r --filter=./packages/* run build",
+    "lint": "eslint --cache .",
+    "lint:fix": "nr lint --fix",
+    "bumpp": "bumpp -r",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.38.6",
+    "@antfu/ni": "^0.21.3",
+    "@types/node": "^18.16.4",
+    "bumpp": "^9.1.0",
+    "eslint": "8.39.0",
+    "esno": "^0.16.3",
+    "lint-staged": "^13.2.2",
+    "pnpm": "8.4.0",
+    "prettier": "^2.8.8",
+    "rimraf": "^5.0.0",
+    "simple-git-hooks": "^2.8.1",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4",
+    "unbuild": "^0.8.11",
+    "vitest": "^0.31.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,vue,md}": [
+      "eslint --cache --fix"
+    ]
+  }
+}
