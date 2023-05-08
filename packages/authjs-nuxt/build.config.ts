@@ -13,6 +13,7 @@ export default defineBuildConfig({
     "@nuxt/schema",
     // Type only
     "vue",
+    "h3",
     "vue-router",
     "unstorage",
     "nitropack"

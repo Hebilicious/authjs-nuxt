@@ -21,7 +21,6 @@
     "**/dist",
     "**/playground",
     "**/playgrounds",
-    "**/docs",
-    "./packages/devtools/client"
+    "**/docs"
   ]
 }

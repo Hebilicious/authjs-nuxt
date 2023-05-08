@@ -23,7 +23,7 @@
   "scripts": {
     "build": "pnpm build:module && esno scripts/prepare.ts",
     "build:module": "nuxt-build-module",
-    "dev": "nuxi dev client",
+    "dev": "nuxi dev",
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
@@ -39,6 +39,7 @@
     "@nuxt/kit": "^3.4.3",
     "@nuxt/module-builder": "^0.3.1",
     "defu": "^6.1.2",
+    "h3": "^1.6.5",
     "nuxt": "^3.4.3"
   }
 }
