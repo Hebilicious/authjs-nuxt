@@ -8,6 +8,13 @@
   },
   "devDependencies": {
     "@nuxt-themes/docus": "^1.11.1",
-    "nuxt": "^3.4.3"
+    "@nuxt/devtools": "^0.4.6",
+    "@unocss/nuxt": "^0.51.12",
+    "@unocss/reset": "^0.51.12",
+    "nuxt": "^3.4.3",
+    "pathe": "^1.1.0",
+    "pinceau": "^0.18.9",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
   }
 }

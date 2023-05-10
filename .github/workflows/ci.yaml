@@ -24,14 +24,11 @@ jobs:
           node-version: 18
           cache: pnpm
 
-      - name: Setup
-        run: npm i -g @antfu/ni
-
       - name: Install
-        run: nci
+        run: pnpm i
 
       - name: Lint
-        run: nr lint
+        run: pnpm lint
 
   test:
     runs-on: ubuntu-latest
@@ -48,19 +45,15 @@ jobs:
           node-version: 18
           cache: pnpm
 
-      - run: corepack enable
-
-      - name: Setup
-        run: npm i -g @antfu/ni
-
       - name: Install
-        run: nci
+        run: pnpm i
+
 
       - name: Build
-        run: nr build
+        run: pnpm build
 
       - name: Test
-        run: nr test
+        run: pnpm test
 
       - name: Typecheck
-        run: nr typecheck
+        run: pnpm typecheck
