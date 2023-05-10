@@ -1,0 +1,23 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@auth/core": "^0.7.1",
+    "@types/node": "^18",
+    "nuxt": "^3.4.3",
+    "unctx": "^2.3.0",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
+  },
+  "dependencies": {
+    "@panva/hkdf": "^1.1.1",
+    "jose": "^4.14.4"
+  }
+}
