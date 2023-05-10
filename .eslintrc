@@ -4,6 +4,7 @@
     "@typescript-eslint/quotes": ["error", "double"],
     "@typescript-eslint/comma-dangle": ["error", "never"],
     "comma-dangle": ["error", "never"],
-    "yml/quotes": "off"
+    "yml/quotes": "off",
+    "antfu/if-newline": "off"
   }
 }

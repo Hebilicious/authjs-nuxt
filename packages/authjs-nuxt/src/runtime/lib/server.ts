@@ -1,9 +1,10 @@
 import crypto from "node:crypto"
-import { Auth } from "@auth/core"
+import type { RuntimeConfig } from "nuxt/schema"
+import { Auth, skipCSRFCheck } from "@auth/core"
 import type { H3Event } from "h3"
 import { eventHandler, getRequestHeaders, getRequestURL } from "h3"
 import type { AuthConfig, Session } from "@auth/core/types"
-import { getRequestFromEvent, respondWithResponse } from "../utils"
+import { checkOrigin, getRequestFromEvent, respondWithResponse } from "../utils"
 
 if (!globalThis.crypto) {
   Object.defineProperty(globalThis, "crypto", {
@@ -19,11 +20,13 @@ if (!globalThis.crypto) {
  * @param options
  * @returns
  */
-export function NuxtAuthHandler(options: AuthConfig) {
+export function NuxtAuthHandler(options: AuthConfig, runtimeConfig: RuntimeConfig) {
   return eventHandler(async (event) => {
     options.trustHost ??= true
+    options.skipCSRFCheck = skipCSRFCheck
     const request = await getRequestFromEvent(event)
-    // console.log("Auth.JS =>", request.url)
+    if (request.url.includes(".js.map")) return // Do not handle source maps
+    checkOrigin(request, runtimeConfig)
     const response = await Auth(request, options)
     return respondWithResponse(event, response)
   })
@@ -38,7 +41,6 @@ export async function getServerSession(
   const url = new URL("/api/auth/session", getRequestURL(event))
 
   const response = await Auth(
-    // rome-ignore lint/suspicious/noExplicitAny: The H3 type should be compatible with native headers ...
     new Request(url, { headers: getRequestHeaders(event) as any }),
     options
   )

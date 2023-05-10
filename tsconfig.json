@@ -12,8 +12,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "paths": {
-      "@auth/nuxt": ["packages/authjs-nuxt/src/module.ts"],
-      "#app": ["node_modules/nuxt/dist/app"]
+      "#imports": ["packages/authjs-nuxt/node_modules/nuxt/app.d.ts"],
+      "#app": ["packages/authjs-nuxt/node_modules/nuxt/dist/app"]
     }
   },
   "exclude": [

@@ -22,6 +22,7 @@
   ],
   "scripts": {
     "build": "pnpm build:module && esno scripts/prepare.ts",
+    "build:module:2": "nuxi build-module --stub .",
     "build:module": "nuxt-build-module",
     "dev": "nuxi dev",
     "prepublishOnly": "pnpm build"
@@ -40,6 +41,7 @@
     "@nuxt/module-builder": "^0.3.1",
     "defu": "^6.1.2",
     "h3": "^1.6.5",
-    "nuxt": "^3.4.3"
+    "nuxt": "^3.4.3",
+    "vue": "^3.2.47"
   }
 }

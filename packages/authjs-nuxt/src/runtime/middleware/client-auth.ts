@@ -1,5 +1,5 @@
 import { verifyClientSession } from "../lib"
-import { defineNuxtRouteMiddleware, navigateTo } from "#app"
+import { defineNuxtRouteMiddleware, navigateTo } from "#imports"
 
 /**
  * This middleware makes sure that the token is valid

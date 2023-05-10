@@ -1,5 +1,5 @@
 import { useAuth } from "../composables/useAuth"
-import { defineNuxtRouteMiddleware, navigateTo } from "#app"
+import { defineNuxtRouteMiddleware, navigateTo } from "#imports"
 
 /**
  * This middleware is the guard for our private pages.

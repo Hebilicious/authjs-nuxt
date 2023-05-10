@@ -3,5 +3,7 @@
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
+  "workbench.colorCustomizations": {},
+  "inline-bookmarks.view.showVisibleFilesOnly": false
 }

@@ -2,7 +2,7 @@ import type { Session } from "@auth/core/types"
 import { produce } from "immer"
 import { computed, readonly, watch } from "vue"
 import * as auth from "../lib"
-import { useState } from "#app"
+import { useState } from "#imports"
 
 export function useAuth() {
   const session = useState<Session | null>("auth:session", () => null)
@@ -13,7 +13,7 @@ export function useAuth() {
   )
   const sessionToken = computed(() => cookies.value?.["next-auth.session-token"] ?? "")
 
-  watch(session, (newSession) => {
+  watch(session, (newSession: Session | null) => {
     if (newSession === null)
       return (status.value = "unauthenticated")
     if (Object.keys(newSession).length)

@@ -1,12 +1,21 @@
 import { parse } from "cookie-es"
 import type { H3Event, RequestHeaders } from "h3"
 import { getMethod, getRequestHeaders, getRequestURL, readRawBody, sendRedirect } from "h3"
+import type { RuntimeConfig } from "nuxt/schema"
 
 export const configKey = "authJs"
 
+export function checkOrigin(request: Request, runtimeConfig: RuntimeConfig) {
+  if (process.env.NODE_ENV === "development") return
+  if (request.method !== "POST") return // Only check post requests
+  const requestOrigin = request.headers.get("Origin")
+  const serverOrigin = runtimeConfig.public.authJs.baseUrl
+  if (serverOrigin !== requestOrigin)
+    throw new Error("CSRF protected")
+}
+
 export function makeCookiesFromCookieString(cookieString: string | null) {
-  if (!cookieString)
-    return {}
+  if (!cookieString) return {}
   return Object.fromEntries(
     Object.entries(parse(cookieString)).filter(([k]) => k.startsWith("next"))
   )
