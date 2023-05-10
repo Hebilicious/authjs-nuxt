@@ -1,6 +1,11 @@
 # ⚗️ AuthJS Nuxt: Experimental Module
 
-Welcome to AuthJS Nuxt! This is an experimental module currently in its alpha stage, strictly adhering to the Auth.js core implementation. 
+Welcome to AuthJS Nuxt! This is an experimental module currently in its alpha stage, strictly adhering to the Auth.js core implementation.
+
+## Disclaimer
+
+Heavy WIP and not published to NPM yet !
+DO NOT USE !!
 
 ## 📦 Installation
 
@@ -8,7 +13,7 @@ Welcome to AuthJS Nuxt! This is an experimental module currently in its alpha st
 pnpm i @hebilicious/authjs-nuxt
 ```
 
-##  Caution
+## Caution
 
 This module is intended for those who know their way around authentication processes and are comfortable navigating potential breaking changes. We're constantly tinkering, improving, and yes, sometimes breaking things. But that's the nature of innovation!
 
@@ -59,5 +64,3 @@ export default defineConfig({
 
 Remember: this is an alpha
 Use with caution! 🏇
-
-

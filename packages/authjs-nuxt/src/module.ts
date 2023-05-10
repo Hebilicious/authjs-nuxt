@@ -33,10 +33,10 @@ export default defineNuxtModule({
       nitroConfig.externals = defu(typeof nitroConfig.externals === "object" ? nitroConfig.externals : {}, {
         inline: [resolve("./runtime")]
       })
-      nitroConfig.alias["#auth"] = resolve("./runtime/lib")
+      nitroConfig.alias["#auth"] = resolve("./runtime/lib/server")
     })
 
-    // 4.. Add types
+    // 4. Add types
     addTemplate({
       filename: "types/auth.d.ts",
       getContents: () => [
