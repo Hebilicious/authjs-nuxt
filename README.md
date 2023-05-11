@@ -17,11 +17,16 @@ _🧪 This module is really unstable and is not recommended for production use. 
 ### Why not?
 
 1. **Why not use use [Sidebase Nuxt-Auth](https://github.com/sidebase/sidebase)?**
-   Because it's not edge compatible. This module is.
+
+   - Because it's not edge compatible. This module is.
+
 2. **Why not use Auth.js directly?**
-   You can. However, Auth.js is currently being rewritten from Next-Auth, and wiring everything with Nuxt for the edge isn't straightforward. This gives you a good starting point and a reference implementation.
+  
+   - You can. However, Auth.js is currently being rewritten from Next-Auth, and wiring everything with Nuxt for the edge isn't straightforward. This gives you a good starting point and a reference implementation.
+
 3. **Why should I use this package? I'd rather build my own auth!**
-   Auth.js gives you a good starting point to do that, and so does this package. If you want to DIY even more, give [Lucia](https://github.com/pilcrowOnPaper/lucia) a shot.
+
+   - Auth.js gives you a good starting point to do that, and so does this package. If you want to DIY even more, give [Lucia](https://github.com/pilcrowOnPaper/lucia) a shot.
 
 ### Why ?
 
@@ -35,13 +40,13 @@ _🧪 This module is really unstable and is not recommended for production use. 
 Install `@hebilicious/authjs-nuxt` and auth.js `@auth/core`  from npm :
 
 ```bash
-pnpm i @hebilicious/authjs-nuxt
+pnpm i @hebilicious/authjs-nuxt @auth/core
 ```
 
 You can use npm as well :
 
 ```bash
-npm i @hebilicious/authjs-nuxt
+npm i @hebilicious/authjs-nuxt @auth/core
 ```
 
 ## 🛠️ How to Use
@@ -106,12 +111,12 @@ __Remember__: this is an alpha, use with caution! 🏇
 
 Contributions, issues and feature requests are welcome!
 
-Fork this repo :
+1. Fork this repo
 
-Use `pnpm` and install the dependencies from the mono-repo root.
+2. Install `node` and `pnpm` _Use `corepack enable && corepack prepare pnpm@latest --activate` to install pnpm easily_
 
-```bash
-pnpm i
-```
+3. Use `pnpm i` at the mono-repo root.
 
-Make modifications, then open a PR. 🚀🚀🚀
+4. Make modifications and follow conventional commits.
+
+5. Open a PR 🚀🚀🚀
