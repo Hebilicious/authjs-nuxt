@@ -1,3 +1,12 @@
+# [0.1.0-beta.1](https://github.com/Hebilicious/authjs-nuxt/compare/v0.1.0-beta.0...v0.1.0-beta.1) (2023-05-11)
+
+
+### Bug Fixes
+
+* bundle dependencies for pnpm compatibility ([34f6ad4](https://github.com/Hebilicious/authjs-nuxt/commit/34f6ad42ce6a6619afb5be3465bd245593bfd6b1))
+
+
+
 # [0.1.0-beta.0](https://github.com/Hebilicious/authjs-nuxt/compare/v0.0.8-beta.0...v0.1.0-beta.0) (2023-05-11)
 
 
