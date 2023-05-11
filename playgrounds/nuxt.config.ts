@@ -1,7 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    "../packages/authjs-nuxt/src/module"
+    // "../packages/authjs-nuxt/src/module"
+    "@hebilicious/authjs-nuxt"
   ],
   nitro: {
     routeRules: {

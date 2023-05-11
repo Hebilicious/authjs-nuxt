@@ -9,7 +9,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@auth/core": "^0.7.1"
+    "@auth/core": "^0.7.1",
+    "@hebilicious/authjs-nuxt": "workspace:0.1.0-beta.0"
   },
   "devDependencies": {
     "@nuxt/devtools": "^0.4.6",

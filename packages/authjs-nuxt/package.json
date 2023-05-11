@@ -43,5 +43,9 @@
     "@nuxt/module-builder": "^0.3.1",
     "h3": "^1.6.5",
     "vue": "^3.2.47"
-  }
+  },
+  "bundledDependencies": [
+    "@panva/hkdf",
+    "jose"
+  ]
 }

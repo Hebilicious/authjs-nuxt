@@ -131,6 +131,9 @@ importers:
       '@auth/core':
         specifier: ^0.7.1
         version: 0.7.1
+      '@hebilicious/authjs-nuxt':
+        specifier: workspace:0.1.0-beta.0
+        version: link:../packages/authjs-nuxt
     devDependencies:
       '@nuxt/devtools':
         specifier: ^0.4.6
