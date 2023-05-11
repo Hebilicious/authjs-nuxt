@@ -6,6 +6,8 @@
 
 🚀 Welcome to __AuthJS Nuxt__!  This is an edge compatible experimental Nuxt module currently in its alpha stage.
 This module uses the [Auth.js](https://github.com/nextauthjs/next-auth) core implementation under the hood.
+You can find the documentation [here](https://authjs-nuxt.pages.dev/) (WIP).
+Contributions are welcome !
 
 ##  ⚠️ Disclaimer
 
@@ -14,24 +16,19 @@ _🧪 This module is really unstable and is not recommended for production use. 
 
 ### Why not?
 
-1. Why not use use [Sidebase Nuxt-Auth](https://github.com/sidebase/sidebase)?
+1. **Why not use use [Sidebase Nuxt-Auth](https://github.com/sidebase/sidebase)?**
    Because it's not edge compatible. This module is.
-2. Why not use Auth.js directly?
-   You can. However, Auth.js is being rewritten from Next-Auth, and wiring everything with Nuxt for the edge isn't straightforward.
-3. Why should I use this package? I'd rather build my own auth!
-   Auth.Js allows you to build your own auth, and so does this package. If you want to DIY without starting from scratch, give [Lucia](https://github.com/pilcrowOnPaper/lucia) a shot.
+2. **Why not use Auth.js directly?**
+   You can. However, Auth.js is currently being rewritten from Next-Auth, and wiring everything with Nuxt for the edge isn't straightforward. This gives you a good starting point and a reference implementation.
+3. **Why should I use this package? I'd rather build my own auth!**
+   Auth.js gives you a good starting point to do that, and so does this package. If you want to DIY even more, give [Lucia](https://github.com/pilcrowOnPaper/lucia) a shot.
 
-### Why
+### Why ?
 
 - It's based on [Auth.js](https://github.com/nextauthjs/next-auth)
 - It works everywhere (tested on the edge)
 - It's lightweight
 - It's Nuxt
-
-## Caution
-
-This module is intended for those who know their way around authentication processes and are comfortable navigating potential breaking changes.
-Some things might break, but that just what things do. But that's the nature of innovation!
 
 ## 📦 Installation
 
