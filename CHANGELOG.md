@@ -1,3 +1,5 @@
+## [0.0.7](https://github.com/Hebilicious/authjs-nuxt/compare/v0.0.6...v0.0.7) (2023-05-11)
+
 v0.0.2 -> v0.0.3 (2 commits)
 --------------
 

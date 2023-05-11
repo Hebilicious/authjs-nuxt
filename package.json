@@ -1,14 +1,15 @@
 {
   "name": "@hebilicious/authjs-nuxt",
   "type": "module",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": true,
   "packageManager": "pnpm@8.4.0",
   "scripts": {
     "build": "rimraf packages/*/dist && pnpm -r --filter=./packages/* run build",
     "lint": "eslint --cache .",
     "lint:fix": "nr lint --fix",
-    "bumpp": "bumpp -r",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "release": "pnpm lint && bumpp -r -x \"pnpm run changelog\" --all",
     "typecheck": "tsc --noEmit",
     "test": "vitest"
   },
@@ -17,6 +18,7 @@
     "@antfu/ni": "^0.21.3",
     "@types/node": "^18.16.4",
     "bumpp": "^9.1.0",
+    "conventional-changelog-cli": "^2.2.2",
     "eslint": "8.39.0",
     "esno": "^0.16.3",
     "lint-staged": "^13.2.2",
