@@ -1,21 +1,51 @@
-# ⚗️ AuthJS Nuxt: Experimental Module
+# ⚗️ AuthJS Nuxt
 
-Welcome to AuthJS Nuxt! This is an experimental module currently in its alpha stage, strictly adhering to the Auth.js core implementation.
+[![CI](https://github.com/Hebilicious/authjs-nuxt/actions/workflows/ci.yaml/badge.svg)](https://github.com/Hebilicious/authjs-nuxt/actions/workflows/ci.yaml)
+[![npm version](https://badge.fury.io/js/@hebilicious%2Fauthjs-nuxt.svg)](https://badge.fury.io/js/@hebilicious%2Fauthjs-nuxt)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Disclaimer
+🚀 Welcome to __AuthJS Nuxt__!  This is an edge compatible experimental Nuxt module currently in its alpha stage.
+This module uses the [Auth.js](https://github.com/nextauthjs/next-auth) core implementation under the hood.
 
-Heavy WIP and not published to NPM yet !
-DO NOT USE !!
+##  ⚠️ Disclaimer
+
+_🧪 This module is really unstable and is not recommended for production use. It is intended for those who want to experiment with AuthJS on the edge._
+
+
+### Why not?
+
+1. Why not use use [Sidebase Nuxt-Auth](https://github.com/sidebase/sidebase)?
+   Because it's not edge compatible. This module is.
+2. Why not use Auth.js directly?
+   You can. However, Auth.js is being rewritten from Next-Auth, and wiring everything with Nuxt for the edge isn't straightforward.
+3. Why should I use this package? I'd rather build my own auth!
+   Auth.Js allows you to build your own auth, and so does this package. If you want to DIY without starting from scratch, give [Lucia](https://github.com/pilcrowOnPaper/lucia) a shot.
+
+### Why
+
+- It's based on [Auth.js](https://github.com/nextauthjs/next-auth)
+- It works everywhere (tested on the edge)
+- It's lightweight
+- It's Nuxt
+
+## Caution
+
+This module is intended for those who know their way around authentication processes and are comfortable navigating potential breaking changes.
+Some things might break, but that just what things do. But that's the nature of innovation!
 
 ## 📦 Installation
+
+Install `@hebilicious/authjs-nuxt` and auth.js `@auth/core`  from npm :
 
 ```bash
 pnpm i @hebilicious/authjs-nuxt
 ```
 
-## Caution
+You can use npm as well :
 
-This module is intended for those who know their way around authentication processes and are comfortable navigating potential breaking changes. We're constantly tinkering, improving, and yes, sometimes breaking things. But that's the nature of innovation!
+```bash
+npm i @hebilicious/authjs-nuxt
+```
 
 ## 🛠️ How to Use
 
@@ -24,10 +54,15 @@ This module is intended for those who know their way around authentication proce
 ```ts
 import GithubProvider from "@auth/core/providers/github"
 import type { AuthConfig } from "@auth/core/types"
-import { NuxtAuthHandler } from "~/modules/auth-nuxt/runtime/lib"
+import { NuxtAuthHandler } from "#auth"
+
+// The #auth virtual import comes from this module. You can use it on the client
+// and server side, however not every export is universal. For example do not
+// use sign-in and sign-out on the server side.
 
 const runtimeConfig = useRuntimeConfig()
 
+// Refer to Auth.js docs for more details
 export const authOptions: AuthConfig = {
   secret: runtimeConfig.authJs.secret,
   providers: [
@@ -38,7 +73,9 @@ export const authOptions: AuthConfig = {
   ]
 }
 
-export default NuxtAuthHandler(authOptions)
+export default NuxtAuthHandler(authOptions, runtimeConfig)
+// If you don't want to pass the full runtime config,
+//  you can pass something like this: { public: { authJs: { baseUrl: "" } } }
 ```
 
 2. Configure your Nuxt settings as shown below (GitHub example) :
@@ -64,5 +101,20 @@ export default defineConfig({
    }
 })
   ```
+Note that you can use whatever environment variables you want here, this is just an example.
 
-Remember: this is an alpha, use with caution! 🏇
+__Remember__: this is an alpha, use with caution! 🏇
+
+## 📦 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Fork this repo :
+
+Use `pnpm` and install the dependencies from the mono-repo root.
+
+```bash
+pnpm i
+```
+
+Make modifications, then open a PR. 🚀🚀🚀
