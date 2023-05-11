@@ -1,42 +1,7 @@
-# Nuxt 3 Minimal Starter
+# AuthJS Nuxt
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is a simple example to demonstrate how to use the module.
+## Dependencies Caveats
 
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+The dev dependencies are required for the build to work with pnpm.
+If you are using npm or `--shamefully-hoist=true`, you should be able to remove them from the `package.json` file.

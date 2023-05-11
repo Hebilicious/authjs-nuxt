@@ -16,7 +16,8 @@ export default defineBuildConfig({
     "h3",
     "vue-router",
     "unstorage",
-    "nitropack"
+    "nitropack",
+    "unenv"
   ],
   rollup: {
     inlineDependencies: true

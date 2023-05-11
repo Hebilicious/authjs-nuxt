@@ -22,26 +22,27 @@
   ],
   "scripts": {
     "build": "pnpm build:module && esno scripts/prepare.ts",
-    "build:module:2": "nuxi build-module --stub .",
     "build:module": "nuxt-build-module",
     "dev": "nuxi dev",
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
-    "nuxt": "^3.4.2",
+    "nuxt": "3.4.2",
     "vite": "*"
   },
   "dependencies": {
     "@auth/core": "^0.7.1",
+    "@nuxt/kit": "3.4.2",
+    "@panva/hkdf": "^1.1.1",
     "cookie-es": "^1.0.0",
-    "immer": "^10.0.1"
+    "defu": "^6.1.2",
+    "immer": "^10.0.1",
+    "jose": "^4.14.4",
+    "unctx": "^2.3.0"
   },
   "devDependencies": {
-    "@nuxt/kit": "^3.4.3",
     "@nuxt/module-builder": "^0.3.1",
-    "defu": "^6.1.2",
     "h3": "^1.6.5",
-    "nuxt": "^3.4.3",
     "vue": "^3.2.47"
   }
 }

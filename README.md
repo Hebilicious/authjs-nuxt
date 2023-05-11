@@ -41,26 +41,27 @@ export const authOptions: AuthConfig = {
 export default NuxtAuthHandler(authOptions)
 ```
 
-2. Configure your Nuxt settings as shown below:
+2. Configure your Nuxt settings as shown below (GitHub example) :
 
-```ts
+
+ ```ts
 export default defineConfig({
-  runtimeConfig: {
-    authJs: {
-      secret: process.env.NUXT_NEXTAUTH_SECRET
-    },
-    github: {
-      clientId: process.env.NUXT_GITHUB_CLIENT_ID,
-      clientSecret: process.env.NUXT_GITHUB_CLIENT_SECRET
-    },
-    public: {
-      authJs: {
-        baseUrl: process.env.NUXT_NEXTAUTH_URL // The base URL is used for the Origin Check
-      }
-    }
-  }
+   runtimeConfig: {
+     authJs: {
+       secret: process.env.NUXT_NEXTAUTH_SECRET // You can generate one with `openssl rand -base64 32`
+     },
+     github: {
+       clientId: process.env.NUXT_GITHUB_CLIENT_ID,
+       clientSecret: process.env.NUXT_GITHUB_CLIENT_SECRET
+     },
+     public: {
+       authJs: {
+         baseUrl: process.env.NUXT_NEXTAUTH_URL, // The base URL is used for the Origin Check in prod only
+         verifyClientOnEveryRequest: true // whether to hit the /auth/session endpoint on every client request
+       }
+     }
+   }
 })
-```
+  ```
 
-Remember: this is an alpha
-Use with caution! 🏇
+Remember: this is an alpha, use with caution! 🏇
