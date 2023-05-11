@@ -1,7 +1,7 @@
 {
   "name": "@hebilicious/authjs-nuxt",
   "type": "module",
-  "version": "0.1.0-beta.2",
+  "version": "0.1.0-beta.3",
   "license": "MIT",
   "repository": "Hebilicious/authjs-nuxt",
   "exports": {
@@ -26,9 +26,9 @@
     "dev": "nuxi dev"
   },
   "peerDependencies": {
+    "@auth/core": "^0.7.1",
     "nuxt": "^3.4.2",
-    "vite": "*",
-    "@auth/core": "^0.7.1"
+    "vite": "*"
   },
   "dependencies": {
     "@auth/core": "^0.7.1",

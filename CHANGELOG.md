@@ -1,3 +1,12 @@
+# [0.1.0-beta.3](https://github.com/Hebilicious/authjs-nuxt/compare/v0.1.0-beta.2...v0.1.0-beta.3) (2023-05-11)
+
+
+### Bug Fixes
+
+* add @auth/core as peer dependency ([c024794](https://github.com/Hebilicious/authjs-nuxt/commit/c024794b549565efb9fe7b468e99e7110b02251b))
+
+
+
 # [0.1.0-beta.2](https://github.com/Hebilicious/authjs-nuxt/compare/v0.1.0-beta.1...v0.1.0-beta.2) (2023-05-11)
 
 
