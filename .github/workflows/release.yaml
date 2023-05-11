@@ -35,9 +35,6 @@ jobs:
       - name: PNPM build
         run: pnpm run build
 
-      - name: Bump dependencies
-        run: pnpm run bumpp
-
       - name: Publish to NPM
         run: pnpm -r publish --access public --no-git-checks
         env:

@@ -46,6 +46,7 @@ export default NuxtAuthHandler(authOptions)
 
  ```ts
 export default defineConfig({
+   modules: ["@hebilicious/authjs-nuxt"],
    runtimeConfig: {
      authJs: {
        secret: process.env.NUXT_NEXTAUTH_SECRET // You can generate one with `openssl rand -base64 32`
