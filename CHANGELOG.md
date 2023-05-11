@@ -1,3 +1,13 @@
+# [0.1.0-beta.2](https://github.com/Hebilicious/authjs-nuxt/compare/v0.1.0-beta.1...v0.1.0-beta.2) (2023-05-11)
+
+
+### Bug Fixes
+
+* remove postinstall script ([e666940](https://github.com/Hebilicious/authjs-nuxt/commit/e6669401bb21aa5e329c8ce6ec914c1bee663fb1))
+* workspace deps ([6ddccf7](https://github.com/Hebilicious/authjs-nuxt/commit/6ddccf792d9f0d15ccc301745c3fbae63632b981))
+
+
+
 # [0.1.0-beta.1](https://github.com/Hebilicious/authjs-nuxt/compare/v0.1.0-beta.0...v0.1.0-beta.1) (2023-05-11)
 
 
