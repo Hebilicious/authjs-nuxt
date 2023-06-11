@@ -6,20 +6,15 @@ export default defineBuildConfig({
   ],
   externals: [
     "@auth/core",
-    "nuxt",
-    "nuxt/schema",
-    "vite",
-    "@nuxt/kit",
-    "@nuxt/schema",
-    // Type only
-    "vue",
+    "jose",
+    "@panva/hkdf",
+    "cookie-es",
+    // implicit externals
     "h3",
-    "vue-router",
-    "unstorage",
-    "nitropack",
-    "unenv"
-  ],
-  rollup: {
-    inlineDependencies: true
-  }
+    "ufo",
+    "radix3",
+    "destr",
+    "uncrypto",
+    "iron-webcrypto"
+  ]
 })

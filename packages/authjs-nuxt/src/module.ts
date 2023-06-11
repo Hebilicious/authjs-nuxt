@@ -4,10 +4,19 @@ import { configKey } from "./runtime/utils"
 
 const NAME = "@auth/nuxt"
 
-export default defineNuxtModule({
+interface ModuleOptions {
+  verifyClientOnEveryRequest: boolean
+  baseUrl: string
+}
+
+export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: NAME,
     configKey
+  },
+  defaults: {
+    verifyClientOnEveryRequest: true,
+    baseUrl: ""
   },
   setup(userOptions, nuxt) {
     const logger = useLogger(NAME)
@@ -26,7 +35,8 @@ export default defineNuxtModule({
     // @todo This isn't needed for node, apply this based on Nitro settings
     nuxt.options.alias = defu(nuxt.options.alias, {
       "jose": resolve(__dirname, "../node_modules/jose/dist/browser/index.js"),
-      "@panva/hkdf": resolve(__dirname, "../node_modules/@panva/hkdf/dist/web/index.js")
+      "@panva/hkdf": resolve(__dirname, "../node_modules/@panva/hkdf/dist/web/index.js"),
+      "cookie": resolve(__dirname, "../node_modules/cookie-es")
     })
 
     // 3. Add composables
@@ -34,7 +44,8 @@ export default defineNuxtModule({
 
     // 4. Create virtual imports for server-side
     // @todo Contribute an helper to nuxt/kit to handle this scenario like this
-    // addLibrary({name: "#auth", entry: "./runtime/lib", clientEntry: "./runtime/lib/client", serverEntry: "./runtime/lib/server"})
+    // addLibrary({name: "#auth", type: "server", from: "./runtime/lib/server"})
+    // addLibrary({name: "#auth", type: "client", from: "./runtime/lib/client"})
 
     // These will be available only in the /server directory
     nuxt.hook("nitro:config", (nitroConfig) => {
