@@ -5,6 +5,7 @@
   "private": true,
   "packageManager": "pnpm@8.4.0",
   "scripts": {
+    "dev": "pnpm -r --filter=./packages/* run dev",
     "build": "rimraf packages/*/dist && pnpm -r --filter=./packages/* run build",
     "lint": "eslint --cache .",
     "lint:fix": "nr lint --fix",
