@@ -1,0 +1,114 @@
+# Getting started
+
+## 📦 Installation
+
+Install `@hebilicious/authjs-nuxt` and auth.js `@auth/core`  from npm :
+
+```bash
+npm i @hebilicious/authjs-nuxt @auth/core
+
+pnpm i @hebilicious/authjs-nuxt @auth/core
+
+yarn add @hebilicious/authjs-nuxt @auth/core
+```
+
+## 🛠️ Route Configuration
+
+Create a catch-all route at `server/api/auth/[...].ts`. 
+
+```ts
+import GithubProvider from "@auth/core/providers/github"
+import type { AuthConfig } from "@auth/core/types"
+import { NuxtAuthHandler } from "#auth"
+
+// The #auth virtual import comes from this module. You can use it on the client
+// and server side, however not every export is universal. For example do not
+// use sign-in and sign-out on the server side.
+
+const runtimeConfig = useRuntimeConfig()
+
+// Refer to Auth.js docs for more details
+export const authOptions: AuthConfig = {
+  secret: runtimeConfig.authJs.secret,
+  providers: [
+    GithubProvider({
+      clientId: runtimeConfig.github.clientId,
+      clientSecret: runtimeConfig.github.clientSecret
+    })
+  ]
+}
+
+export default NuxtAuthHandler(authOptions, runtimeConfig)
+// If you don't want to pass the full runtime config,
+//  you can pass something like this: { public: { authJs: { baseUrl: "" } } }
+```
+
+## ⚙️ Nuxt settings
+
+This is an example for GitHub
+
+ ```ts
+export default defineConfig({
+   modules: ["@hebilicious/authjs-nuxt"],
+   runtimeConfig: {
+     authJs: {
+       secret: process.env.NUXT_NEXTAUTH_SECRET // You can generate one with `openssl rand -base64 32`
+     },
+     github: {
+       clientId: process.env.NUXT_GITHUB_CLIENT_ID,
+       clientSecret: process.env.NUXT_GITHUB_CLIENT_SECRET
+     },
+     public: {
+       authJs: {
+         baseUrl: process.env.NUXT_NEXTAUTH_URL, // The base URL is used for the Origin Check in prod only
+         verifyClientOnEveryRequest: true // whether to hit the /auth/session endpoint on every client request
+       }
+     }
+   }
+})
+  ```
+
+Note that you can use whatever environment variables you want here, this is just an example.
+
+## 📝 Usage
+
+Use the `useAuth` helper to handle your authentication.
+
+```html
+<script setup lang="ts">
+const { signIn, signOut, session, status, cookies } = useAuth()
+</script>
+
+<template>
+  <div>
+    <div>
+      <a href="/api/auth/signin" class="buttonPrimary">Native Link Sign in</a>
+      <button @click="signIn(`github`)">
+        JS Sign In
+      </button>
+      <button @click="signOut()">
+        Sign Out
+      </button>
+    </div>
+    <div>
+      <pre>{{ status }}</pre>
+      <pre>{{ session?.user }}</pre>
+      <pre>{{ cookies }}</pre>
+    </div>
+  </div>
+</template>
+```
+
+Use the `auth` middleware to protect your pages.
+
+`pages/private.vue`
+
+```html
+<script>
+definePageMeta({ middleware: "auth" })
+</script>
+
+<template>
+  <h1>PRIVATE</h1>
+</template>
+```
