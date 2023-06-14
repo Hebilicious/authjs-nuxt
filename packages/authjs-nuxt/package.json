@@ -1,7 +1,7 @@
 {
   "name": "@hebilicious/authjs-nuxt",
   "type": "module",
-  "version": "0.1.0-beta.5",
+  "version": "0.1.0-beta.6",
   "license": "MIT",
   "repository": "Hebilicious/authjs-nuxt",
   "exports": {
@@ -23,6 +23,7 @@
   "scripts": {
     "build": "pnpm build:module && esno scripts/prepare.ts",
     "build:module": "nuxt-build-module",
+    "edge-release": "pnpm build && pnpm publish --access public --tag edge",
     "dev": "nuxi dev"
   },
   "peerDependencies": {
