@@ -82,10 +82,17 @@ export default NuxtAuthHandler(authOptions, runtimeConfig)
 
 2. Configure your Nuxt settings as shown below (GitHub example) :
 
-
  ```ts
+import { resolve } from "node:path"
+
 export default defineConfig({
    modules: ["@hebilicious/authjs-nuxt"],
+   // Add these aliases if you are running into import errors
+   alias: {
+     //  "cookie": resolve(__dirname, "node_modules/cookie"),
+     //  "jose": resolve(__dirname, "node_modules/jose/dist/browser/index.js"),
+     //  "@panva/hkdf": resolve(__dirname, "node_modules/@panva/hkdf/dist/web/index.js")
+   },
    runtimeConfig: {
      authJs: {
        secret: process.env.NUXT_NEXTAUTH_SECRET // You can generate one with `openssl rand -base64 32`
@@ -103,6 +110,7 @@ export default defineConfig({
    }
 })
   ```
+  
 Note that you can use whatever environment variables you want here, this is just an example.
 
 __Remember__: this is an alpha, use with caution! 🏇
