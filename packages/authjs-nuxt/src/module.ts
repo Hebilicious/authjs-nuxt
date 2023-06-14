@@ -36,7 +36,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.alias = defu(nuxt.options.alias, {
       "jose": resolve(__dirname, "../node_modules/jose/dist/browser/index.js"),
       "@panva/hkdf": resolve(__dirname, "../node_modules/@panva/hkdf/dist/web/index.js"),
-      "cookie": resolve(__dirname, "../node_modules/cookie-es")
+      "cookie": resolve(__dirname, "../node_modules/cookie")
     })
 
     // 3. Add composables

@@ -77,6 +77,9 @@ importers:
       '@panva/hkdf':
         specifier: ^1.1.1
         version: 1.1.1
+      cookie:
+        specifier: ^0.5.0
+        version: 0.5.0
       cookie-es:
         specifier: ^1.0.0
         version: 1.0.0
@@ -95,9 +98,6 @@ importers:
       unctx:
         specifier: ^2.3.1
         version: 2.3.1
-      vite:
-        specifier: '*'
-        version: 4.3.5(@types/node@18.16.5)
     devDependencies:
       '@nuxt/module-builder':
         specifier: ^0.4.0

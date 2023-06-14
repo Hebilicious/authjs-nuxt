@@ -5,11 +5,13 @@ export default defineBuildConfig({
     "src/module"
   ],
   externals: [
+    // Should be installed by the user
     "@auth/core",
-    "jose",
-    "@panva/hkdf",
-    "cookie-es",
-    // implicit externals
+    // Should be installed by the module
+    // "jose",
+    // "@panva/hkdf",
+    // "cookie-es",
+    // Should be implicitly externals
     "h3",
     "ufo",
     "radix3",
