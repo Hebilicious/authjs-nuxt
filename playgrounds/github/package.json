@@ -1,0 +1,23 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "NITRO_PRESET=cloudflare_pages nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "dependencies": {
+    "@auth/core": "^0.8.2",
+    "@hebilicious/authjs-nuxt": "workspace:*"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^0.6.1",
+    "node-fetch-native": "^1.2.0",
+    "nuxt": "3.5.3",
+    "ufo": "^1.1.2",
+    "unctx": "^2.3.1",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.2"
+  }
+}
