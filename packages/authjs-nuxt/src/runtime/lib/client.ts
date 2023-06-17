@@ -66,7 +66,8 @@ export async function signIn<P extends RedirectableProviderType | undefined = un
   const response = await postToInternal({ url: _signInUrl, options, callbackUrl })
   const url = response?._data?.url ?? null
   const error = url ? new URL(url).searchParams.get("error") : null
-  if (redirect || !isSupportingReturn || !error) {
+  if (error) throw new Error(error)
+  if (redirect || !isSupportingReturn) {
     // TODO: Do not redirect for Credentials and Email providers by default in next major
     const to = url ?? callbackUrl
     await navigateTo(to, { external: true })
