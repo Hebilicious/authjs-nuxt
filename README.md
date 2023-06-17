@@ -87,6 +87,12 @@ This is an example for GitHub
  ```ts
 export default defineNuxtConfig({
    modules: ["@hebilicious/authjs-nuxt"],
+   // Optional default config
+   //  authJs: {
+   //    verifyClientOnEveryRequest: true,
+   //    guestRedirectTo: "/",
+   //    baseUrl: ""
+   //  },
    runtimeConfig: {
      authJs: {
        secret: process.env.NUXT_NEXTAUTH_SECRET // You can generate one with `openssl rand -base64 32`

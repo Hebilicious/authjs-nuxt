@@ -6,6 +6,7 @@ const NAME = "@auth/nuxt"
 
 interface ModuleOptions {
   verifyClientOnEveryRequest: boolean
+  guestRedirectTo: string
   baseUrl: string
 }
 
@@ -16,6 +17,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults: {
     verifyClientOnEveryRequest: true,
+    guestRedirectTo: "/",
     baseUrl: ""
   },
   setup(userOptions, nuxt) {
@@ -25,10 +27,7 @@ export default defineNuxtModule<ModuleOptions>({
     logger.info(`Adding ${NAME} module...`, userOptions)
 
     // 1. Set up runtime configuration
-    const options = defu(nuxt.options.runtimeConfig.public[configKey], userOptions, {
-      verifyClientOnEveryRequest: true,
-      baseUrl: ""
-    })
+    const options = defu(nuxt.options.runtimeConfig.public[configKey], userOptions)
     nuxt.options.runtimeConfig.public[configKey] = options
 
     // 2. Alias @auth/core dependencies to their browser version

@@ -11,7 +11,7 @@ export default defineNuxtPlugin(async () => {
   const config = useRuntimeConfig().public[configKey]
 
   // console.log(config)
-  addRouteMiddleware("auth", authMiddleware)
+  addRouteMiddleware("auth", authMiddleware, { global: true })
   addRouteMiddleware("client-auth", clientMiddleware, { global: config.verifyClientOnEveryRequest })
 
   // We try to get the session when the app SSRs. No need to repeat this on the client.

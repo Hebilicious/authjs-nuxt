@@ -1,9 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    // "../packages/authjs-nuxt/src/module"
-    "@hebilicious/authjs-nuxt"
+    "../packages/authjs-nuxt/src/module"
+    // "@hebilicious/authjs-nuxt"
   ],
+  authJs: {
+    guestRedirectTo: "/redirected"
+  },
   nitro: {
     routeRules: {
       "/": { ssr: true, prerender: true },
