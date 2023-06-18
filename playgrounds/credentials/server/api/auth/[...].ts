@@ -19,7 +19,7 @@ export const authOptions: AuthConfig = {
         username: { label: "Username", type: "text", placeholder: "admin" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         if (
           credentials.username === "admin"
           && credentials.password === "admin"

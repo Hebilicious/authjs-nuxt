@@ -1,7 +1,39 @@
 import { describe, expect, it } from "vitest"
+import { checkOrigin, makeCookiesFromCookieString, makeNativeHeaders, makeNativeHeadersFromCookieObject } from "../src/runtime/utils"
+
+const runtimeConfig = (baseUrl = "https://example.com") => ({ public: { authJs: { baseUrl } } }) as const
 
 describe("all", () => {
-  it("auth tests", () => {
-    expect(true).toBe(true)
+  it("can transform cookie object into headers", () => {
+    const cookies = { hello: "world", hi: "there" }
+    const headers = makeNativeHeadersFromCookieObject(cookies)
+    expect(headers.get("Set-Cookie")).toBe("hello=world, hi=there")
+    expect(headers instanceof Headers).toBe(true)
+  })
+
+  it("can transform Request headers into regular headers", () => {
+    const headers = { hello: "world", hi: "there" }
+    const nativeHeaders = makeNativeHeaders(headers)
+    expect(nativeHeaders.get("hello")).toBe("world")
+    expect(nativeHeaders.get("hi")).toBe("there")
+  })
+
+  it("can make cookies from cookie string", () => {
+    const cookieString = "next.hello=world; hi=there"
+    const cookies = makeCookiesFromCookieString(cookieString)
+    expect(cookies["next.hello"]).toBe("world")
+    expect(cookies.hi).toBeUndefined()
+  })
+
+  it("throws an error if the origin header is not set", () => {
+    const url = "https://example.com"
+    expect(() => checkOrigin(new Request(url, { method: "POST" }), runtimeConfig(url)))
+      .toThrowError("CSRF protected")
+  })
+
+  it("is undefined is the Origin is checked ", () => {
+    const url = "https://example.com"
+    expect(checkOrigin(new Request(url, { method: "POST", headers: { Origin: url } }), runtimeConfig(url)))
+      .toBeUndefined()
   })
 })

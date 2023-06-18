@@ -22,11 +22,8 @@ export function makeCookiesFromCookieString(cookieString: string | null) {
 }
 
 export function makeNativeHeadersFromCookieObject(headers: Record<string, string>) {
-  const nativeHeaders = new Headers()
-  Object.entries(headers).forEach(([key, value]) => {
-    if (value)
-      nativeHeaders.append("Set-Cookie", `${key}=${value}`)
-  })
+  const nativeHeaders = new Headers(Object.entries(headers)
+    .map(([key, value]) => ["Set-Cookie", `${key}=${value}`]) as HeadersInit)
   return nativeHeaders
 }
 
@@ -38,8 +35,7 @@ export function makeNativeHeadersFromCookieObject(headers: Record<string, string
 export function makeNativeHeaders(headers: RequestHeaders) {
   const nativeHeaders = new Headers()
   Object.entries(headers).forEach(([key, value]) => {
-    if (value)
-      nativeHeaders.append(key, value)
+    if (value) nativeHeaders.append(key, value)
   })
   return nativeHeaders
 }
