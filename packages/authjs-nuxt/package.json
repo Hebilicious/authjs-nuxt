@@ -27,7 +27,7 @@
     "dev": "nuxi dev"
   },
   "peerDependencies": {
-    "@auth/core": "^0.8.2",
+    "@auth/core": "^0.8.4",
     "nuxt": "*"
   },
   "dependencies": {
