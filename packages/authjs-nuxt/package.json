@@ -27,11 +27,11 @@
     "dev": "nuxi dev"
   },
   "peerDependencies": {
-    "@auth/core": "^0.8.4",
+    "@auth/core": "^0.9.0",
     "nuxt": "*"
   },
   "dependencies": {
-    "@nuxt/kit": "3.5.3",
+    "@nuxt/kit": "3.6.1",
     "@panva/hkdf": "^1.1.1",
     "cookie": "^0.5.0",
     "cookie-es": "^1.0.0",
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.4.0",
-    "h3": "^1.7.0",
+    "h3": "^1.7.1",
     "vue": "^3.3.4"
   },
   "bundledDependencies": [
