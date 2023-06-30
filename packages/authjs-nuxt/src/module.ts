@@ -4,6 +4,12 @@ import { configKey } from "./runtime/utils"
 
 const NAME = "@auth/nuxt"
 
+declare module "@nuxt/schema" {
+  interface PublicRuntimeConfig {
+    [configKey]: Record<string, unknown>
+  }
+}
+
 interface ModuleOptions {
   verifyClientOnEveryRequest: boolean
   guestRedirectTo: string

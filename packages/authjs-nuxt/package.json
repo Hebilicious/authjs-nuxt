@@ -7,12 +7,20 @@
   "exports": {
     ".": {
       "types": "./dist/module.d.ts",
-      "require": "./dist/module.cjs",
-      "import": "./dist/module.mjs"
+      "require": {
+        "default": "./dist/module.cjs",
+        "types": "./dist/module.d.cts"
+      },
+      "import": {
+        "default": "./dist/module.mjs",
+        "types": "./dist/module.d.mts"
+      },
+      "default": "./dist/module.mjs"
     },
     "./*": "./*"
   },
   "main": "./dist/module.cjs",
+  "module": "./dist/module.mjs",
   "types": "./dist/types.d.ts",
   "files": [
     "dist",
@@ -21,17 +29,21 @@
     "*.mjs"
   ],
   "scripts": {
-    "build": "pnpm build:module && esno scripts/prepare.ts",
+    "dts": "esno scripts/dts.ts",
+    "readme": "esno scripts/readme.ts",
+    "postbuild": "pnpm dts && pnpm readme",
     "build:module": "nuxt-build-module",
+    "build": "rimraf dist && pnpm build:module && pnpm postbuild",
     "edge-release": "pnpm build && pnpm publish --access public --tag edge",
+    "postinstall": "nuxi prepare",
     "dev": "nuxi dev"
   },
   "peerDependencies": {
-    "@auth/core": "^0.8.4",
+    "@auth/core": "^0.9.0",
     "nuxt": "*"
   },
   "dependencies": {
-    "@nuxt/kit": "3.5.3",
+    "@nuxt/kit": "3.6.1",
     "@panva/hkdf": "^1.1.1",
     "cookie": "^0.5.0",
     "cookie-es": "^1.0.0",
@@ -42,7 +54,7 @@
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.4.0",
-    "h3": "^1.7.0",
+    "h3": "^1.7.1",
     "vue": "^3.3.4"
   },
   "bundledDependencies": [

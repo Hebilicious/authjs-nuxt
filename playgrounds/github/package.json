@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "playground_github",
   "private": true,
   "scripts": {
     "build": "NITRO_PRESET=cloudflare_pages nuxt build",
@@ -8,13 +8,13 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
-    "@auth/core": "^0.8.4",
+    "@auth/core": "^0.9.0",
     "@hebilicious/authjs-nuxt": "workspace:*"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^0.6.2",
+    "@nuxt/devtools": "^0.6.4",
     "node-fetch-native": "^1.2.0",
-    "nuxt": "3.5.3",
+    "nuxt": "3.6.1",
     "ufo": "^1.1.2",
     "unctx": "^2.3.1",
     "vue": "^3.3.4",
