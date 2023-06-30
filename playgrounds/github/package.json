@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "playground_github",
   "private": true,
   "scripts": {
     "build": "NITRO_PRESET=cloudflare_pages nuxt build",

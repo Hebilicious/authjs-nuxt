@@ -7,12 +7,20 @@
   "exports": {
     ".": {
       "types": "./dist/module.d.ts",
-      "require": "./dist/module.cjs",
-      "import": "./dist/module.mjs"
+      "require": {
+        "default": "./dist/module.cjs",
+        "types": "./dist/module.d.cts"
+      },
+      "import": {
+        "default": "./dist/module.mjs",
+        "types": "./dist/module.d.mts"
+      },
+      "default": "./dist/module.mjs"
     },
     "./*": "./*"
   },
   "main": "./dist/module.cjs",
+  "module": "./dist/module.mjs",
   "types": "./dist/types.d.ts",
   "files": [
     "dist",
@@ -21,9 +29,13 @@
     "*.mjs"
   ],
   "scripts": {
-    "build": "pnpm build:module && esno scripts/prepare.ts",
+    "dts": "esno scripts/dts.ts",
+    "readme": "esno scripts/readme.ts",
+    "postbuild": "pnpm dts && pnpm readme",
     "build:module": "nuxt-build-module",
+    "build": "rimraf dist && pnpm build:module && pnpm postbuild",
     "edge-release": "pnpm build && pnpm publish --access public --tag edge",
+    "postinstall": "nuxi prepare",
     "dev": "nuxi dev"
   },
   "peerDependencies": {

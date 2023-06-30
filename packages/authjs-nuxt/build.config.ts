@@ -18,5 +18,6 @@ export default defineBuildConfig({
     "destr",
     "uncrypto",
     "iron-webcrypto"
-  ]
+  ],
+  failOnWarn: false
 })

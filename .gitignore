@@ -1,7 +1,7 @@
 node_modules
 dist
 .nuxt
-packages/*/README.md
 .eslintcache
-docs/.vitepress/cache
-docs/.vitepress/dist
+.vitepress/cache
+.vitepress/dist
+.turbo

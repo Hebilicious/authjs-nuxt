@@ -60,7 +60,6 @@ export async function getRequestFromEvent(event: H3Event) {
  * @returns
  */
 export async function respondWithResponse(event: H3Event, response: Response) {
-  // @ts-expect-error: Type is wrong but this works
   for (const [key, value] of response.headers)
     event.node.res.setHeader(key, value)
 

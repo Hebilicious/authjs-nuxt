@@ -6,7 +6,9 @@
   "packageManager": "pnpm@8.6.5",
   "scripts": {
     "dev": "pnpm -r --filter=./packages/* run dev",
-    "build": "rimraf packages/*/dist && pnpm -r --filter=./packages/* run build",
+    "build": "rimraf packages/*/dist && turbo run build --filter=@hebilicious/*",
+    "build:docs": "turbo run build --filter=authjs_docs",
+    "build:all": "turbo run build",
     "lint": "eslint --cache .",
     "lint:fix": "nr lint --fix",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
@@ -29,6 +31,7 @@
     "simple-git-hooks": "^2.8.1",
     "taze": "^0.11.0",
     "tsup": "^7.1.0",
+    "turbo": "^1.10.6",
     "typescript": "^5.1.6",
     "unbuild": "^1.2.1",
     "vitest": "^0.32.2"
