@@ -18,7 +18,7 @@ _🧪 This module like Auth.js, is still in developement._
 
 1. **Why not use use [Sidebase Nuxt-Auth](https://github.com/sidebase/sidebase)?**
 
-    - Becaause it's based on Next-Auth and not Auth.js.
+    - Because it's based on Next-Auth and not Auth.js.
     - Because it's not edge compatible. This module is.
 
 2. **Why not use Auth.js directly?**
