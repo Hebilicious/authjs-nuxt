@@ -1,6 +1,7 @@
 import crypto from "node:crypto"
 import type { RuntimeConfig } from "nuxt/schema"
 import { Auth, skipCSRFCheck } from "@auth/core"
+import type { GetTokenParams } from "@auth/core/jwt"
 import { getToken as authGetToken } from "@auth/core/jwt"
 import type { H3Event } from "h3"
 import { eventHandler, getRequestHeaders, getRequestURL } from "h3"
@@ -59,7 +60,6 @@ export async function getServerSession(
 
 export function getToken<R extends boolean = false>({ event, secureCookie, secret, ...rest }: Omit<GetTokenParams<R>, "req"> & { event: H3Event }) {
   return authGetToken({
-  // @ts-expect-error As our request is not a real next-auth request, we pass down only what's required for the method, as per code from https://github.com/nextauthjs/next-auth/blob/8387c78e3fef13350d8a8c6102caeeb05c70a650/packages/next-auth/src/jwt/index.ts#L68
     req: {
       cookies: parseCookies(event),
       headers: getHeaders(event)
