@@ -5,11 +5,11 @@ import type { RuntimeConfig } from "nuxt/schema"
 
 export const configKey = "authJs"
 
-export function checkOrigin(request: Request, runtimeConfig: RuntimeConfig) {
+export function checkOrigin(request: Request, runtimeConfig: Partial<RuntimeConfig>) {
   if (process.env.NODE_ENV === "development") return
   if (request.method !== "POST") return // Only check post requests
   const requestOrigin = request.headers.get("Origin")
-  const serverOrigin = runtimeConfig.public.authJs.baseUrl
+  const serverOrigin = runtimeConfig.public?.authJs?.baseUrl
   if (serverOrigin !== requestOrigin)
     throw new Error("CSRF protected")
 }
