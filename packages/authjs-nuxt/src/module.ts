@@ -1,4 +1,4 @@
-import { addImports, addPlugin, addTemplate, createResolver, defineNuxtModule, useLogger } from "@nuxt/kit"
+import { addImports, addPlugin, addTypeTemplate, createResolver, defineNuxtModule, useLogger } from "@nuxt/kit"
 import { defu } from "defu"
 import { configKey } from "./runtime/utils"
 
@@ -57,8 +57,9 @@ export default defineNuxtModule<ModuleOptions>({
     // nuxt.options.build.transpile.push(resolve("./runtime/lib/client")) This doesn't look it's needed ?
 
     // 4. Add types
-    addTemplate({
+    addTypeTemplate({
       filename: "types/auth.d.ts",
+      write: true,
       getContents: () => [
         "declare module '#auth' {",
         `  const verifyClientSession: typeof import('${resolve("./runtime/lib/client")}').verifyClientSession`,
@@ -66,12 +67,9 @@ export default defineNuxtModule<ModuleOptions>({
         `  const signOut: typeof import('${resolve("./runtime/lib/client")}').signOut`,
         `  const getServerSession: typeof import('${resolve("./runtime/lib/server")}').getServerSession`,
         `  const NuxtAuthHandler: typeof import('${resolve("./runtime/lib/server")}').NuxtAuthHandler`,
+        `  const getJWT: typeof import('${resolve("./runtime/lib/server")}').getJWT`,
         "}"
       ].join("\n")
-    })
-
-    nuxt.hook("prepare:types", (options) => {
-      options.references.push({ path: resolve(nuxt.options.buildDir, "types/auth.d.ts") })
     })
 
     // 5. Add plugin & middleware

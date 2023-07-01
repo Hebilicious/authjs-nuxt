@@ -1,24 +1,22 @@
-import crypto from "node:crypto"
 import type { RuntimeConfig } from "nuxt/schema"
 import { Auth, skipCSRFCheck } from "@auth/core"
-import type { GetTokenParams } from "@auth/core/jwt"
-import { getToken as authGetToken } from "@auth/core/jwt"
 import type { H3Event } from "h3"
 import { eventHandler, getRequestHeaders, getRequestURL } from "h3"
 import type { AuthConfig, Session } from "@auth/core/types"
-import { checkOrigin, getRequestFromEvent, respondWithResponse } from "../utils"
+import { getToken } from "@auth/core/jwt"
+import { checkOrigin, getAuthJsSecret, getRequestFromEvent, getServerOrigin, makeCookiesFromCookieString, respondWithResponse } from "../utils"
 
 if (!globalThis.crypto) {
-  Object.defineProperty(globalThis, "crypto", {
-    value: crypto,
-    writable: false,
-    configurable: true
+  // eslint-disable-next-line no-console
+  console.log("Polyfilling crypto...")
+  import("node:crypto").then((crypto) => {
+    Object.defineProperty(globalThis, "crypto", {
+      value: crypto,
+      writable: false,
+      configurable: true
+    })
   })
 }
-
-export const isProduction = process.env.NODE_ENV === "production"
-
-let usedSecret: string | undefined
 
 /**
  * This is the event handler for the catch-all route.
@@ -31,17 +29,6 @@ export function NuxtAuthHandler(options: AuthConfig, runtimeConfig: RuntimeConfi
   return eventHandler(async (event) => {
     options.trustHost ??= true
     options.skipCSRFCheck = skipCSRFCheck
-    usedSecret = options?.secret
-    if (!usedSecret) {
-      if (isProduction) {
-        throw new Error("No secret")
-      }
-      else {
-        // eslint-disable-next-line no-console
-        console.log("No secret!")
-        usedSecret = "secret"
-      }
-    }
     const request = await getRequestFromEvent(event)
     if (request.url.includes(".js.map")) return // Do not handle source maps
     checkOrigin(request, runtimeConfig)
@@ -54,57 +41,45 @@ export async function getServerSession(
   event: H3Event,
   options: AuthConfig
 ): Promise<Session | null> {
-  options.trustHost ??= true
-
-  const url = new URL("/api/auth/session", getRequestURL(event))
-
-  const response = await Auth(
-    new Request(url, { headers: getRequestHeaders(event) as any }),
-    options
-  )
+  const response = await getServerSessionResponse(event, options)
 
   const { status = 200 } = response
   const data = await response.json()
 
-  if (!data || !Object.keys(data).length)
-    return null
-  if (status === 200)
-    return data
+  if (!data || !Object.keys(data).length) return null
+  if (status === 200) return data
   throw new Error(data.message)
 }
 
-function getServerOrigin(): string {
-  // Prio 1: Environment variable
-  const envOrigin = process.env.AUTH_ORIGIN
-  if (envOrigin)
-    return envOrigin
-
-  // Prio 2: Runtime configuration
-  const runtimeConfigOrigin = useRuntimeConfig().public.authJs.baseUrl
-  if (runtimeConfigOrigin)
-    return runtimeConfigOrigin
-
-  throw new Error("No Origin")
-}
-
 /**
- * Returns the JWT Token defined
+ * Returns the JWT Token.
  * @param event H3 Event
- * @param secureCookie Whether the cookie is secure or not
- * @param secret cookie encryption secret
- * @param rest rest of the config
  * @returns JWT Token
  */
-export function getToken<R extends boolean = false>({ event, secureCookie, secret, ...rest }: Omit<GetTokenParams<R>, "req"> & { event: H3Event }) {
-  return authGetToken({
+export async function getJWT(event: H3Event, options: AuthConfig) {
+  const response = await getServerSessionResponse(event, options)
+  const cookies = Object.fromEntries(response.headers.entries())
+  const parsedCookies = makeCookiesFromCookieString(cookies["set-cookie"])
+  const parameters = {
     req: {
-      cookies: parseCookies(event),
-      // @ts-expect-error type [name: string]: string can be mapped to String Record<String>
-      headers: getHeaders(event)
+      cookies: parsedCookies,
+      headers: response.headers as unknown as Record<string, string>
     },
-    // see https://github.com/nextauthjs/next-auth/blob/8387c78e3fef13350d8a8c6102caeeb05c70a650/packages/next-auth/src/jwt/index.ts#L73
-    secureCookie: secureCookie || getServerOrigin().startsWith("https://"),
-    secret: secret || usedSecret,
-    ...rest
-  })
+    // see https://github.com/nextauthjs/next-auth/blob/a79774f6e890b492ae30201f24b3f7024d0d7c9d/packages/core/src/jwt.ts
+    secureCookie: getServerOrigin(event).startsWith("https://"),
+    secret: getAuthJsSecret(options)
+  }
+  return getToken(parameters)
+}
+
+async function getServerSessionResponse(
+  event: H3Event,
+  options: AuthConfig
+) {
+  options.trustHost ??= true
+  const url = new URL("/api/auth/session", getRequestURL(event))
+  return Auth(
+    new Request(url, { headers: getRequestHeaders(event) as any }),
+    options
+  )
 }
