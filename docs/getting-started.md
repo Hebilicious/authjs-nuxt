@@ -135,3 +135,16 @@ definePageMeta({ middleware: "auth" })
   <h1>PRIVATE</h1>
 </template>
 ```
+
+If you need the session or the JWT on your api handlers, use the following methods :
+
+```ts
+import { authOptions } from "./auth/[...]"
+import { getJWT, getServerSession } from "#auth"
+
+export default defineEventHandler(async (event) => {
+  const session = await getServerSession(event, authOptions)
+  const jwt = await getJWT(event, authOptions)
+  return { session, jwt }
+})
+```
