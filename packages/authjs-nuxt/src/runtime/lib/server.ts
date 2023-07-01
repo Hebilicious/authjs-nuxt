@@ -21,9 +21,9 @@ if (!globalThis.crypto) {
 /**
  * This is the event handler for the catch-all route.
  * Everything can be customized by adding a custom route that takes priority over the handler.
- * @param options
- * @param runtimeConfig
- * @returns
+ * @param options AuthConfig
+ * @param runtimeConfig RuntimeConfig
+ * @returns EventHandler
  */
 export function NuxtAuthHandler(options: AuthConfig, runtimeConfig: RuntimeConfig) {
   return eventHandler(async (event) => {
@@ -37,6 +37,12 @@ export function NuxtAuthHandler(options: AuthConfig, runtimeConfig: RuntimeConfi
   })
 }
 
+/**
+ * Get and returns the session.
+ * @param event H3Event
+ * @param options AuthConfig
+ * @returns Session
+ */
 export async function getServerSession(
   event: H3Event,
   options: AuthConfig
@@ -53,7 +59,8 @@ export async function getServerSession(
 
 /**
  * Returns the JWT Token.
- * @param event H3 Event
+ * @param event H3Event
+ * @param options AuthConfig
  * @returns JWT Token
  */
 export async function getJWT(event: H3Event, options: AuthConfig) {
