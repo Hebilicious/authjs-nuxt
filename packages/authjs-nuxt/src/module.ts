@@ -3,7 +3,8 @@ import { defu } from "defu"
 import { configKey } from "./runtime/utils"
 
 const NAME = "@auth/nuxt"
-interface ModuleOptions {
+
+export interface ModuleOptions {
   verifyClientOnEveryRequest: boolean
   guestRedirectTo: string
   baseUrl: string
