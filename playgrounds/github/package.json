@@ -5,6 +5,7 @@
     "build": "NITRO_PRESET=cloudflare_pages nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "postinstall": "nuxi prepare",
     "preview": "nuxt preview"
   },
   "dependencies": {

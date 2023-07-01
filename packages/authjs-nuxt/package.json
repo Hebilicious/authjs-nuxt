@@ -40,7 +40,7 @@
   },
   "peerDependencies": {
     "@auth/core": "^0.9.0",
-    "nuxt": "*"
+    "nuxt": "^3.6.1"
   },
   "dependencies": {
     "@nuxt/kit": "3.6.1",
