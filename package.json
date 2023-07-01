@@ -14,7 +14,8 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "release": "pnpm lint:fix && bumpp -r -x \"pnpm run changelog\" --all",
     "typecheck": "tsc --noEmit",
-    "test": "vitest"
+    "test": "vitest",
+    "test:all": "pnpm lint && pnpm typecheck && pnpm vitest run"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.6",
