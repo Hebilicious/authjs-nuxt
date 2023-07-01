@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest"
 import { checkOrigin, makeCookiesFromCookieString, makeNativeHeaders, makeNativeHeadersFromCookieObject } from "../src/runtime/utils"
 
-const runtimeConfig = (baseUrl = "https://example.com") => ({ public: { authJs: { baseUrl } } }) as const
+// eslint-disable-next-line antfu/top-level-function
+const mockRuntimeConfig = (baseUrl = "https://example.com") =>
+  ({ public: { authJs: { baseUrl, verifyClientOnEveryRequest: true, guestRedirectTo: "/" } } })
 
 describe("all", () => {
   it("can transform cookie object into headers", () => {
@@ -27,13 +29,13 @@ describe("all", () => {
 
   it("throws an error if the origin header is not set", () => {
     const url = "https://example.com"
-    expect(() => checkOrigin(new Request(url, { method: "POST" }), runtimeConfig(url)))
+    expect(() => checkOrigin(new Request(url, { method: "POST" }), mockRuntimeConfig(url)))
       .toThrowError("CSRF protected")
   })
 
   it("is undefined is the Origin is checked ", () => {
     const url = "https://example.com"
-    expect(checkOrigin(new Request(url, { method: "POST", headers: { Origin: url } }), runtimeConfig(url)))
+    expect(checkOrigin(new Request(url, { method: "POST", headers: { Origin: url } }), mockRuntimeConfig(url)))
       .toBeUndefined()
   })
 })
