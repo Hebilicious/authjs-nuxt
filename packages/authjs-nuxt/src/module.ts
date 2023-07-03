@@ -67,7 +67,7 @@ export default defineNuxtModule<ModuleOptions>({
         `  const signOut: typeof import('${resolve("./runtime/lib/client")}').signOut`,
         `  const getServerSession: typeof import('${resolve("./runtime/lib/server")}').getServerSession`,
         `  const NuxtAuthHandler: typeof import('${resolve("./runtime/lib/server")}').NuxtAuthHandler`,
-        `  const getJWT: typeof import('${resolve("./runtime/lib/server")}').getJWT`,
+        `  const getServerToken: typeof import('${resolve("./runtime/lib/server")}').getServerToken`,
         "}"
       ].join("\n")
     })

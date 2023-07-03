@@ -3,7 +3,7 @@ import { Auth, skipCSRFCheck } from "@auth/core"
 import type { H3Event } from "h3"
 import { eventHandler, getRequestHeaders, getRequestURL } from "h3"
 import type { AuthConfig, Session } from "@auth/core/types"
-import { getToken as authGetToken } from "@auth/core/jwt"
+import { getToken } from "@auth/core/jwt"
 import { checkOrigin, getAuthJsSecret, getRequestFromEvent, getServerOrigin, makeCookiesFromCookieString, respondWithResponse } from "../utils"
 
 if (!globalThis.crypto) {
@@ -58,12 +58,12 @@ export async function getServerSession(
 }
 
 /**
- * Returns the OAuth2 Token.
+ * Returns the JWT Token.
  * @param event H3Event
  * @param options AuthConfig
- * @returns OAuth2 Token
+ * @returns JWT Token
  */
-export async function getToken(event: H3Event, options: AuthConfig) {
+export async function getServerToken(event: H3Event, options: AuthConfig) {
   const response = await getServerSessionResponse(event, options)
   const cookies = Object.fromEntries(response.headers.entries())
   const parsedCookies = makeCookiesFromCookieString(cookies["set-cookie"])
@@ -76,7 +76,7 @@ export async function getToken(event: H3Event, options: AuthConfig) {
     secureCookie: getServerOrigin(event).startsWith("https://"),
     secret: getAuthJsSecret(options)
   }
-  return authGetToken(parameters)
+  return getToken(parameters)
 }
 
 async function getServerSessionResponse(
