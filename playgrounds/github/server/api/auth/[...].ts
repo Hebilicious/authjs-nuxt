@@ -10,7 +10,6 @@ export const authOptions: AuthConfig = {
     logo: "https://nuxt.com/assets/design-kit/logo/icon-green.png"
   },
   providers: [
-    // @ts-expect-error wrong types
     GithubProvider({
       clientId: runtimeConfig.github.clientId,
       clientSecret: runtimeConfig.github.clientSecret

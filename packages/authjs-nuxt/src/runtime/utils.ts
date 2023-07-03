@@ -1,9 +1,28 @@
+import type { AuthConfig } from "@auth/core"
 import { parse } from "cookie-es"
 import type { H3Event, RequestHeaders } from "h3"
 import { getMethod, getRequestHeaders, getRequestURL, readRawBody, sendRedirect } from "h3"
 import type { RuntimeConfig } from "@nuxt/schema"
 
 export const configKey = "authJs"
+
+/**
+ * Get the AuthJS secret. For internal use only.
+ * @returns The secret used to sign the JWT Token
+ */
+export function getAuthJsSecret(options: AuthConfig) {
+  const secret = options?.secret || process.env.NUXT_NEXTAUTH_SECRET || process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET
+  if (!secret) throw new Error("[authjs-nuxt] No secret found, please set a secret in your [...].ts handler or use environment variables")
+  return secret
+}
+
+export function getServerOrigin(event: H3Event) {
+  const requestOrigin = getRequestHeaders(event).Origin
+  const serverOrigin = useRuntimeConfig().public?.authJs?.baseUrl
+  const origin = requestOrigin ?? serverOrigin.length > 0 ? serverOrigin : process.env.AUTH_ORIGIN
+  if (!origin) throw new Error("No Origin found ...")
+  return origin
+}
 
 export function checkOrigin(request: Request, runtimeConfig: Partial<RuntimeConfig>) {
   if (process.env.NODE_ENV === "development") return
