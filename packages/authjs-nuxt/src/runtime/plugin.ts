@@ -10,7 +10,6 @@ export default defineNuxtPlugin(async () => {
 
   const config = useRuntimeConfig().public[configKey]
 
-  // console.log(config)
   addRouteMiddleware("auth", authMiddleware, { global: true })
   addRouteMiddleware("client-auth", clientMiddleware, { global: config.verifyClientOnEveryRequest })
 

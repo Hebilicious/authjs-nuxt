@@ -8,7 +8,7 @@ import { defineNuxtRouteMiddleware, navigateTo, useRuntimeConfig } from "#import
  */
 
 export default defineNuxtRouteMiddleware(async (to) => {
-  if (to.meta.middleware !== "auth") return
+  if (to.meta.auth !== true) return
   if (process.client) {
     const url = useRuntimeConfig()?.public?.authJs?.guestRedirectTo ?? "/"
     const valid = await verifyClientSession()

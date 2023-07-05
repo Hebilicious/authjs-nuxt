@@ -128,7 +128,7 @@ Use the `auth` middleware to protect your pages.
 
 ```html
 <script>
-definePageMeta({ middleware: "auth" })
+definePageMeta({ auth: true })
 </script>
 
 <template>

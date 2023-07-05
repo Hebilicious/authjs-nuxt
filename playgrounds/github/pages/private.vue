@@ -1,5 +1,5 @@
 <script>
-definePageMeta({ middleware: "auth" })
+definePageMeta({ auth: true })
 </script>
 
 <template>
