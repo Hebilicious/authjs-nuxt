@@ -7,12 +7,12 @@
   "exports": {
     ".": {
       "require": {
-        "default": "./dist/module.cjs",
-        "types": "./dist/module.d.cts"
+        "types": "./dist/module.d.cts",
+        "default": "./dist/module.cjs"
       },
       "import": {
-        "default": "./dist/module.mjs",
-        "types": "./dist/module.d.mts"
+        "types": "./dist/module.d.mts",
+        "default": "./dist/module.mjs"
       },
       "types": "./dist/module.d.ts",
       "default": "./dist/module.mjs"
