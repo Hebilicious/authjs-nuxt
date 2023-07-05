@@ -122,7 +122,9 @@ const { signIn, signOut, session, status, cookies } = useAuth()
 </template>
 ```
 
-Use the `auth` middleware to protect your pages.
+## 📝 Middlewares
+
+Use middlewares to protect your pages.
 
 `pages/private.vue`
 
@@ -135,6 +137,16 @@ definePageMeta({ auth: true })
   <h1>PRIVATE</h1>
 </template>
 ```
+
+There's 2 middlewares availables :
+
+```ts
+definePageMeta({ middleware: "auth" })
+definePageMeta({ middleware: "client-auth" }) // will run globally with `verifyClientOnEveryRequest: true`
+```
+
+However you do not need to call them manually. You can use `definePageMeta({ auth: true })` and `verifyClientOnEveryRequest: true` respectively.
+Yo can use `client-auth` manually if you disable `verifyClientOnEveryRequest` in the config.
 
 If you need the session or the JWT on your api handlers, use the following methods :
 

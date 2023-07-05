@@ -5,8 +5,9 @@ import { defineNuxtRouteMiddleware, navigateTo, useRuntimeConfig } from "#import
  * This middleware is the guard for our private pages.
  */
 export default defineNuxtRouteMiddleware((to) => {
-  if (to.meta.auth !== true) return
-  const { status } = useAuth()
-  if (status.value === "authenticated") return
-  return navigateTo(useRuntimeConfig()?.public?.authJs?.guestRedirectTo ?? "/")
+  if (to.meta.auth === true || to.meta.middleware === "auth") {
+    const { status } = useAuth()
+    if (status.value === "authenticated") return
+    return navigateTo(useRuntimeConfig()?.public?.authJs?.guestRedirectTo ?? "/")
+  }
 })

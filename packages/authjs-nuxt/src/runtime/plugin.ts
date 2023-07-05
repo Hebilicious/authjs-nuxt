@@ -10,7 +10,7 @@ export default defineNuxtPlugin(async () => {
 
   const config = useRuntimeConfig().public[configKey]
 
-  addRouteMiddleware("auth", authMiddleware, { global: true })
+  addRouteMiddleware("auth", authMiddleware)
   addRouteMiddleware("client-auth", clientMiddleware, { global: config.verifyClientOnEveryRequest })
 
   // We try to get the session when the app SSRs. No need to repeat this on the client.
@@ -20,10 +20,8 @@ export default defineNuxtPlugin(async () => {
       headers
     })
     const hasSession = data && Object.keys(data).length
-    if (hasSession)
-      updateSession(data)
-    if (!hasSession)
-      removeSession()
+    if (hasSession) updateSession(data)
+    if (!hasSession) removeSession()
     cookies.value = makeCookiesFromCookieString(headers.cookie)
   }
 })
