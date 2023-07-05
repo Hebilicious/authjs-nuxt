@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { signIn, signOut, session, status, cookies } = useAuth()
+const { signIn, signOut, session, status, cookies, user } = useAuth()
 </script>
 
 <template>
@@ -13,6 +13,7 @@ const { signIn, signOut, session, status, cookies } = useAuth()
         Sign Out
       </button>
     </div>
+    <pre>{{ user }}</pre>
     <div>
       <pre>{{ status }}</pre>
       <pre>{{ session?.user }}</pre>

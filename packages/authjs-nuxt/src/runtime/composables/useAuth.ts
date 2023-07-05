@@ -12,7 +12,7 @@ export function useAuth() {
     () => "unauthenticated"
   )
   const sessionToken = computed(() => cookies.value?.["next-auth.session-token"] ?? "")
-
+  const user = computed(() => session.value?.user ?? null)
   watch(session, (newSession: Session | null) => {
     if (newSession === null)
       return (status.value = "unauthenticated")
@@ -55,6 +55,7 @@ export function useAuth() {
 
   return {
     session: readonly(session),
+    user,
     updateSession,
     status: readonly(status),
     signIn,
