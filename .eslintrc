@@ -6,5 +6,27 @@
     "comma-dangle": ["error", "never"],
     "yml/quotes": "off",
     "antfu/if-newline": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "package.json"
+      ],
+      "parser": "jsonc-eslint-parser",
+      "rules": {
+        "jsonc/sort-keys": [
+          "error",
+          {
+            "pathPattern": "^exports.*$",
+            "order": [
+              "require",
+              "import",
+              "types",
+              "default"
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }

@@ -6,7 +6,6 @@
   "repository": "Hebilicious/authjs-nuxt",
   "exports": {
     ".": {
-      "types": "./dist/module.d.ts",
       "require": {
         "default": "./dist/module.cjs",
         "types": "./dist/module.d.cts"
@@ -15,9 +14,9 @@
         "default": "./dist/module.mjs",
         "types": "./dist/module.d.mts"
       },
+      "types": "./dist/module.d.ts",
       "default": "./dist/module.mjs"
-    },
-    "./*": "./*"
+    }
   },
   "main": "./dist/module.cjs",
   "module": "./dist/module.mjs",
