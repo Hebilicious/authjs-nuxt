@@ -4,6 +4,9 @@ import { defineConfig } from "vitepress"
 export default defineConfig({
   title: "AuthJS Nuxt",
   description: "An edge-compatible module for AuthJS",
+  head: [
+    ["link", { rel: "icon", href: "favicon.svg" }]
+  ],
   themeConfig: {
     logo: "/favicon.svg",
     // https://vitepress.dev/reference/default-theme-config
