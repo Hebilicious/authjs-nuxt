@@ -43,7 +43,7 @@ export function makeCookiesFromCookieString(cookieString: string | null) {
 
 export function makeNativeHeadersFromCookieObject(headers: Record<string, string>) {
   const nativeHeaders = new Headers(Object.entries(headers)
-    .map(([key, value]) => ["Set-Cookie", `${key}=${value}`]) as HeadersInit)
+    .map(([key, value]) => ["set-cookie", `${key}=${value}`]) as HeadersInit)
   return nativeHeaders
 }
 
@@ -81,12 +81,12 @@ export async function getRequestFromEvent(event: H3Event) {
  */
 export async function respondWithResponse(event: H3Event, response: Response) {
   for (const [key, value] of response.headers)
-    event.node.res.appendHeader(key, value)
+    event.node.res.setHeader(key, value)
 
-  const cookieHeader = response.headers.get("Set-Cookie")
+  const cookieHeader = response.headers.get("set-cookie")
   if (cookieHeader) {
     const cookieString = setCookieParser.splitCookiesString(cookieHeader)
-    event.node.res.setHeader("Set-Cookie", cookieString)
+    event.node.res.setHeader("set-cookie", cookieString)
   }
 
   if (response.status === 302 && response.headers.get("Location")) {

@@ -9,7 +9,7 @@ describe("all", () => {
   it("can transform cookie object into headers", () => {
     const cookies = { hello: "world", hi: "there" }
     const headers = makeNativeHeadersFromCookieObject(cookies)
-    expect(headers.get("Set-Cookie")).toBe("hello=world, hi=there")
+    expect(headers.get("set-cookie")).toBe("hello=world, hi=there")
     expect(headers instanceof Headers).toBe(true)
   })
 
