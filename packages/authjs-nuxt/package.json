@@ -49,10 +49,12 @@
     "defu": "^6.1.2",
     "immer": "^10.0.2",
     "jose": "^4.14.4",
+    "set-cookie-parser": "^2.6.0",
     "unctx": "^2.3.1"
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.4.0",
+    "@types/set-cookie-parser": "^2.4.2",
     "h3": "^1.7.1",
     "vue": "^3.3.4"
   },

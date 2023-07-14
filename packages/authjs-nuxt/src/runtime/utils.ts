@@ -1,5 +1,6 @@
 import type { AuthConfig } from "@auth/core"
 import { parse } from "cookie-es"
+import setCookieParser from "set-cookie-parser"
 import type { H3Event, RequestHeaders } from "h3"
 import { getMethod, getRequestHeaders, getRequestURL, readRawBody, sendRedirect } from "h3"
 import type { RuntimeConfig } from "@nuxt/schema"
@@ -80,15 +81,24 @@ export async function getRequestFromEvent(event: H3Event) {
  */
 export async function respondWithResponse(event: H3Event, response: Response) {
   for (const [key, value] of response.headers)
-    event.node.res.setHeader(key, value)
+    event.node.res.appendHeader(key, value)
+
+  const cookieHeader = response.headers.get("Set-Cookie")
+  if (cookieHeader) {
+    const cookieString = setCookieParser.splitCookiesString(cookieHeader)
+    event.node.res.setHeader("Set-Cookie", cookieString)
+  }
 
   if (response.status === 302 && response.headers.get("Location")) {
     event.node.res.statusCode = 302
     return sendRedirect(event, response.headers.get("Location") as string)
   }
+
   if (response.body) {
-    for await (const chunk of response.body as unknown as AsyncIterable<Uint8Array>)
-      event.node.res.write(chunk)
+    const contentType = response.headers.get("Content-Type") || ""
+    if (contentType.includes("text") || contentType.includes("json"))
+      for await (const chunk of response.body as unknown as AsyncIterable<Uint8Array>) event.node.res.write(new TextDecoder().decode(chunk))
+    else for await (const chunk of response.body as unknown as AsyncIterable<Uint8Array>) event.node.res.write(chunk)
   }
   return event.node.res.end()
 }
