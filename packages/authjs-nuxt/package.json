@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.4.0",
+    "@types/set-cookie-parser": "^2.4.2",
     "h3": "^1.7.1",
     "vue": "^3.3.4"
   },

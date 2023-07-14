@@ -108,6 +108,9 @@ importers:
       '@nuxt/module-builder':
         specifier: ^0.4.0
         version: 0.4.0(@nuxt/kit@3.6.1)(nuxi@3.6.1)
+      '@types/set-cookie-parser':
+        specifier: ^2.4.2
+        version: 2.4.2
       h3:
         specifier: ^1.7.1
         version: 1.7.1
@@ -2370,6 +2373,12 @@ packages:
 
   /@types/semver@7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
+    dev: true
+
+  /@types/set-cookie-parser@2.4.2:
+    resolution: {integrity: sha512-fBZgytwhYAUkj/jC/FAV4RQ5EerRup1YQsXQCh8rZfiHkc4UahC192oH0smGwsXol3cL3A5oETuAHeQHmhXM4w==}
+    dependencies:
+      '@types/node': 20.3.3
     dev: true
 
   /@types/unist@2.0.6:
