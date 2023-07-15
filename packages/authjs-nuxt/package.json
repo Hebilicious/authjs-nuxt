@@ -1,7 +1,7 @@
 {
   "name": "@hebilicious/authjs-nuxt",
   "type": "module",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "repository": "Hebilicious/authjs-nuxt",
   "exports": {
