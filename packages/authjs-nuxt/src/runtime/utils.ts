@@ -1,6 +1,5 @@
 import type { AuthConfig } from "@auth/core"
 import { parse } from "cookie-es"
-import * as setCookieParser from "set-cookie-parser"
 import type { H3Event, RequestHeaders } from "h3"
 import { getMethod, getRequestHeaders, getRequestURL, readRawBody, sendRedirect } from "h3"
 import type { RuntimeConfig } from "@nuxt/schema"
@@ -85,7 +84,7 @@ export async function respondWithResponse(event: H3Event, response: Response) {
 
   const cookieHeader = response.headers.get("set-cookie")
   if (cookieHeader) {
-    const cookieString = setCookieParser.splitCookiesString(cookieHeader)
+    const cookieString = splitCookiesString(cookieHeader)
     event.node.res.setHeader("set-cookie", cookieString)
   }
 
