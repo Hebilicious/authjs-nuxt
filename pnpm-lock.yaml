@@ -98,9 +98,6 @@ importers:
       nuxt:
         specifier: ^3.6.1
         version: 3.6.1(@types/node@20.3.3)(eslint@8.44.0)(rollup@3.21.5)(typescript@5.1.6)
-      set-cookie-parser:
-        specifier: ^2.6.0
-        version: 2.6.0
       unctx:
         specifier: ^2.3.1
         version: 2.3.1
@@ -108,9 +105,6 @@ importers:
       '@nuxt/module-builder':
         specifier: ^0.4.0
         version: 0.4.0(@nuxt/kit@3.6.1)(nuxi@3.6.1)
-      '@types/set-cookie-parser':
-        specifier: ^2.4.2
-        version: 2.4.2
       h3:
         specifier: ^1.7.1
         version: 1.7.1
@@ -2373,12 +2367,6 @@ packages:
 
   /@types/semver@7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
-    dev: true
-
-  /@types/set-cookie-parser@2.4.2:
-    resolution: {integrity: sha512-fBZgytwhYAUkj/jC/FAV4RQ5EerRup1YQsXQCh8rZfiHkc4UahC192oH0smGwsXol3cL3A5oETuAHeQHmhXM4w==}
-    dependencies:
-      '@types/node': 20.3.3
     dev: true
 
   /@types/unist@2.0.6:
@@ -8597,10 +8585,6 @@ packages:
 
   /set-blocking@2.0.0:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
-
-  /set-cookie-parser@2.6.0:
-    resolution: {integrity: sha512-RVnVQxTXuerk653XfuliOxBP81Sf0+qfQE73LIYKcyMYHG94AuH0kgrQpRDuTZnSmjpysHmzxJXKNfa6PjFhyQ==}
-    dev: false
 
   /setprototypeof@1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
