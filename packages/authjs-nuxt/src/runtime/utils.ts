@@ -16,9 +16,9 @@ export function getAuthJsSecret(options: AuthConfig) {
   return secret
 }
 
-export function getServerOrigin(event: H3Event) {
+export function getServerOrigin(event: H3Event, runtimeConfig?: Partial<RuntimeConfig>) {
   const requestOrigin = getRequestHeaders(event).Origin
-  const serverOrigin = useRuntimeConfig().public?.authJs?.baseUrl
+  const serverOrigin = runtimeConfig?.public?.authJs?.baseUrl ?? ""
   const origin = requestOrigin ?? serverOrigin.length > 0 ? serverOrigin : process.env.AUTH_ORIGIN
   if (!origin) throw new Error("No Origin found ...")
   return origin

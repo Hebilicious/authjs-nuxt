@@ -63,7 +63,7 @@ export async function getServerSession(
  * @param options AuthConfig
  * @returns JWT Token
  */
-export async function getServerToken(event: H3Event, options: AuthConfig) {
+export async function getServerToken(event: H3Event, options: AuthConfig, runtimeConfig?: Partial<RuntimeConfig>) {
   const response = await getServerSessionResponse(event, options)
   const cookies = Object.fromEntries(response.headers.entries())
   const parsedCookies = makeCookiesFromCookieString(cookies["set-cookie"])
@@ -73,7 +73,7 @@ export async function getServerToken(event: H3Event, options: AuthConfig) {
       headers: response.headers as unknown as Record<string, string>
     },
     // see https://github.com/nextauthjs/next-auth/blob/a79774f6e890b492ae30201f24b3f7024d0d7c9d/packages/core/src/jwt.ts
-    secureCookie: getServerOrigin(event).startsWith("https://"),
+    secureCookie: getServerOrigin(event, runtimeConfig).startsWith("https://"),
     secret: getAuthJsSecret(options)
   }
   return getToken(parameters)
