@@ -1,8 +1,7 @@
 import type { AuthConfig } from "@auth/core"
 import { parse } from "cookie-es"
 import type { H3Event, RequestHeaders } from "h3"
-import { getMethod, getRequestHeaders, getRequestURL, readRawBody, sendRedirect } from "h3"
-import { splitCookiesString } from "set-cookie-parser"
+import { getMethod, getRequestHeaders, getRequestURL, readRawBody, sendRedirect, splitCookiesString } from "h3"
 import type { RuntimeConfig } from "@nuxt/schema"
 
 export const configKey = "authJs"
