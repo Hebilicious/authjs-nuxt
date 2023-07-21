@@ -3,7 +3,6 @@ import { useAuth } from "./composables/useAuth"
 import { configKey, makeCookiesFromCookieString } from "./utils"
 import authMiddleware from "./middleware/auth-guard"
 import clientMiddleware from "./middleware/client-auth"
-import guestOnly from "./middleware/guest-only"
 import { addRouteMiddleware, defineNuxtPlugin, useRequestHeaders, useRuntimeConfig } from "#app"
 
 export default defineNuxtPlugin(async () => {
@@ -12,7 +11,6 @@ export default defineNuxtPlugin(async () => {
   const config = useRuntimeConfig().public[configKey]
 
   addRouteMiddleware("auth", authMiddleware)
-  addRouteMiddleware("guest-only", guestOnly)
   addRouteMiddleware("client-auth", clientMiddleware, { global: config.verifyClientOnEveryRequest })
 
   // We try to get the session when the app SSRs. No need to repeat this on the client.
