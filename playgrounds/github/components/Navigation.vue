@@ -22,9 +22,18 @@ const { signIn, signOut, session, status, cookies, user } = useAuth()
     <NuxtLink to="/private">
       Private
     </NuxtLink>
+    <NuxtLink to="/protected">
+      Protected
+    </NuxtLink>
     <hr>
     <NuxtLink to="/">
       Home
+    </NuxtLink>
+    <NuxtLink to="/auth/login">
+      Login
+    </NuxtLink>
+    <NuxtLink to="/auth/register">
+      Register
     </NuxtLink>
   </div>
 </template>
