@@ -26,5 +26,11 @@ const { signIn, signOut, session, status, cookies, user } = useAuth()
     <NuxtLink to="/">
       Home
     </NuxtLink>
+    <NuxtLink to="/auth/register">
+      Register
+    </NuxtLink>
+    <NuxtLink to="/auth/login">
+      Login
+    </NuxtLink>
   </div>
 </template>

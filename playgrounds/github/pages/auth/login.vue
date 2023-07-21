@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang='ts'>
 definePageMeta({
   middleware: ["guest-only"],
   auth: {
@@ -9,5 +9,7 @@ definePageMeta({
 </script>
 
 <template>
-  Redirected
+  <div>
+    login page
+  </div>
 </template>
