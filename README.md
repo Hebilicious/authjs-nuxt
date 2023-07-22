@@ -167,7 +167,7 @@ Use middlewares to protect your pages.
 
 ```html
 <script>
-definePageMeta({ auth: true })
+definePageMeta({ middleware: "auth" })
 </script>
 
 <template>
@@ -182,9 +182,8 @@ definePageMeta({ middleware: "auth" })
 definePageMeta({ middleware: "client-auth" }) // will run globally with `verifyClientOnEveryRequest: true`
 ```
 
-However you do not need to call them manually. You can use `definePageMeta({ auth: true })` and `verifyClientOnEveryRequest: true` respectively.
-Yo can use `client-auth` manually if you disable `verifyClientOnEveryRequest` in the config.
-
+Use `definePageMeta({ middleware: "auth" })` and `verifyClientOnEveryRequest: true` to protect pages while doing client side routing.
+Yo can register manually with `definePageMeta({ middleware: "client-auth" })` if you want to disable `verifyClientOnEveryRequest` in the config.
 
 If you need the session or the JWT on your api handlers, use the following methods :
 
