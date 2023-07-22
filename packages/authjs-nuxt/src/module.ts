@@ -5,9 +5,9 @@ import { configKey } from "./runtime/utils"
 const NAME = "@auth/nuxt"
 
 export interface ModuleOptions {
-  verifyClientOnEveryRequest: boolean
-  guestRedirectTo: string
-  authenticatedRedirectTo: string
+  verifyClientOnEveryRequest?: boolean
+  guestRedirectTo?: string
+  authenticatedRedirectTo?: string
   baseUrl: string
 }
 

@@ -161,7 +161,7 @@ definePageMeta({ middleware: "guest-only" }) // will redirect to `guestRedirectT
 
 Use `definePageMeta({ middleware: "auth" })` and `verifyClientOnEveryRequest: true` to protect pages while doing client side routing.
 You can register manually with `definePageMeta({ middleware: "client-auth" })` if you want to disable `verifyClientOnEveryRequest` in the config.
-You can configure `guestRedirectTo` and `authenticatedRedirectTo` globally, or in the middleware with the `auth` which takes priority.
+You can configure `guestRedirectTo` and `authenticatedRedirectTo` globally, or in the middleware with the `auth` key which takes priority.
 
 ### Session and JWT
 

@@ -1,9 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { checkOrigin, makeCookiesFromCookieString, makeNativeHeaders, makeNativeHeadersFromCookieObject } from "../src/runtime/utils"
 
-// eslint-disable-next-line antfu/top-level-function
-const mockRuntimeConfig = (baseUrl = "https://example.com") =>
-  ({ public: { authJs: { baseUrl, verifyClientOnEveryRequest: true, guestRedirectTo: "/" } } })
+const mockRuntimeConfig = (baseUrl = "https://example.com") => ({ public: { authJs: { baseUrl } } })
 
 describe("all", () => {
   it("can transform cookie object into headers", () => {
