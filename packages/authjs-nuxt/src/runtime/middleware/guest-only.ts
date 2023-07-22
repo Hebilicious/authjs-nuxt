@@ -1,4 +1,5 @@
 import { useAuth } from "../composables/useAuth"
+import { defineNuxtRouteMiddleware } from "#imports"
 
 /**
  * Prevents authenticated users from accessing guest-only pages. Ideal for pages like login and register.
