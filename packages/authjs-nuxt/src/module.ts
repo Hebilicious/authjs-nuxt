@@ -7,6 +7,7 @@ const NAME = "@auth/nuxt"
 export interface ModuleOptions {
   verifyClientOnEveryRequest: boolean
   guestRedirectTo: string
+  authenticatedRedirectTo: string
   baseUrl: string
 }
 
@@ -18,6 +19,7 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     verifyClientOnEveryRequest: true,
     guestRedirectTo: "/",
+    authenticatedRedirectTo: "/",
     baseUrl: ""
   },
   setup(userOptions, nuxt) {
