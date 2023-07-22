@@ -1,16 +1,13 @@
 import type { Session } from "@auth/core/types"
 import { produce } from "immer"
-import { computed, readonly, watch } from "vue"
+import { type Ref, computed, readonly, watch } from "vue"
 import * as auth from "../lib"
 import { useState } from "#imports"
 
 export function useAuth() {
-  const session = useState<Session | null>("auth:session", () => null)
-  const cookies = useState<Record<string, string> | null>("auth:cookies", () => ({}))
-  const status = useState<"loading" | "authenticated" | "unauthenticated" | "error">(
-    "auth:session:status",
-    () => "unauthenticated"
-  )
+  const session = useState("auth:session", () => null) as Ref<Session | null>
+  const cookies = useState("auth:cookies", () => ({})) as Ref<Record<string, string> | null>
+  const status = useState("auth:session:status", () => "unauthenticated") as Ref<"loading" | "authenticated" | "unauthenticated" | "error">
   const sessionToken = computed(() => cookies.value?.["next-auth.session-token"] ?? "")
   const user = computed(() => session.value?.user ?? null)
   watch(session, (newSession: Session | null) => {
