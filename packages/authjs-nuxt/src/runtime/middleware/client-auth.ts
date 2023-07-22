@@ -12,5 +12,5 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const valid = await verifyClientSession()
   if (valid) return
   if (["client-auth", "auth"].includes(to.meta.middleware) || to.meta.auth === true)
-    if (!valid) return navigateTo(to?.meta?.auth?.guestRedirectTo ?? useRuntimeConfig()?.public?.authJs?.guestRedirectTo ?? "/")
+    return navigateTo(to?.meta?.auth?.guestRedirectTo ?? useRuntimeConfig()?.public?.authJs?.guestRedirectTo ?? "/")
 })
