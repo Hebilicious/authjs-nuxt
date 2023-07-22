@@ -53,7 +53,8 @@ export default defineNuxtConfig({
    // Optional default config
    //  authJs: {
    //    verifyClientOnEveryRequest: true,
-   //    guestRedirectTo: "/",
+   //    guestRedirectTo: "/", // where to redirect if the user is authenticated
+   //    authenticatedRedirectTo: "/", // where to redirect if the user is not authenticated
    //    baseUrl: ""
    //  },
    runtimeConfig: {
@@ -130,7 +131,7 @@ Use middlewares to protect your pages.
 
 ```html
 <script>
-definePageMeta({ middleware: "auth" })
+definePageMeta({ middleware: "auth", auth: { guestRedirectTo: "/login" } })
 </script>
 
 <template>
@@ -138,15 +139,31 @@ definePageMeta({ middleware: "auth" })
 </template>
 ```
 
-There's 2 middlewares availables :
+`pages/login.vue`
+
+```html
+<script>
+definePageMeta({ middleware: "guest-only", auth: { authenticatedRedirectTo: "/profile" } })
+</script>
+
+<template>
+  <h1>Login</h1>
+</template>
+```
+
+There's 3 middlewares availables :
 
 ```ts
 definePageMeta({ middleware: "auth" })
 definePageMeta({ middleware: "client-auth" }) // will run globally with `verifyClientOnEveryRequest: true`
+definePageMeta({ middleware: "guest-only" }) // will redirect to `guestRedirectTo` if the user is authenticated
 ```
 
 Use `definePageMeta({ middleware: "auth" })` and `verifyClientOnEveryRequest: true` to protect pages while doing client side routing.
-Yo can register manually with `definePageMeta({ middleware: "client-auth" })` if you want to disable `verifyClientOnEveryRequest` in the config.
+You can register manually with `definePageMeta({ middleware: "client-auth" })` if you want to disable `verifyClientOnEveryRequest` in the config.
+You can configure `guestRedirectTo` and `authenticatedRedirectTo` globally, or in the middleware with the `auth` key which takes priority.
+
+### Session and JWT
 
 If you need the session or the JWT on your api handlers, use the following methods :
 
