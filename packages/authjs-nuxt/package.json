@@ -44,12 +44,14 @@
   "dependencies": {
     "@nuxt/kit": "3.6.1",
     "@panva/hkdf": "^1.1.1",
+    "@types/set-cookie-parser": "^2.4.3",
     "cookie": "^0.5.0",
     "cookie-es": "^1.0.0",
     "defu": "^6.1.2",
     "h3": "^1.7.1",
     "immer": "^10.0.2",
     "jose": "^4.14.4",
+    "set-cookie-parser": "^2.6.0",
     "unctx": "^2.3.1",
     "vue": "^3.3.4"
   },
