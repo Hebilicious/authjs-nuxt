@@ -1,0 +1,24 @@
+{
+  "name": "playground_keycloak",
+  "private": true,
+  "scripts": {
+    "build": "NITRO_PRESET=cloudflare_pages nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "postinstall": "nuxi prepare",
+    "preview": "nuxt preview"
+  },
+  "dependencies": {
+    "@auth/core": "^0.9.0",
+    "@hebilicious/authjs-nuxt": "workspace:*"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^0.6.6",
+    "node-fetch-native": "^1.2.0",
+    "nuxt": "3.6.1",
+    "ufo": "^1.1.2",
+    "unctx": "^2.3.1",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.2"
+  }
+}
