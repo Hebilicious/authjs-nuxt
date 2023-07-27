@@ -1,8 +1,7 @@
 import type { AuthConfig } from "@auth/core"
 import { parse } from "cookie-es"
 import type { H3Event, RequestHeaders } from "h3"
-import * as cookie from "set-cookie-parser"
-import { getMethod, getRequestHeaders, getRequestURL, readRawBody, sendRedirect } from "h3"
+import { getMethod, getRequestHeaders, getRequestURL, readRawBody, sendRedirect, splitCookiesString } from "h3"
 import type { RuntimeConfig } from "@nuxt/schema"
 
 export const configKey = "authJs"
@@ -69,7 +68,6 @@ export async function getRequestFromEvent(event: H3Event) {
   const url = new URL(getRequestURL(event))
   const method = getMethod(event)
   const body = method === "POST" ? await readRawBody(event) : undefined
-  // rome-ignore lint/suspicious/noExplicitAny: The H3 type should be compatible with native headers ...
   return new Request(url, { headers: getRequestHeaders(event) as any, method, body })
 }
 
@@ -81,7 +79,7 @@ export async function getRequestFromEvent(event: H3Event) {
  */
 export async function respondWithResponse(event: H3Event, response: Response) {
   for (const [key, value] of response.headers) {
-    if (key === "set-cookie") event.node.res.appendHeader(key, cookie.splitCookiesString(value))
+    if (key === "set-cookie") event.node.res.appendHeader(key, splitCookiesString(value))
     else event.node.res.setHeader(key, value)
   }
 
