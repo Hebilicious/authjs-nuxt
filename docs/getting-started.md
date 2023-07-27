@@ -79,7 +79,7 @@ Note that you can use whatever environment variables you want here, this is just
 
 ### Import errors
 
-You might run into imports errors for cookie or for the @auth/core internals. 
+You might run into imports errors for cookie or for the @auth/core internals.
 Add these aliases if you are running into import errors
 
 ```ts
@@ -87,9 +87,10 @@ import { resolve } from "node:path"
 
 export default defineNuxtConfig({
   alias: {
-    "cookie": resolve(__dirname, "node_modules/cookie"),
-    "jose": resolve(__dirname, "node_modules/jose/dist/browser/index.js"),
-    "@panva/hkdf": resolve(__dirname, "node_modules/@panva/hkdf/dist/web/index.js")
+    cookie: resolve(__dirname, "node_modules/cookie")
+    // If you have error with the 2 followings imports, please open an issue and uncomment these lines.
+    // "jose": resolve(__dirname, "node_modules/jose/dist/browser/index.js"),
+    // "@panva/hkdf": resolve(__dirname, "node_modules/@panva/hkdf/dist/web/index.js")
   }
 })
 ```
