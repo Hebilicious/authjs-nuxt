@@ -33,8 +33,8 @@ importers:
         specifier: ^13.2.3
         version: 13.2.3
       pnpm:
-        specifier: 8.6.5
-        version: 8.6.5
+        specifier: 8.6.8
+        version: 8.6.8
       prettier:
         specifier: ^3.0.0
         version: 3.0.0
@@ -7482,8 +7482,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /pnpm@8.6.5:
-    resolution: {integrity: sha512-mztfvneJl4o9gCWfQlFKio6gVYhJbFazWUVBcomJ9u/yspwScHUxMyWvxOed1a543roo+aeIjp5VQkHOoTWFAg==}
+  /pnpm@8.6.8:
+    resolution: {integrity: sha512-OtrCRUE7VqRyKly9E3gfExZHOAHtFDpmulyVFKrnl3v/n2xJckdueVumWJqUA5FHxcRP/T42r8P8CDr9duPP9w==}
     engines: {node: '>=16.14'}
     hasBin: true
     dev: true
