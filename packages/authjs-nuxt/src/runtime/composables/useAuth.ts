@@ -50,6 +50,16 @@ export function useAuth() {
     }
   }
 
+  const getProviders: () => ReturnType<typeof auth.getProviders> = () => {
+    try {
+      return auth.getProviders()
+    }
+    catch (error) {
+      status.value = "error"
+      throw error
+    }
+  }
+
   return {
     session: readonly(session),
     user,
@@ -59,6 +69,7 @@ export function useAuth() {
     signOut,
     cookies,
     sessionToken,
-    removeSession
+    removeSession,
+    getProviders
   }
 }
