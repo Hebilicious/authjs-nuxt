@@ -36,8 +36,7 @@ export default defineNuxtModule<ModuleOptions>({
     // @todo This isn't needed for node, apply this based on Nitro settings
     nuxt.options.alias = defu(nuxt.options.alias, {
       "jose": resolve(__dirname, "../node_modules/jose/dist/browser/index.js"),
-      "@panva/hkdf": resolve(__dirname, "../node_modules/@panva/hkdf/dist/web/index.js"),
-      "cookie": resolve(__dirname, "../node_modules/cookie")
+      "@panva/hkdf": resolve(__dirname, "../node_modules/@panva/hkdf/dist/web/index.js")
     })
 
     // 3. Add composables
