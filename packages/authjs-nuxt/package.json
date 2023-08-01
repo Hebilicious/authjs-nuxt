@@ -38,11 +38,11 @@
     "dev": "nuxi dev"
   },
   "peerDependencies": {
-    "@auth/core": "^0.9.0",
-    "nuxt": "^3.6.1"
+    "@auth/core": "^0.10.0",
+    "nuxt": "^3.6.5"
   },
   "dependencies": {
-    "@nuxt/kit": "3.6.1",
+    "@nuxt/kit": "3.6.5",
     "@panva/hkdf": "^1.1.1",
     "cookie": "^0.5.0",
     "cookie-es": "^1.0.0",
