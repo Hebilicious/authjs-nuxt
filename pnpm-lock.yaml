@@ -8,12 +8,12 @@ importers:
 
   .:
     devDependencies:
-      '@antfu/eslint-config':
-        specifier: ^0.40.0
-        version: 0.40.0(eslint@8.46.0)(typescript@5.1.6)
       '@antfu/ni':
         specifier: ^0.21.5
         version: 0.21.5
+      '@hebilicious/eslint-config':
+        specifier: 0.0.3-beta.1
+        version: 0.0.3-beta.1(eslint@8.46.0)(typescript@5.1.6)
       '@types/node':
         specifier: ^20.4.5
         version: 20.4.5
@@ -1580,6 +1580,21 @@ packages:
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
     dependencies:
       '@hapi/hoek': 9.3.0
+    dev: true
+
+  /@hebilicious/eslint-config@0.0.3-beta.1(eslint@8.46.0)(typescript@5.1.6):
+    resolution: {integrity: sha512-cNU3kbx1FuA9yZs3K31t6r19YOQvjqbq1386NLyxi2i9tRNaPu/UOJBoSVW4gBpE1NDyUrk8GdYdTbHTZEuEmQ==}
+    peerDependencies:
+      eslint: ^8.46.0
+    dependencies:
+      '@antfu/eslint-config': 0.40.0(eslint@8.46.0)(typescript@5.1.6)
+      eslint: 8.46.0
+    transitivePeerDependencies:
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - jest
+      - supports-color
+      - typescript
     dev: true
 
   /@humanwhocodes/config-array@0.11.10:

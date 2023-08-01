@@ -18,8 +18,8 @@
     "test:all": "pnpm lint && pnpm typecheck && pnpm vitest run"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.40.0",
     "@antfu/ni": "^0.21.5",
+    "@hebilicious/eslint-config": "0.0.3-beta.1",
     "@types/node": "^20.4.5",
     "bumpp": "^9.1.1",
     "conventional-changelog-cli": "^3.0.0",
