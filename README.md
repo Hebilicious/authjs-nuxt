@@ -136,7 +136,7 @@ Use the `useAuth` helper to handle your authentication.
 
 ```html
 <script setup lang="ts">
-const { signIn, signOut, session, status, cookies } = useAuth()
+const { signIn, signOut, session, status, cookies, getProviders } = useAuth()
 </script>
 
 <template>
