@@ -109,11 +109,11 @@ export async function signOut(options?: SignOutParams) {
 }
 
 /**
- * Retrieve the list of providers currently configured
+ * Retrieve the list of providers currently configured.
  * See [OAuth Sign In](https://authjs.dev/guides/basics/pages#oauth-sign-in) for more details.
  */
 export async function getProviders() {
-  const data = await $fetch<Record<string, any>>("/api/auth/providers")
+  const data = await $fetch<Record<string, unknown>[]>("/api/auth/providers")
   return data
 }
 

@@ -50,7 +50,7 @@ export function useAuth() {
     }
   }
 
-  const getProviders: () => ReturnType<typeof auth.getProviders> = () => {
+  const getProviders = () => {
     return auth.getProviders()
   }
 
