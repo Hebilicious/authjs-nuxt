@@ -51,13 +51,7 @@ export function useAuth() {
   }
 
   const getProviders: () => ReturnType<typeof auth.getProviders> = () => {
-    try {
-      return auth.getProviders()
-    }
-    catch (error) {
-      status.value = "error"
-      throw error
-    }
+    return auth.getProviders()
   }
 
   return {
