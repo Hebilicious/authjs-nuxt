@@ -1,7 +1,7 @@
 import type { Session } from "@auth/core/types"
 import { produce } from "immer"
 import { type Ref, computed, readonly, watch } from "vue"
-import * as auth from "../lib"
+import { getProviders, signIn, signOut } from "../lib/client"
 import { useState } from "#imports"
 
 export function useAuth() {
@@ -26,44 +26,16 @@ export function useAuth() {
     updateSession(null)
   }
 
-  const signIn: (...args: Parameters<typeof auth.signIn>) => void = async (...args) => {
-    try {
-      status.value = "loading"
-      await auth.signIn(...args)
-    }
-    catch (error) {
-      status.value = "error"
-      throw error
-    }
-  }
-
-  const signOut: (...args: Parameters<typeof auth.signOut>) => ReturnType<typeof auth.signOut> = (
-    ...args
-  ) => {
-    try {
-      status.value = "unauthenticated"
-      return auth.signOut(...args)
-    }
-    catch (error) {
-      status.value = "error"
-      throw error
-    }
-  }
-
-  const getProviders = () => {
-    return auth.getProviders()
-  }
-
   return {
     session: readonly(session),
     user,
     updateSession,
-    status: readonly(status),
-    signIn,
-    signOut,
+    status,
     cookies,
     sessionToken,
     removeSession,
+    signIn,
+    signOut,
     getProviders
   }
 }
