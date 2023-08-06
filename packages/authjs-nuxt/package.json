@@ -35,6 +35,7 @@
     "build": "rimraf dist && pnpm build:module && pnpm postbuild",
     "edge-release": "pnpm build && pnpm publish --access public --tag edge",
     "postinstall": "nuxi prepare",
+    "test": "vitest",
     "dev": "nuxi dev"
   },
   "peerDependencies": {
