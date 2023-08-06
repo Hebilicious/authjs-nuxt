@@ -50,6 +50,10 @@ export function useAuth() {
     }
   }
 
+  const getProviders = () => {
+    return auth.getProviders()
+  }
+
   return {
     session: readonly(session),
     user,
@@ -59,6 +63,7 @@ export function useAuth() {
     signOut,
     cookies,
     sessionToken,
-    removeSession
+    removeSession,
+    getProviders
   }
 }
