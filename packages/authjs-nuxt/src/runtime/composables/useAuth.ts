@@ -31,7 +31,7 @@ export function useAuth() {
   }
 
   return {
-    session,
+    session: readonly(session) as Readonly<Ref<Session | null>>,
     user,
     updateSession,
     status,
