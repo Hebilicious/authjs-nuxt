@@ -4,7 +4,7 @@ import type { H3Event } from "h3"
 import { eventHandler, getRequestHeaders, getRequestURL } from "h3"
 import type { AuthConfig, Session } from "@auth/core/types"
 import { getToken } from "@auth/core/jwt"
-import { checkOrigin, getAuthJsSecret, getRequestFromEvent, getServerOrigin, makeCookiesFromCookieString, respondWithResponse } from "../utils"
+import { checkOrigin, getAuthJsSecret, getRequestFromEvent, getServerOrigin, makeCookiesFromCookieString } from "../utils"
 
 if (!globalThis.crypto) {
   // eslint-disable-next-line no-console
@@ -33,7 +33,7 @@ export function NuxtAuthHandler(options: AuthConfig, runtimeConfig: RuntimeConfi
     if (request.url.includes(".js.map")) return // Do not handle source maps
     checkOrigin(request, runtimeConfig)
     const response = await Auth(request, options)
-    return respondWithResponse(event, response)
+    return response
   })
 }
 

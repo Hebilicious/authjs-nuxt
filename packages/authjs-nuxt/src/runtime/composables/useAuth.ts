@@ -22,6 +22,8 @@ export function useAuth() {
   }
 
   const removeSession = () => {
+    // eslint-disable-next-line no-console
+    console.log("Removing session")
     cookies.value = null
     updateSession(null)
   }
