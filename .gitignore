@@ -5,3 +5,4 @@ dist
 .vitepress/cache
 .vitepress/dist
 .turbo
+.output
