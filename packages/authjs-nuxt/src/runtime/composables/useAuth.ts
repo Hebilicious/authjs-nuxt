@@ -1,15 +1,17 @@
-import type { Session } from "@auth/core/types"
+import type { Session, User } from "@auth/core/types"
 import { produce } from "immer"
-import { type Ref, computed, readonly, watch } from "vue"
+import { type ComputedRef, type Ref, computed, watch } from "vue"
 import { getProviders, signIn, signOut } from "../lib/client"
 import { useState } from "#imports"
+
+// @note the `as Type` statements are necessary for rollup to generate the correct types
 
 export function useAuth() {
   const session = useState("auth:session", () => null) as Ref<Session | null>
   const cookies = useState("auth:cookies", () => ({})) as Ref<Record<string, string> | null>
   const status = useState("auth:session:status", () => "unauthenticated") as Ref<"loading" | "authenticated" | "unauthenticated" | "error">
   const sessionToken = computed(() => cookies.value?.["next-auth.session-token"] ?? "")
-  const user = computed(() => session.value?.user ?? null)
+  const user = computed(() => session.value?.user ?? null) as ComputedRef<User | null>
   watch(session, (newSession: Session | null) => {
     if (newSession === null)
       return (status.value = "unauthenticated")
@@ -29,7 +31,7 @@ export function useAuth() {
   }
 
   return {
-    session: readonly(session),
+    session,
     user,
     updateSession,
     status,
