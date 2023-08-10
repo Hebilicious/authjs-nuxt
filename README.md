@@ -14,7 +14,7 @@ Contributions are welcome !
 
 ## Documentation
 
-You can find the documentation [here](https://authjs-nuxt.pages.dev/) (WIP).
+You can find the documentation [here](https://authjs-nuxt.pages.dev/)
 
 ### Why not?
 
