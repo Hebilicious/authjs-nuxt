@@ -1,3 +1,5 @@
+/// <reference path="./client.d.ts" />
+// @todo find a way to make this reference work
 import type { BuiltInProviderType, Provider, RedirectableProviderType } from "@auth/core/providers"
 import type { Session } from "@auth/core/types"
 import { makeNativeHeadersFromCookieObject } from "../utils"
