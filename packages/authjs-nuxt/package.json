@@ -31,6 +31,7 @@
     "dts": "esno scripts/dts.ts",
     "readme": "esno scripts/readme.ts",
     "postbuild": "pnpm dts && pnpm readme",
+    "build:stub": "nuxt-build-module --stub",
     "build:module": "nuxt-build-module",
     "build": "rimraf dist && pnpm build:module && pnpm postbuild",
     "edge-release": "pnpm build && pnpm publish --access public --tag edge",
@@ -40,7 +41,9 @@
   },
   "peerDependencies": {
     "@auth/core": "^0.10.0",
-    "nuxt": "^3.6.5"
+    "h3": "^1.8.0-rc.3",
+    "nuxt": "^3.6.5",
+    "vue": "^3.3.4"
   },
   "dependencies": {
     "@nuxt/kit": "3.6.5",
@@ -48,17 +51,11 @@
     "cookie": "^0.5.0",
     "cookie-es": "^1.0.0",
     "defu": "^6.1.2",
-    "h3": "^1.7.1",
     "immer": "^10.0.2",
     "jose": "^4.14.4",
-    "unctx": "^2.3.1",
-    "vue": "^3.3.4"
+    "unctx": "^2.3.1"
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.4.0"
-  },
-  "bundledDependencies": [
-    "@panva/hkdf",
-    "jose"
-  ]
+  }
 }

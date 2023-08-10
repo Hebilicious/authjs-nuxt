@@ -22,8 +22,10 @@ export default defineNuxtPlugin(async () => {
       headers
     })
     const hasSession = data && Object.keys(data).length
-    if (hasSession) updateSession(data)
+    if (hasSession) {
+      updateSession(data)
+      cookies.value = makeCookiesFromCookieString(headers.cookie)
+    }
     if (!hasSession) removeSession()
-    cookies.value = makeCookiesFromCookieString(headers.cookie)
   }
 })
