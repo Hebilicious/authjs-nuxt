@@ -1,4 +1,4 @@
-import { addImports, addPlugin, addTypeTemplate, createResolver, defineNuxtModule, useLogger } from "@nuxt/kit"
+import { addImports, addPlugin, addRouteMiddleware, addTypeTemplate, createResolver, defineNuxtModule, useLogger } from "@nuxt/kit"
 import { defu } from "defu"
 import { configKey } from "./runtime/utils"
 
@@ -66,8 +66,14 @@ export default defineNuxtModule<ModuleOptions>({
       ].join("\n")
     })
 
-    // 5. Add plugin & middleware
+    // 5. Add plugin
     addPlugin(resolve("./runtime/plugin"))
+
+    // 6. Add middlewares
+    addRouteMiddleware({ name: "auth", path: resolve("./runtime/middleware/auth") })
+    addRouteMiddleware({ name: "guest-only", path: resolve("./runtime/middleware/guest-only") })
+    addRouteMiddleware({ name: "client-auth", path: resolve("./runtime/middleware/client-auth.ts"), global: options.verifyClientOnEveryRequest })
+
     logger.success(`Added ${NAME} module successfully.`)
   }
 })
