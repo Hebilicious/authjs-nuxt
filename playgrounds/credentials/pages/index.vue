@@ -9,7 +9,7 @@ async function check() {
       password: "admins"
     })
     // eslint-disable-next-line no-console
-    console.log("SignIn")
+    console.log("SignIn", session.value?.user?.role)
   }
   catch (error) {
     // eslint-disable-next-line no-console

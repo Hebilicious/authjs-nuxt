@@ -149,6 +149,23 @@ const { signIn, signOut, session, status, cookies, getProviders } = useAuth()
 </template>
 ```
 
+### Extending Auth.js Types
+
+If you need to extend Auth.js types such as `Session` or `User`, create a Typescript declaration file (`types.d.ts`) in your project root.
+
+```ts
+declare module "@auth/core/types" {
+  interface Session {
+    user?: User
+  }
+  interface User {
+    role: string
+  }
+}
+
+export {}
+```
+
 ## 📝 Middlewares
 
 Use middlewares to protect your pages.
@@ -189,7 +206,7 @@ Use `definePageMeta({ middleware: "auth" })` and `verifyClientOnEveryRequest: tr
 You can register manually with `definePageMeta({ middleware: "client-auth" })` if you want to disable `verifyClientOnEveryRequest` in the config.
 You can configure `guestRedirectTo` and `authenticatedRedirectTo` globally, or in the middleware with the `auth` key which takes priority.
 
-### Session and JWT
+## Session and JWT
 
 If you need the session or the JWT on your api handlers, use the following methods :
 

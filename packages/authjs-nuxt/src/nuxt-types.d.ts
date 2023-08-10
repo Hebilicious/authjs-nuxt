@@ -1,11 +1,12 @@
-import { configKey } from "./runtime/utils";
 import type { ModuleOptions } from "./module";
 
 declare module "@nuxt/schema" {
+    interface RuntimeConfig {
+      authJs: ModuleOptions
+    }
     interface PublicRuntimeConfig {
-      [configKey]: ModuleOptions
+      authJs: ModuleOptions
     }
 }
-  
-export { }
-  
+
+export {}
