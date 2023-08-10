@@ -19,9 +19,9 @@ describe("all", () => {
   })
 
   it("can make cookies from cookie string", () => {
-    const cookieString = "next.hello=world; hi=there"
+    const cookieString = "next-auth.hello=world; hi=there"
     const cookies = makeCookiesFromCookieString(cookieString)
-    expect(cookies["next.hello"]).toBe("world")
+    expect(cookies["next-auth.hello"]).toBe("world")
     expect(cookies.hi).toBeUndefined()
   })
 
