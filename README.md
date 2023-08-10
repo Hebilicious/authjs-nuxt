@@ -136,7 +136,7 @@ export default defineNuxtConfig({
   ```
 
 Note that you can use whatever environment variables you want here, this is just an example.
-For environment variable usage with `runtimeConfig`, refer to the [Nuxt documentation](https://nuxt.com/docs/guide/going-further/runtime-config).
+For `.env` and general environment variable usage with `runtimeConfig`, refer to the [Nuxt documentation](https://nuxt.com/docs/guide/going-further/runtime-config).
 
 ### Import errors
 
