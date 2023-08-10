@@ -48,9 +48,34 @@ pnpm i @hebilicious/authjs-nuxt @auth/core
 yarn add @hebilicious/authjs-nuxt @auth/core
 ```
 
+### Response support
+
+Native `Response` is necessary for this module, and currently being added to Nuxt through h3 and nitropack.
+Therefore you must enforce recent dependencies with your package manager :
+
+```json
+{
+  "dependencies": {
+    "@auth/core": "0.9.0",
+    "h3": "1.8.0-rc.3",
+    "nitropack": "npm:nitropack-edge@latest",
+    "nuxt": "^3.6.5",
+    "@hebilicious/authjs-nuxt": "0.2.0-beta.8"
+  },
+  "overrides": { // for npm
+    "h3": "1.8.0-rc.3",
+    "nitropack": "npm:nitropack-edge@latest"
+  },
+  "resolutions": { // for pnpm and yarn
+    "h3": "1.8.0-rc.3",
+    "nitropack": "npm:nitropack-edge@latest"
+  }
+}
+```
+
 ## 🛠️ Route Configuration
 
-Create a catch-all route at `server/api/auth/[...].ts`. 
+Create a catch-all route at `server/api/auth/[...].ts`.
 
 ```ts
 import GithubProvider from "@auth/core/providers/github"
@@ -115,7 +140,7 @@ Note that you can use whatever environment variables you want here, this is just
 ### Import errors
 
 You might run into imports errors for cookie or for the @auth/core internals.
-Add these aliases if you are running into import errors
+Uses aliases if you are running into import errors.
 
 ```ts
 import { resolve } from "node:path"
@@ -123,9 +148,6 @@ import { resolve } from "node:path"
 export default defineNuxtConfig({
   alias: {
     cookie: resolve(__dirname, "node_modules/cookie")
-    // If you have error with the 2 followings imports, please open an issue and uncomment these lines.
-    // "jose": resolve(__dirname, "node_modules/jose/dist/browser/index.js"),
-    // "@panva/hkdf": resolve(__dirname, "node_modules/@panva/hkdf/dist/web/index.js")
   }
 })
 ```
