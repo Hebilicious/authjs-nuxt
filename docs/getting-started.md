@@ -12,9 +12,34 @@ pnpm i @hebilicious/authjs-nuxt @auth/core
 yarn add @hebilicious/authjs-nuxt @auth/core
 ```
 
+### Response support
+
+Auth.js relies on native `Response` support, which is currently being added to Nuxt through [h3](https://github.com/unjs/h3) and [nitro](https://github.com/unjs/nitro).
+Therefore you must enforce recent dependencies with your package manager :
+
+```json
+{
+  "dependencies": {
+    "@auth/core": "0.9.0",
+    "h3": "1.8.0-rc.3", // 1.8.0 or above
+    "nitropack": "npm:nitropack-edge@latest", // 2.6.0 or above
+    "nuxt": "^3.6.5", // 3.6.5 or above
+    "@hebilicious/authjs-nuxt": "0.2.0-beta.8"
+  },
+  "overrides": { // for npm
+    "h3": "1.8.0-rc.3",
+    "nitropack": "npm:nitropack-edge@latest"
+  },
+  "resolutions": { // for pnpm and yarn
+    "h3": "1.8.0-rc.3",
+    "nitropack": "npm:nitropack-edge@latest"
+  }
+}
+```
+
 ## 🛠️ Route Configuration
 
-Create a catch-all route at `server/api/auth/[...].ts`. 
+Create a catch-all route at `server/api/auth/[...].ts`.
 
 ```ts
 import GithubProvider from "@auth/core/providers/github"
@@ -76,11 +101,14 @@ export default defineNuxtConfig({
   ```
 
 Note that you can use whatever environment variables you want here, this is just an example.
+For `.env` and general environment variable usage with `runtimeConfig`, refer to the [Nuxt documentation](https://nuxt.com/docs/guide/going-further/runtime-config).
+
+For production, you *must* set a baseUrl that matches the url where your app is deployed. This will protect your users against `CSRF` attacks.
 
 ### Import errors
 
 You might run into imports errors for cookie or for the @auth/core internals.
-Add these aliases if you are running into import errors
+Uses aliases if you are running into import errors.
 
 ```ts
 import { resolve } from "node:path"
@@ -88,9 +116,6 @@ import { resolve } from "node:path"
 export default defineNuxtConfig({
   alias: {
     cookie: resolve(__dirname, "node_modules/cookie")
-    // If you have error with the 2 followings imports, please open an issue and uncomment these lines.
-    // "jose": resolve(__dirname, "node_modules/jose/dist/browser/index.js"),
-    // "@panva/hkdf": resolve(__dirname, "node_modules/@panva/hkdf/dist/web/index.js")
   }
 })
 ```
