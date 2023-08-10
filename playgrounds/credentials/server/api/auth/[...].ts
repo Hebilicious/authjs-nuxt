@@ -24,8 +24,7 @@ export const authOptions: AuthConfig = {
           credentials.username === "admin"
           && credentials.password === "admin"
         )
-          return { id: "1", name: "admin", email: "admin" }
-
+          return { id: "1", name: "admin", email: "admin", role: "test" }
         return null
       }
     })
