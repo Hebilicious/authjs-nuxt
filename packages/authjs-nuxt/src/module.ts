@@ -32,13 +32,6 @@ export default defineNuxtModule<ModuleOptions>({
     const options = defu(nuxt.options.runtimeConfig.public[configKey], userOptions)
     nuxt.options.runtimeConfig.public[configKey] = options
 
-    // 2. Alias @auth/core dependencies to their browser version
-    // @todo This isn't needed for node, apply this based on Nitro settings
-    nuxt.options.alias = defu(nuxt.options.alias, {
-      "jose": resolve(__dirname, "../node_modules/jose/dist/browser/index.js"),
-      "@panva/hkdf": resolve(__dirname, "../node_modules/@panva/hkdf/dist/web/index.js")
-    })
-
     // 3. Add composables
     addImports([{ name: "useAuth", from: resolve("./runtime/composables/useAuth") }])
 
