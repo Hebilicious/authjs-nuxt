@@ -14,16 +14,16 @@ yarn add @hebilicious/authjs-nuxt @auth/core
 
 ### Response support
 
-Native `Response` is necessary for this module, and currently being added to Nuxt through h3 and nitropack.
+Auth.js relies on native `Response` support, which is currently being added to Nuxt through [h3](https://github.com/unjs/h3) and [nitro](https://github.com/unjs/nitro).
 Therefore you must enforce recent dependencies with your package manager :
 
 ```json
 {
   "dependencies": {
     "@auth/core": "0.9.0",
-    "h3": "1.8.0-rc.3",
-    "nitropack": "npm:nitropack-edge@latest",
-    "nuxt": "^3.6.5",
+    "h3": "1.8.0-rc.3", // 1.8.0 or above
+    "nitropack": "npm:nitropack-edge@latest", // 2.6.0 or above
+    "nuxt": "^3.6.5", // 3.6.5 or above
     "@hebilicious/authjs-nuxt": "0.2.0-beta.8"
   },
   "overrides": { // for npm
@@ -102,6 +102,8 @@ export default defineNuxtConfig({
 
 Note that you can use whatever environment variables you want here, this is just an example.
 For `.env` and general environment variable usage with `runtimeConfig`, refer to the [Nuxt documentation](https://nuxt.com/docs/guide/going-further/runtime-config).
+
+For production, you *must* set a baseUrl that matches the url where your app is deployed. This will protect your users against `CSRF` attacks.
 
 ### Import errors
 
