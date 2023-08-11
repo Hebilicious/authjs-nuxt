@@ -72,7 +72,7 @@ export default defineNuxtModule<ModuleOptions>({
     // 6. Add middlewares
     addRouteMiddleware({ name: "auth", path: resolve("./runtime/middleware/auth") })
     addRouteMiddleware({ name: "guest-only", path: resolve("./runtime/middleware/guest-only") })
-    addRouteMiddleware({ name: "client-auth", path: resolve("./runtime/middleware/client-auth.ts"), global: options.verifyClientOnEveryRequest })
+    addRouteMiddleware({ name: "client-auth", path: resolve("./runtime/middleware/client-auth"), global: options.verifyClientOnEveryRequest })
 
     logger.success(`Added ${NAME} module successfully.`)
   }
