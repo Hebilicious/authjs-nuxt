@@ -100,7 +100,7 @@ export default defineNuxtConfig({
 })
   ```
 
-Note that you can use whatever environment variables you want here, this is just an example.
+Note that you can use whatever environment variables prefixed by `NUXT_` you want here, this is just an example.
 For `.env` and general environment variable usage with `runtimeConfig`, refer to the [Nuxt documentation](https://nuxt.com/docs/guide/going-further/runtime-config).
 
 For production, you *must* set a baseUrl that matches the url where your app is deployed. This will protect your users against `CSRF` attacks.
