@@ -1,6 +1,6 @@
 import type { Session, User } from "@auth/core/types"
 import { produce } from "immer"
-import { type ComputedRef, type Ref, computed, watch } from "vue"
+import { type ComputedRef, type Ref, computed, readonly, watch } from "vue"
 import { getProviders, signIn, signOut } from "../lib/client"
 import { useState } from "#imports"
 
