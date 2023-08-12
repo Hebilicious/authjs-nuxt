@@ -6,3 +6,4 @@ dist
 .vitepress/dist
 .turbo
 .output
+**/.nuxt/**

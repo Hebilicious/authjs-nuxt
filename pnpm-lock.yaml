@@ -14,6 +14,9 @@ importers:
       '@hebilicious/eslint-config':
         specifier: 0.0.3-beta.2
         version: 0.0.3-beta.2(eslint@8.46.0)(typescript@5.1.6)
+      '@nuxt/test-utils':
+        specifier: ^3.6.5
+        version: 3.6.5(rollup@3.21.5)(vitest@0.34.1)(vue@3.3.4)
       '@types/node':
         specifier: ^20.4.8
         version: 20.4.8
@@ -204,6 +207,23 @@ importers:
       vue-router:
         specifier: ^4.2.4
         version: 4.2.4(vue@3.3.4)
+
+  test: {}
+
+  test/fixtures/basic:
+    dependencies:
+      '@hebilicious/authjs-nuxt':
+        specifier: latest
+        version: link:../../../packages/authjs-nuxt
+      h3:
+        specifier: ^1.8.0-rc.3
+        version: 1.8.0-rc.3
+      nitropack:
+        specifier: 2.5.2
+        version: 2.5.2
+      nuxt:
+        specifier: 3.6.5
+        version: 3.6.5(@types/node@20.4.8)(eslint@8.46.0)(rollup@3.21.5)(typescript@5.1.6)
 
 packages:
 
@@ -1839,6 +1859,38 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
+
+  /@nuxt/test-utils@3.6.5(rollup@3.21.5)(vitest@0.34.1)(vue@3.3.4):
+    resolution: {integrity: sha512-excgW7fTOxGaIpLmiFo3hCD56Z2/b1hqpn6Wvdw5wZSHdrReke/Ka23Ut+7P+bBiciLrNrhpk7M3ORCNRfJNDA==}
+    engines: {node: ^14.18.0 || >=16.10.0}
+    peerDependencies:
+      '@jest/globals': ^29.5.0
+      playwright-core: ^1.34.3
+      vitest: ^0.30.0 || ^0.31.0 || ^0.32.0 || ^0.33.0
+      vue: ^3.3.4
+    peerDependenciesMeta:
+      '@jest/globals':
+        optional: true
+      playwright-core:
+        optional: true
+      vitest:
+        optional: true
+    dependencies:
+      '@nuxt/kit': 3.6.5(rollup@3.21.5)
+      '@nuxt/schema': 3.6.5(rollup@3.21.5)
+      consola: 3.2.3
+      defu: 6.1.2
+      execa: 7.2.0
+      get-port-please: 3.0.1
+      ofetch: 1.1.1
+      pathe: 1.1.1
+      ufo: 1.2.0
+      vitest: 0.34.1
+      vue: 3.3.4
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
 
   /@nuxt/ui-templates@1.2.0:
     resolution: {integrity: sha512-MSZza7dxccNb/p7nuzGF8/m4POaFpHzVhNdR7f4xahOpH7Ja02lFeYR+rHtoHIJC0yym4qriqv0mQ+Qf/R61bQ==}
@@ -5276,6 +5328,7 @@ packages:
       ufo: 1.2.0
       uncrypto: 0.1.3
       unenv: 1.7.1
+    dev: false
 
   /handlebars@4.7.7:
     resolution: {integrity: sha512-aAcXm5OAfE/8IXkcZvCepKU3VzW1/39Fb5ZuqMtgI/hT8X2YgoMvBY5dLhq/cpOvw7Lk1nK/UF71aLG/ZnVYRA==}
@@ -5551,6 +5604,7 @@ packages:
 
   /iron-webcrypto@0.8.0:
     resolution: {integrity: sha512-gScdcWHjTGclCU15CIv2r069NoQrys1UeUFFfaO1hL++ytLHkVw7N5nXJmFf3J2LEDMz1PkrvC0m62JEeu1axQ==}
+    dev: false
 
   /is-alphabetical@1.0.4:
     resolution: {integrity: sha512-DwzsA04LQ10FHTZuL0/grVDk4rFoVH1pjAToYwBrHSxcrBIGQuXrQMtD5U1b0U2XVgKZCTLLP8u2Qxqhy3l2Vg==}
@@ -6866,7 +6920,7 @@ packages:
       estree-walker: 3.0.3
       fs-extra: 11.1.1
       globby: 13.2.2
-      h3: 1.8.0-rc.3
+      h3: 1.7.1
       hookable: 5.5.3
       jiti: 1.19.1
       klona: 2.0.6

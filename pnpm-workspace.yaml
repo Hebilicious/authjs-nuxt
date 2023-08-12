@@ -2,3 +2,4 @@ packages:
   - docs/**
   - packages/**
   - playgrounds/**
+  - test/**
