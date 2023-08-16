@@ -40,8 +40,8 @@
     "dev": "nuxi dev"
   },
   "peerDependencies": {
-    "@auth/core": "^0.10.0",
-    "h3": "^1.8.0-rc.3",
+    "@auth/core": "^0.12.0",
+    "h3": "^1.8.0",
     "nuxt": "^3.6.5",
     "vue": "^3.3.4"
   },
