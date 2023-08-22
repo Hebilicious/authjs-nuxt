@@ -21,12 +21,12 @@
     "@antfu/ni": "^0.21.5",
     "@hebilicious/eslint-config": "0.0.3-beta.3",
     "@nuxt/test-utils": "^3.6.5",
-    "@types/node": "^20.5.0",
-    "bumpp": "^9.1.1",
+    "@types/node": "^20.5.3",
+    "bumpp": "^9.2.0",
     "conventional-changelog-cli": "^3.0.0",
     "eslint": "8.47.0",
     "esno": "^0.17.0",
-    "lint-staged": "^14.0.0",
+    "lint-staged": "^14.0.1",
     "pnpm": "8.6.12",
     "prettier": "^3.0.2",
     "rimraf": "^5.0.1",
@@ -36,7 +36,7 @@
     "turbo": "^1.10.12",
     "typescript": "^5.1.6",
     "unbuild": "^1.2.1",
-    "vitest": "^0.34.1"
+    "vitest": "^0.34.2"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
