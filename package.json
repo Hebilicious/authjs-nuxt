@@ -23,7 +23,7 @@
     "@nuxt/test-utils": "^3.6.5",
     "@types/node": "^20.5.3",
     "bumpp": "^9.2.0",
-    "conventional-changelog-cli": "^3.0.0",
+    "conventional-changelog-cli": "^4.0.0",
     "eslint": "8.47.0",
     "esno": "^0.17.0",
     "lint-staged": "^14.0.1",
