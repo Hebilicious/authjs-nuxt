@@ -87,14 +87,14 @@ export async function signIn<P extends RedirectableProviderType | undefined = un
     const url = response?._data?.url ?? null
     const error = url ? new URL(url).searchParams.get("error") : null
     if (error) throw new Error(error)
+    if (isCredentials && !redirect) reloadNuxtApp({ persistState: true, force: true })
     if (redirect || !isSupportingReturn) {
-      // TODO: Do not redirect for Credentials and Email providers by default in next major
       const to = url ?? callbackUrl
       // eslint-disable-next-line no-console
       console.log(`Redirecting, navigating to ${to}`)
       await navigateTo(to, { external: true })
       // If url contains a hash, the browser does not reload the page. We reload manually
-      if (to?.includes("#")) reloadNuxtApp({ persistState: true })
+      if (to?.includes("#")) reloadNuxtApp({ persistState: true, force: true })
       return
     }
     return response

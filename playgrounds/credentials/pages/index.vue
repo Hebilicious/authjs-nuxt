@@ -6,10 +6,10 @@ async function check() {
     await signIn("credentials", {
       redirect: false,
       username: "admin",
-      password: "admins"
+      password: "admin"
     })
     // eslint-disable-next-line no-console
-    console.log("SignIn", session.value?.user?.role)
+    console.log("SignIn", session.value?.user)
   }
   catch (error) {
     // eslint-disable-next-line no-console
