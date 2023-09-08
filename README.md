@@ -52,9 +52,9 @@ Contributions, issues and feature requests are welcome!
 
 1. Fork this repo
 
-2. Install `node` and `pnpm` _Use `corepack enable && corepack prepare pnpm@latest --activate` to install pnpm easily_
+2. [Install `bun`.](https://bun.sh/docs/installation)
 
-3. Use `pnpm i` at the mono-repo root.
+3. Use `bun i` at the mono-repo root.
 
 4. Make modifications and follow conventional commits.
 
