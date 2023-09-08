@@ -1,5 +1,3 @@
+# We use pnpm to publish https://github.com/oven-sh/bun/issues/1976
 packages:
-  - docs/**
   - packages/**
-  - playgrounds/**
-  - test/**

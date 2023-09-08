@@ -1,10 +1,11 @@
 {
   "extends": "./packages/authjs-nuxt/.nuxt/tsconfig.json",
   "compilerOptions": {
+    "types": ["bun-types"],
     "baseUrl": ".",
     "paths": {
-      "#imports": ["./packages/authjs-nuxt/node_modules/nuxt/app.d.ts"],
-      "#app": ["./packages/authjs-nuxt/node_modules/nuxt/dist/app"]
+      "#imports": ["./node_modules/nuxt/app.d.ts"],
+      "#app": ["./node_modules/nuxt/dist/app"]
     }
   },
   "exclude": [

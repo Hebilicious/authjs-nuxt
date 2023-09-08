@@ -1,9 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: [
-    "../packages/authjs-nuxt/src/module.ts"
-    // "@hebilicious/authjs-nuxt"
-  ],
+  modules: ["@hebilicious/authjs-nuxt"],
   authJs: {
     guestRedirectTo: "/redirected"
   },

@@ -4,7 +4,7 @@ import type { H3Event, RequestHeaders } from "h3"
 import { getMethod, getRequestHeaders, getRequestURL, readRawBody } from "h3"
 import type { RuntimeConfig } from "@nuxt/schema"
 
-export const configKey = "authJs"
+export const configKey = "authJs" as const
 
 /**
  * Get the AuthJS secret. For internal use only.

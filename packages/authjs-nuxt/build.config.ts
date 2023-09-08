@@ -19,5 +19,8 @@ export default defineBuildConfig({
     "uncrypto",
     "iron-webcrypto"
   ],
-  failOnWarn: false
+  declaration: true,
+  rollup: {
+    emitCJS: true
+  }
 })
