@@ -1,4 +1,6 @@
-# Usage
+# 💻 Usage
+
+## 📝 Pages and components
 
 In your pages and vue files, use the `useAuth` helper to handle your authentication.
 
@@ -27,7 +29,7 @@ const { signIn, signOut, session, status, cookies, getProviders } = useAuth()
 </template>
 ```
 
-## 📝 Middlewares
+## 🌉 Middlewares
 
 Use middlewares to protect your pages.
 
@@ -69,7 +71,7 @@ You can register manually with `definePageMeta({ middleware: "client-auth" })` i
 
 You can configure `guestRedirectTo` and `authenticatedRedirectTo` globally, or in the middleware with the `auth` key which takes priority.
 
-## Session and JWT
+## 🔐 Session and JWT
 
 If you need the session or the JWT on your api handlers, use the following methods :
 
@@ -84,7 +86,7 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
-## Extending Auth.js Types
+## 🎱 Extending Auth.js Types
 
 If you need to extend Auth.js types such as `Session` or `User`, create a Typescript declaration file (`types.d.ts`) in your project root.
 
