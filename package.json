@@ -20,7 +20,8 @@
     "release": "pnpm lint:fix && bumpp -r -x \"pnpm run changelog\" --all",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
-    "test:all": "bun lint && bun typecheck && vitest run"
+    "test:all": "bun lint && bun typecheck && vitest run",
+    "publish:ci": "pnpm -r publish --access public --no-git-checks"
   },
   "devDependencies": {
     "@hebilicious/eslint-config": "0.0.3-beta.3",
@@ -41,7 +42,7 @@
     "vitest": "^0.34.4"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "bunx lint-staged"
   },
   "lint-staged": {
     "*.{js,ts,tsx,vue,md}": [
