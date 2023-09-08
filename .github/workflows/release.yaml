@@ -35,6 +35,5 @@ jobs:
       - name: Publish to NPM
         run: bun run publish:ci
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
           NPM_CONFIG_PROVENANCE: true
