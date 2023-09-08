@@ -1,3 +1,7 @@
+# [0.3.0](https://github.com/Hebilicious/authjs-nuxt/compare/v0.3.0-beta.3...v0.3.0) (2023-09-08)
+
+
+
 # [0.3.0-beta.3](https://github.com/Hebilicious/authjs-nuxt/compare/v0.3.0-beta.2...v0.3.0-beta.3) (2023-09-08)
 
 
