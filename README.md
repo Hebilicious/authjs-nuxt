@@ -14,7 +14,8 @@ Contributions are welcome !
 
 ## Documentation
 
-You can find the documentation [here](https://authjs-nuxt.pages.dev/)
+You can find the documentation for this module [on the website](https://authjs-nuxt.pages.dev/); and the documentation for auth.js [here](https://authjs.dev/).
+You can also find working examples of this module in the playgrounds, on in this [repository](https://github.com/Hebilicious/authjs-nuxt-examples).
 
 ### Why not?
 
