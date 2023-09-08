@@ -28,7 +28,14 @@ export const authOptions: AuthConfig = {
         return null
       }
     })
-  ]
+  ],
+  callbacks: {
+    async jwt({ token, user, session }) {
+      // eslint-disable-next-line no-console
+      console.log("jwt callback", { token, user, session })
+      return token
+    }
+  }
 }
 
 export default NuxtAuthHandler(authOptions, runtimeConfig)
