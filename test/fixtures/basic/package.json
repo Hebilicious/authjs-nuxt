@@ -3,8 +3,6 @@
   "private": true,
   "dependencies": {
     "@hebilicious/authjs-nuxt": "latest",
-    "h3": "^1.8.1",
-    "nitropack": "2.6.3",
     "nuxt": "3.7.1"
   }
 }
