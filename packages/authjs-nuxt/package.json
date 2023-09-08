@@ -28,34 +28,32 @@
     "*.mjs"
   ],
   "scripts": {
-    "dts": "esno scripts/dts.ts",
-    "readme": "esno scripts/readme.ts",
-    "postbuild": "pnpm dts && pnpm readme",
+    "readme": "bun scripts/readme.ts",
+    "prebuild": "bun postinstall",
+    "postinstall": "nuxi prepare",
+    "postbuild": "bun readme",
     "build:stub": "nuxt-build-module --stub",
     "build:module": "nuxt-build-module",
-    "build": "rimraf dist && pnpm build:module && pnpm postbuild",
-    "edge-release": "pnpm build && pnpm publish --access public --tag edge",
-    "postinstall": "nuxi prepare",
+    "build": "rimraf dist && bun build:module",
+    "edge-release": "bun run build && pnpm publish --access public --tag edge",
     "test": "vitest",
     "dev": "nuxi dev"
   },
   "peerDependencies": {
-    "@auth/core": "^0.12.0",
-    "h3": "^1.8.0",
-    "nuxt": "^3.6.5",
-    "vue": "^3.3.4"
+    "@auth/core": "^0.14.0",
+    "nuxt": "^3.7.1"
   },
   "dependencies": {
-    "@nuxt/kit": "3.6.5",
+    "@nuxt/kit": "^3.7.1",
     "@panva/hkdf": "^1.1.1",
     "cookie": "^0.5.0",
     "cookie-es": "^1.0.0",
     "defu": "^6.1.2",
     "immer": "^10.0.2",
-    "jose": "^4.14.4",
+    "jose": "^4.14.6",
     "unctx": "^2.3.1"
   },
   "devDependencies": {
-    "@nuxt/module-builder": "^0.4.0"
+    "@nuxt/module-builder": "^0.5.1"
   }
 }

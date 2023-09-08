@@ -13,33 +13,27 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-
-      - name: Set node
-        uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: 18
-          cache: pnpm
-          registry-url: "https://registry.npmjs.org"
+          bun-version: latest
 
-      - run: npx changelogithub
+      - run: bun x changelogithub
         continue-on-error: false
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Install Dependencies
-        run: pnpm i
+      - name: Install
+        run: bun install
 
-      - name: PNPM build
-        run: pnpm run build
+      - name: Build
+        run: bun run build
 
       - name: Publish to NPM
-        run: pnpm -r publish --access public --no-git-checks
+        run: bun run publish:ci
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
           NPM_CONFIG_PROVENANCE: true
