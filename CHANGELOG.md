@@ -1,3 +1,12 @@
+## [0.3.1](https://github.com/Hebilicious/authjs-nuxt/compare/v0.3.0...v0.3.1) (2023-09-08)
+
+
+### Bug Fixes
+
+* credentials no redirect ([#96](https://github.com/Hebilicious/authjs-nuxt/issues/96)) ([dae0c45](https://github.com/Hebilicious/authjs-nuxt/commit/dae0c4558be45eba9a6a210be265f2106e176985))
+
+
+
 # [0.3.0](https://github.com/Hebilicious/authjs-nuxt/compare/v0.3.0-beta.3...v0.3.0) (2023-09-08)
 
 
