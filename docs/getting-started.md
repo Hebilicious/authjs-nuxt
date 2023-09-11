@@ -14,21 +14,6 @@ pnpm i @hebilicious/authjs-nuxt @auth/core
 yarn add @hebilicious/authjs-nuxt @auth/core
 ```
 
-### Import errors
-
-You might run into imports errors for cookie or for the @auth/core internals.
-Uses aliases if you are running into import errors.
-
-```ts
-import { resolve } from "node:path"
-
-export default defineNuxtConfig({
-  alias: {
-    cookie: resolve(__dirname, "node_modules/cookie")
-  }
-})
-```
-
 ### Response support
 
 Auth.js relies on native `Response` support, which is currently being added to Nuxt through [h3](https://github.com/unjs/h3) and [nitro](https://github.com/unjs/nitro).

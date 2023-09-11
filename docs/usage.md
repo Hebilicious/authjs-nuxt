@@ -12,7 +12,7 @@ const { signIn, signOut, session, status, cookies, getProviders } = useAuth()
 <template>
   <div>
     <div>
-      <a href="/api/auth/signin" class="buttonPrimary">Native Link Sign in</a>
+      <a href="api/auth/signin" class="buttonPrimary">Native Link Sign in</a>
       <button @click="signIn(`github`)">
         JS Sign In
       </button>
@@ -77,11 +77,10 @@ If you need the session or the JWT on your api handlers, use the following metho
 
 ```ts
 import { authOptions } from "./auth/[...]"
-import { getServerSession, getServerToken } from "#auth"
 
 export default defineEventHandler(async (event) => {
-  const session = await getServerSession(event, authOptions)
-  const jwt = await getServerToken(event, authOptions)
+  const session = await getAuthJsSession(event, authOptions)
+  const jwt = await getAuthJsToken(event, authOptions)
   return { session, jwt }
 })
 ```

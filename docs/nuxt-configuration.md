@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     },
     public: {
       authJs: {
-        baseUrl: process.env.NUXT_NEXTAUTH_URL, // The URL of your deployed app (used for origin Check in production)
+        serverUrl: process.env.NUXT_NEXTAUTH_URL, // The URL of your deployed app (used for origin Check in production)
         verifyClientOnEveryRequest: true // whether to hit the /auth/session endpoint on every client request
       }
     }
@@ -33,23 +33,32 @@ export default defineNuxtConfig({
 })
 ```
 
+### Import errors
+
+You might run into imports errors for cookie. Uses the following config to fix them.
+
+```ts
+import { resolve } from "node:path"
+
+export default defineNuxtConfig({
+  alias: {
+    cookie: resolve(__dirname, "node_modules/cookie")
+  }
+})
+```
+
 ## 🛠️ Route Configuration
 
 You *must* create a catch-all route at `server/api/auth/[...].ts`.
+Please use the `defineAuthJsConfig` to make sure Auth.js is configured correctly with Nuxt.
 
 ```ts
 import GithubProvider from "@auth/core/providers/github"
-import type { AuthConfig } from "@auth/core/types"
-import { NuxtAuthHandler } from "#auth"
-
-// The #auth virtual import comes from this module. You can use it on the client
-// and server side, however not every export is universal. For example do not
-// use sign-in and sign-out on the server side.
 
 const runtimeConfig = useRuntimeConfig()
 
 // Refer to Auth.js docs for more details
-export const authOptions: AuthConfig = {
+export const authOptions = defineAuthJsConfig({
   secret: runtimeConfig.authJs.secret,
   providers: [
     GithubProvider({
@@ -57,12 +66,14 @@ export const authOptions: AuthConfig = {
       clientSecret: runtimeConfig.github.clientSecret
     })
   ]
-}
+})
 
-export default NuxtAuthHandler(authOptions, runtimeConfig)
+export default NuxtAuthJsHandler(authOptions, runtimeConfig)
 // If you don't want to pass the full runtime config,
-//  you can pass something like this: { public: { authJs: { baseUrl: "" } } }
+//  you can trim the un-needed keys: `{ public: { authJs: { baseUrl: "" } } }`
 ```
+
+While you can use both `runtimeConfig.authJs` and `runtimeConfig.public.authJs`, you should place sensitive values in `runtimeConfig.authJs`.
 
 ### Environment variables
 
