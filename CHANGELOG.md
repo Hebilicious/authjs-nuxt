@@ -1,3 +1,12 @@
+## [0.3.2](https://github.com/Hebilicious/authjs-nuxt/compare/v0.3.1...v0.3.2) (2023-09-11)
+
+
+### Bug Fixes
+
+* webcrypto polyfill ([#100](https://github.com/Hebilicious/authjs-nuxt/issues/100)) ([97a1282](https://github.com/Hebilicious/authjs-nuxt/commit/97a128231dfd1db0988f2c016e060e753c3c385c))
+
+
+
 ## [0.3.1](https://github.com/Hebilicious/authjs-nuxt/compare/v0.3.0...v0.3.1) (2023-09-08)
 
 
