@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
-import { checkOrigin, makeCookiesFromCookieString, makeNativeHeaders, makeNativeHeadersFromCookieObject } from "../src/runtime/utils"
+import { checkOrigin, makeCookiesFromCookieString, makeNativeHeadersFromCookieObject, noSurroundingSlash } from "../src/runtime/utils"
 
-const mockRuntimeConfig = (baseUrl = "https://example.com") => ({ public: { authJs: { baseUrl } } })
+const mockRuntimeConfig = (serverUrl = "https://example.com") => ({ public: { authJs: { serverUrl } } })
 
 describe("all", () => {
   it("can transform cookie object into headers", () => {
@@ -9,13 +9,6 @@ describe("all", () => {
     const headers = makeNativeHeadersFromCookieObject(cookies)
     expect(headers.get("set-cookie")).toBe("hello=world, hi=there")
     expect(headers instanceof Headers).toBe(true)
-  })
-
-  it("can transform Request headers into regular headers", () => {
-    const headers = { hello: "world", hi: "there" }
-    const nativeHeaders = makeNativeHeaders(headers)
-    expect(nativeHeaders.get("hello")).toBe("world")
-    expect(nativeHeaders.get("hi")).toBe("there")
   })
 
   it("can make cookies from cookie string", () => {
@@ -35,5 +28,19 @@ describe("all", () => {
     const url = "https://example.com"
     expect(checkOrigin(new Request(url, { method: "POST", headers: { Origin: url } }), mockRuntimeConfig(url)))
       .toBeUndefined()
+  })
+
+  it("removes surrounding slashes", () => {
+    expect(noSurroundingSlash("//hello//")).toBe("hello")
+    expect(noSurroundingSlash("/hello/")).toBe("hello")
+
+    expect(noSurroundingSlash("//hello")).toBe("hello")
+    expect(noSurroundingSlash("/hello")).toBe("hello")
+
+    expect(noSurroundingSlash("hello//")).toBe("hello")
+    expect(noSurroundingSlash("hello/")).toBe("hello")
+
+    expect(noSurroundingSlash("hello")).toBe("hello")
+    expect(noSurroundingSlash("/")).toBe("")
   })
 })
