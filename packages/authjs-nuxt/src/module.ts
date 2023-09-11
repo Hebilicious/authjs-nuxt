@@ -8,7 +8,7 @@ export interface ModuleOptions {
   verifyClientOnEveryRequest?: boolean
   guestRedirectTo?: string
   authenticatedRedirectTo?: string
-  baseUrl: string
+  serverUrl: string
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -20,7 +20,7 @@ export default defineNuxtModule<ModuleOptions>({
     verifyClientOnEveryRequest: true,
     guestRedirectTo: "/",
     authenticatedRedirectTo: "/",
-    baseUrl: ""
+    serverUrl: ""
   },
   setup(userOptions, nuxt) {
     const logger = useLogger(NAME)
@@ -37,31 +37,46 @@ export default defineNuxtModule<ModuleOptions>({
 
     // 4. Create virtual imports for server-side
     // @todo Contribute an helper to nuxt/kit to handle this scenario like this
-    // addLibrary({name: "#auth", type: "server", from: "./runtime/lib/server"})
-    // addLibrary({name: "#auth", type: "client", from: "./runtime/lib/client"})
+    // addLibrary({
+    //   alias: "#auth",
+    //   server: {
+    //     from: "./runtime/lib/server", autoImport: true // include: [], exclude: []
+    //   },
+    //   client: { from: "./runtime/lib/client" }, // by default include all exports,
+    //   universal: { from: "./runtime/lib/universal" }
+    // })
 
-    // These will be available only in the /server directory
+    const serverUtilities = ["getAuthJsSession", "NuxtAuthJsHandler", "getAuthJsToken", "defineAuthJsConfig"]
+    const serverLib = resolve("./runtime/lib/server")
+
+    const clientUtilities = ["verifyClientSession", "signIn", "signOut"]
+    const clientLib = resolve("./runtime/lib/client")
+
     nuxt.hook("nitro:config", (nitroConfig) => {
       nitroConfig.alias = nitroConfig.alias || {}
-      nitroConfig.alias["#auth"] = resolve("./runtime/lib/server")
+      nitroConfig.alias["#auth"] = serverLib
+      // add to externals
+      nitroConfig.externals = defu(nitroConfig.externals, {
+        inline: [serverLib]
+      })
+      // add to imports
+      nitroConfig.imports = defu(nitroConfig.imports, {
+        presets: [
+          {
+            from: serverLib,
+            imports: serverUtilities
+          }
+        ]
+      })
     })
-
-    // These will be available outside of the /server directory
-    nuxt.options.alias["#auth"] = resolve("./runtime/lib/client")
-    // nuxt.options.build.transpile.push(resolve("./runtime/lib/client")) This doesn't look it's needed ?
 
     // 4. Add types
     addTypeTemplate({
       filename: "types/auth.d.ts",
-      write: true,
       getContents: () => [
         "declare module '#auth' {",
-        `  const verifyClientSession: typeof import('${resolve("./runtime/lib/client")}').verifyClientSession`,
-        `  const signIn: typeof import('${resolve("./runtime/lib/client")}').signIn`,
-        `  const signOut: typeof import('${resolve("./runtime/lib/client")}').signOut`,
-        `  const getServerSession: typeof import('${resolve("./runtime/lib/server")}').getServerSession`,
-        `  const NuxtAuthHandler: typeof import('${resolve("./runtime/lib/server")}').NuxtAuthHandler`,
-        `  const getServerToken: typeof import('${resolve("./runtime/lib/server")}').getServerToken`,
+        ...clientUtilities.map(name => `const ${name}: typeof import('${clientLib}').${name}`),
+        ...serverUtilities.map(name => `const ${name}: typeof import('${serverLib}').${name}`),
         "}"
       ].join("\n")
     })

@@ -1,7 +1,7 @@
 import type { AuthConfig } from "@auth/core"
 import { parse } from "cookie-es"
-import type { H3Event, RequestHeaders } from "h3"
-import { getMethod, getRequestHeaders, getRequestURL, readRawBody } from "h3"
+import type { H3Event } from "h3"
+import { getRequestHeaders, getRequestURL, readRawBody } from "h3"
 import type { RuntimeConfig } from "@nuxt/schema"
 
 export const configKey = "authJs" as const
@@ -18,19 +18,18 @@ export function getAuthJsSecret(options: AuthConfig) {
 
 export function getServerOrigin(event: H3Event, runtimeConfig?: Partial<RuntimeConfig>) {
   const requestOrigin = getRequestHeaders(event).Origin
-  const serverOrigin = runtimeConfig?.public?.authJs?.baseUrl ?? ""
-  const origin = requestOrigin ?? serverOrigin.length > 0 ? serverOrigin : process.env.AUTH_ORIGIN
-  if (!origin) throw new Error("No Origin found ...")
+  const origin = requestOrigin ?? runtimeConfig?.public?.authJs?.serverUrl ?? process.env.AUTH_ORIGIN
+  if (!origin || origin.length === 0) throw new Error("No Origin found ...")
   return origin
 }
 
-export function checkOrigin(request: Request, runtimeConfig: Partial<RuntimeConfig>) {
+export function checkOrigin(eventOrRequest: H3Event | Request, runtimeConfig: Partial<RuntimeConfig>) {
   if (process.env.NODE_ENV === "development") return
-  if (request.method !== "POST") return // Only check post requests
-  const requestOrigin = request.headers.get("Origin")
-  const serverOrigin = runtimeConfig.public?.authJs?.baseUrl
+  if (eventOrRequest.method !== "POST") return // Only check post requests
+  const requestOrigin = eventOrRequest instanceof Request ? eventOrRequest.headers.get("origin") : getRequestHeaders(eventOrRequest).Origin
+  const serverOrigin = runtimeConfig?.public?.authJs?.serverUrl ?? process.env.AUTH_ORIGIN
   if (serverOrigin !== requestOrigin)
-    throw new Error("CSRF protected")
+    throw new Error(`CSRF protected, Origin ${requestOrigin} does not match configuration.`)
 }
 
 export function makeCookiesFromCookieString(cookieString: string | null) {
@@ -48,25 +47,28 @@ export function makeNativeHeadersFromCookieObject(headers: Record<string, string
 
 /**
  * This should be a function in H3
- * @param headers RequestHeaders
- * @returns Headers
- */
-export function makeNativeHeaders(headers: RequestHeaders) {
-  const nativeHeaders = new Headers()
-  Object.entries(headers).forEach(([key, value]) => {
-    if (value) nativeHeaders.append(key, value)
-  })
-  return nativeHeaders
-}
-
-/**
- * This should be a function in H3
  * @param event
- * @returns
+ * @returns Request
  */
 export async function getRequestFromEvent(event: H3Event) {
   const url = new URL(getRequestURL(event))
-  const method = getMethod(event)
+  const method = event.method
   const body = method === "POST" ? await readRawBody(event) : undefined
   return new Request(url, { headers: getRequestHeaders(event) as any, method, body })
+}
+
+const withoutTrailingSlash = (input: string): string => {
+  const clean = input.endsWith("/") ? input.slice(0, -1) : input
+  if (input.endsWith("/")) return withoutTrailingSlash(clean)
+  return clean
+}
+
+const withoutLeadingSlash = (input: string): string => {
+  const clean = input.startsWith("/") ? input.slice(1) : input
+  if (input.startsWith("/")) return withoutLeadingSlash(clean)
+  return clean
+}
+
+export function noSurroundingSlash(input: string) {
+  return withoutLeadingSlash(withoutTrailingSlash(input))
 }

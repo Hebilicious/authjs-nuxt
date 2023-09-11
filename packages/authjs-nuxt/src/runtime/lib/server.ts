@@ -25,13 +25,13 @@ if (!globalThis.crypto) {
  * @param runtimeConfig RuntimeConfig
  * @returns EventHandler
  */
-export function NuxtAuthHandler(options: AuthConfig, runtimeConfig: RuntimeConfig) {
+export function NuxtAuthJsHandler(options: AuthConfig, runtimeConfig: RuntimeConfig) {
   return eventHandler(async (event) => {
     options.trustHost ??= true
     options.skipCSRFCheck = skipCSRFCheck
     const request = await getRequestFromEvent(event)
     if (request.url.includes(".js.map")) return // Do not handle source maps
-    checkOrigin(request, runtimeConfig)
+    checkOrigin(event, runtimeConfig)
     const response = await Auth(request, options)
     return response
   })
@@ -43,11 +43,11 @@ export function NuxtAuthHandler(options: AuthConfig, runtimeConfig: RuntimeConfi
  * @param options AuthConfig
  * @returns Session
  */
-export async function getServerSession(
+export async function getAuthJsSession(
   event: H3Event,
   options: AuthConfig
 ): Promise<Session | null> {
-  const response = await getServerSessionResponse(event, options)
+  const response = await getAuthJsSessionResponse(event, options)
 
   const { status = 200 } = response
   const data = await response.json()
@@ -63,8 +63,8 @@ export async function getServerSession(
  * @param options AuthConfig
  * @returns JWT Token
  */
-export async function getServerToken(event: H3Event, options: AuthConfig, runtimeConfig?: Partial<RuntimeConfig>) {
-  const response = await getServerSessionResponse(event, options)
+export async function getAuthJsToken(event: H3Event, options: AuthConfig, runtimeConfig?: Partial<RuntimeConfig>) {
+  const response = await getAuthJsSessionResponse(event, options)
   const cookies = Object.fromEntries(response.headers.entries())
   const parsedCookies = makeCookiesFromCookieString(cookies["set-cookie"])
   const parameters = {
@@ -79,7 +79,7 @@ export async function getServerToken(event: H3Event, options: AuthConfig, runtim
   return getToken(parameters)
 }
 
-async function getServerSessionResponse(
+async function getAuthJsSessionResponse(
   event: H3Event,
   options: AuthConfig
 ) {
@@ -89,4 +89,11 @@ async function getServerSessionResponse(
     new Request(url, { headers: getRequestHeaders(event) as any }),
     options
   )
+}
+
+/**
+ * Helper to define the AuthJS config.
+ */
+export const defineAuthJsConfig = (config: AuthConfig) => {
+  return config
 }
