@@ -1,5 +1,10 @@
 <script setup lang="ts">
-const { signIn, signOut, session, status, cookies, user } = useAuth()
+const { signIn, signOut, session, status, cookies, user, getProviders } = useAuth()
+const handler = async () => {
+  const providers = await getProviders()
+  // eslint-disable-next-line no-console
+  console.log(providers)
+}
 </script>
 
 <template>
@@ -11,6 +16,9 @@ const { signIn, signOut, session, status, cookies, user } = useAuth()
       </button>
       <button @click="signOut()">
         Sign Out
+      </button>
+      <button @click="handler">
+        Providers Log
       </button>
     </div>
     <pre>{{ user }}</pre>

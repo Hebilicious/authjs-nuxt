@@ -1,3 +1,3 @@
 <template>
-  <h1>PUBLIC</h1>
+  <h1>HOME</h1>
 </template>

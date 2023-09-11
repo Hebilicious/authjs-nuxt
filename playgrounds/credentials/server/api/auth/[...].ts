@@ -25,6 +25,8 @@ export const authOptions = defineAuthJsConfig({
     async jwt({ token, user, session }) {
       // eslint-disable-next-line no-console
       console.log("jwt callback", { token, user, session })
+      token.user = user
+      token.session = session
       return token
     }
   }
