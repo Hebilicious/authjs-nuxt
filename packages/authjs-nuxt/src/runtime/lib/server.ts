@@ -11,7 +11,7 @@ if (!globalThis.crypto) {
   console.log("Polyfilling crypto...")
   import("node:crypto").then((crypto) => {
     Object.defineProperty(globalThis, "crypto", {
-      value: crypto,
+      value: crypto.webcrypto,
       writable: false,
       configurable: true
     })
