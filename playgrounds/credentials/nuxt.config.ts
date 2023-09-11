@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     },
     public: {
       authJs: {
-        baseUrl: "http://localhost:3000",
+        serverUrl: "http://localhost:3000",
         verifyClientOnEveryRequest: true
       }
     }

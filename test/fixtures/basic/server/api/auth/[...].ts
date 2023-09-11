@@ -1,7 +1,4 @@
 import CredentialsProvider from "@auth/core/providers/credentials"
-import type { AuthConfig } from "@auth/core/types"
-
-import { NuxtAuthHandler } from "#auth"
 
 // The #auth virtual import comes from this module. You can use it on the client
 // and server side, however not every export is universal. For example do not
@@ -11,7 +8,7 @@ const runtimeConfig = useRuntimeConfig()
 
 // Refer to Auth.js docs for more details
 
-export const authOptions: AuthConfig = {
+export const authOptions = defineAuthJsConfig({
   secret: runtimeConfig.authJs.secret,
   providers: [
     CredentialsProvider({
@@ -29,8 +26,8 @@ export const authOptions: AuthConfig = {
       }
     })
   ]
-}
+})
 
-export default NuxtAuthHandler(authOptions, runtimeConfig)
+export default NuxtAuthJsHandler(authOptions, runtimeConfig)
 // If you don't want to pass the full runtime config,
 //  you can pass something like this: { public: { authJs: { baseUrl: "" } } }

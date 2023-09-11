@@ -5,7 +5,7 @@ const { signIn, signOut, session, status, cookies } = useAuth()
 <template>
   <div>
     <div>
-      <a href="/api/auth/signin" class="buttonPrimary">Native Link Sign in</a>
+      <a href="api/auth/signin" class="buttonPrimary">Native Link Sign in</a>
       <button @click="signIn(`github`)">
         JS Sign In
       </button>

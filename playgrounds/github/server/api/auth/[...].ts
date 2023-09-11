@@ -1,10 +1,8 @@
 import GithubProvider from "@auth/core/providers/github"
-import type { AuthConfig } from "@auth/core/types"
-import { NuxtAuthHandler } from "#auth"
 
 const runtimeConfig = useRuntimeConfig()
 
-export const authOptions: AuthConfig = {
+export const authOptions = defineAuthJsConfig({
   secret: runtimeConfig.authJs.secret,
   theme: {
     logo: "https://nuxt.com/assets/design-kit/logo/icon-green.png"
@@ -15,6 +13,6 @@ export const authOptions: AuthConfig = {
       clientSecret: runtimeConfig.github.clientSecret
     })
   ]
-}
+})
 
-export default NuxtAuthHandler(authOptions, runtimeConfig)
+export default NuxtAuthJsHandler(authOptions, runtimeConfig)

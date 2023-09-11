@@ -2,7 +2,7 @@
   "name": "basic-fixture",
   "private": true,
   "dependencies": {
-    "@hebilicious/authjs-nuxt": "latest",
+    "@hebilicious/authjs-nuxt": "workspace:*",
     "nuxt": "3.7.1"
   }
 }

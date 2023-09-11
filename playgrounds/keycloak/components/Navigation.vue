@@ -5,7 +5,7 @@ const { signIn, signOut, session, status, cookies, user } = useAuth()
 <template>
   <div>
     <div>
-      <a href="/api/auth/signin" class="buttonPrimary">Native Link Sign in</a>
+      <a href="api/auth/signin" class="buttonPrimary">Native Link Sign in</a>
       <button @click="signIn(`keycloak`)">
         JS Sign In
       </button>
