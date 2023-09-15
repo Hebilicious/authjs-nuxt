@@ -26,7 +26,7 @@
   "devDependencies": {
     "@hebilicious/eslint-config": "0.0.3-beta.3",
     "@nuxt/test-utils": "^3.7.3",
-    "@types/node": "^20.6.0",
+    "@types/node": "^20.6.1",
     "bumpp": "^9.2.0",
     "bun-types": "^1.0.1",
     "conventional-changelog-cli": "^4.1.0",
