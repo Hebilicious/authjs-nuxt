@@ -41,10 +41,10 @@
   },
   "peerDependencies": {
     "@auth/core": "^0.14.0",
-    "nuxt": "^3.7.1"
+    "nuxt": "^3.7.3"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.7.1",
+    "@nuxt/kit": "^3.7.3",
     "@panva/hkdf": "^1.1.1",
     "cookie": "^0.5.0",
     "cookie-es": "^1.0.0",
