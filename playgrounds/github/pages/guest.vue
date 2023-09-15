@@ -8,5 +8,5 @@ definePageMeta({
 </script>
 
 <template>
-  <h1>Guest Only </h1>
+  <h1>Guest Only</h1>
 </template>

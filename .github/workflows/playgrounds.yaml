@@ -30,6 +30,11 @@ jobs:
           git remote add child_repo https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/Hebilicious/authjs-nuxt-examples.git
           for dir in $(find playgrounds -maxdepth 1 -mindepth 1 -type d); do
             branch_name=$(basename $dir)
+            # Workaround until bun supports latest in workspaces
+            find $dir -type f -exec sed -i 's/"@hebilicious\/authjs-nuxt": "workspace:*"/"@hebilicious\/authjs-nuxt": "latest"/g' {} +
+            # Add and commit the changes
+            git add $dir
+            git commit -m "Updated @hebilicious/authjs-nuxt version for $branch_name"
             git subtree split --prefix=$dir -b $branch_name
             git push --force child_repo $branch_name:$branch_name
           done

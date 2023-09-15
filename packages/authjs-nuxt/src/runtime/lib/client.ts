@@ -69,21 +69,11 @@ export async function signIn<P extends RedirectableProviderType | undefined = un
 
     // TODO: Support custom providers
     const isCredentials = providerId === "credentials"
-    const isEmail = providerId === "email"
-    const isSupportingReturn = isCredentials || isEmail
+    const isSupportingReturn = providerId ? ["email", "credentials"].includes(providerId) : false
+    const signInUrl = `/api/auth/${isCredentials ? "callback" : "signin"}/${providerId}?${new URLSearchParams(authorizationParams)}`
+    // We check the origin, so a manual CSRF check is un-necessary
 
-    // TODO: Handle custom base path
-    const signInUrl = `/api/auth/${isCredentials ? "callback" : "signin"}/${providerId}`
-    const _signInUrl = `${signInUrl}?${new URLSearchParams(authorizationParams)}`
-
-    // TODO: Handle custom base path
-
-    // We check the origin so CSRF check is un-necessary
-    // const { data: csrf } = await useFetch<{ csrfToken: string }>("/api/auth/csrf")
-    // const csrfToken = csrf?.value?.csrfToken
-    // if (!csrfToken) throw new Error("CSRF token not found")
-
-    const response = await postToInternal({ url: _signInUrl, options, callbackUrl })
+    const response = await postToInternal({ url: signInUrl, options, callbackUrl })
     const url = response?._data?.url ?? null
     const error = url ? new URL(url).searchParams.get("error") : null
     if (error) throw new Error(error)
@@ -116,7 +106,6 @@ export async function signOut(options?: SignOutParams) {
   try {
     status.value = "unauthenticated"
     const { callbackUrl = window.location.href } = options ?? {}
-    // TODO: Custom base path
     const data = await $fetch<{ url: string }>("/api/auth/signout", {
       method: "post",
       headers: {
@@ -132,8 +121,11 @@ export async function signOut(options?: SignOutParams) {
 
     // Navigate back to where we are.
     const url = data?.url ?? callbackUrl
-    // await navigateTo(new URL(url).pathname, { replace: true })
-    await useRouter().push({ path: new URL(url).pathname, force: true }) // navigateTo doesn't accept force
+    const _path = new URL(url).pathname
+    const baseUrl = useRuntimeConfig().app.baseURL
+    const path = baseUrl !== "/" && _path.startsWith(baseUrl) ? _path.slice(baseUrl.length) : _path
+
+    await useRouter().push({ path, force: true }) // navigateTo doesn't accept force
     // If url contains a hash, the browser does not reload the page. We reload manually
     if (url.includes("#")) reloadNuxtApp({ persistState: true })
   }

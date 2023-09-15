@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@auth/core": "^0.14.0",
-    "@hebilicious/authjs-nuxt": "latest"
+    "@hebilicious/authjs-nuxt": "workspace:*"
   },
   "devDependencies": {
     "@nuxt/devtools": "^0.8.3",
