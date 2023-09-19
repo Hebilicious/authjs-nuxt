@@ -11,8 +11,8 @@ export default defineNuxtConfig({
   // Optional default config
   //  authJs: {
   //    verifyClientOnEveryRequest: true,
-  //    guestRedirectTo: "/", // where to redirect if the user is authenticated
-  //    authenticatedRedirectTo: "/", // where to redirect if the user is not authenticated
+  //    guestRedirectTo: "/", // where to redirect if the user is not authenticated
+  //    authenticatedRedirectTo: "/", // where to redirect if the user is authenticated
   //    baseUrl: "" // should be something like https://www.my-app.com
   //  },
   runtimeConfig: {
