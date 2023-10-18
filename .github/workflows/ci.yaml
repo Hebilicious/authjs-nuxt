@@ -39,10 +39,10 @@ jobs:
         run: bun install
 
       - name: Build
-        run: bun run build
+        run: bun run build:ci
 
       - name: Test
-        run: bun run test
+        run: bun run test:ci
 
       - name: Typecheck
         run: bun run typecheck

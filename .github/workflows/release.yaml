@@ -30,7 +30,7 @@ jobs:
         run: bun install
 
       - name: Build
-        run: bun run build
+        run: bun run build:ci
 
       - name: Publish to NPM
         run: bun run publish:ci
