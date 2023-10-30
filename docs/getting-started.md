@@ -29,6 +29,16 @@ export default defineNuxtConfig({
 })
 ```
 
+#### pnpm
+
+```ts
+export default defineNuxtConfig({
+  alias: {
+    cookie: "cookie"
+  }
+})
+```
+
 ### Response support
 
 Auth.js relies on native `Response` support, which is currently being added to Nuxt through [h3](https://github.com/unjs/h3) and [nitro](https://github.com/unjs/nitro).
