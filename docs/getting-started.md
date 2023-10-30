@@ -34,7 +34,7 @@ export default defineNuxtConfig({
 ```ts
 export default defineNuxtConfig({
   alias: {
-    cookie: 'cookie'
+    cookie: "cookie"
   }
 })
 ```
