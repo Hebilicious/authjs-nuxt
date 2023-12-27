@@ -1,7 +1,7 @@
 import type { RuntimeConfig } from "nuxt/schema"
 import { Auth, skipCSRFCheck } from "@auth/core"
 import type { H3Event } from "h3"
-import { eventHandler, getRequestHeaders, getRequestURL } from "h3"
+import { eventHandler, getRequestHeaders, getRequestURL, parseCookies } from "h3"
 import type { AuthConfig, Session } from "@auth/core/types"
 import { getToken } from "@auth/core/jwt"
 import { checkOrigin, getAuthJsSecret, getRequestFromEvent, getServerOrigin, makeCookiesFromCookieString } from "../utils"
@@ -65,11 +65,11 @@ export async function getServerSession(
  */
 export async function getServerToken(event: H3Event, options: AuthConfig, runtimeConfig?: Partial<RuntimeConfig>) {
   const response = await getServerSessionResponse(event, options)
-  const cookies = Object.fromEntries(response.headers.entries())
-  const parsedCookies = makeCookiesFromCookieString(cookies["set-cookie"])
+  const cookies = parseCookies(event)
+
   const parameters = {
     req: {
-      cookies: parsedCookies,
+      cookies,
       headers: response.headers as unknown as Record<string, string>
     },
     // see https://github.com/nextauthjs/next-auth/blob/a79774f6e890b492ae30201f24b3f7024d0d7c9d/packages/core/src/jwt.ts
