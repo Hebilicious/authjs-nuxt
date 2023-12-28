@@ -4,7 +4,7 @@ import type { H3Event } from "h3"
 import { eventHandler, getRequestHeaders, getRequestURL, parseCookies } from "h3"
 import type { AuthConfig, Session } from "@auth/core/types"
 import { getToken } from "@auth/core/jwt"
-import { checkOrigin, getAuthJsSecret, getRequestFromEvent, getServerOrigin, makeCookiesFromCookieString } from "../utils"
+import { checkOrigin, getAuthJsSecret, getRequestFromEvent, getServerOrigin } from "../utils"
 
 if (!globalThis.crypto) {
   // eslint-disable-next-line no-console
