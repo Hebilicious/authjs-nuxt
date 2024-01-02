@@ -21,12 +21,16 @@ if (!globalThis.crypto) {
 /**
  * This is the event handler for the catch-all route.
  * Everything can be customized by adding a custom route that takes priority over the handler.
- * @param options AuthConfig
+ * @param options AuthConfig|Function
  * @param runtimeConfig RuntimeConfig
  * @returns EventHandler
  */
-export function NuxtAuthHandler(options: AuthConfig, runtimeConfig: RuntimeConfig) {
+export function NuxtAuthHandler(options: AuthConfig|Function, runtimeConfig: RuntimeConfig) {
   return eventHandler(async (event) => {
+    if (typeof options === 'function') {
+      options = await options(event) as AuthConfig
+    }
+
     options.trustHost ??= true
     options.skipCSRFCheck = skipCSRFCheck
     const request = await getRequestFromEvent(event)
