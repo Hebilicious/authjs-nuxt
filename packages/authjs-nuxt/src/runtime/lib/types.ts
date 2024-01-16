@@ -46,4 +46,4 @@ export interface SignOutParams<R extends boolean = true> {
   /** [Documentation](https://next-auth.js.org/getting-started/client#using-the-redirect-false-option-1 */
   redirect?: R
 }
-export declare type AuthConfigFunction = (event: H3Event) => Promise<AuthConfig>
+export type AuthConfigFunction = (event: H3Event) => Promise<AuthConfig>
