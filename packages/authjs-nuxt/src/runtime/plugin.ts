@@ -3,12 +3,15 @@ import { useAuth } from "./composables/useAuth"
 import { makeCookiesFromCookieString } from "./utils"
 import { defineNuxtPlugin, useRequestHeaders } from "#app"
 
+// @ts-expect-error -- ignore
+import { basePath } from "#auth-config"
+
 export default defineNuxtPlugin(async () => {
   // We try to get the session when the app SSRs. No need to repeat this on the client.
   if (process.server) {
     const { updateSession, removeSession, cookies } = useAuth()
     const headers = useRequestHeaders() as any
-    const data = await $fetch<Session>("/api/auth/session", {
+    const data = await $fetch<Session>(`${basePath}/session`, {
       headers
     })
     const hasSession = data && Object.keys(data).length

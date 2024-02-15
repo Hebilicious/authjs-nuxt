@@ -6,6 +6,9 @@ import type { AuthConfig, Session } from "@auth/core/types"
 import { getToken } from "@auth/core/jwt"
 import { checkOrigin, getAuthJsSecret, getRequestFromEvent, getServerOrigin, makeCookiesFromCookieString } from "../utils"
 
+// @ts-expect-error -- ignore
+import { basePath } from "#auth-config"
+
 if (!globalThis.crypto) {
   // eslint-disable-next-line no-console
   console.log("Polyfilling crypto...")
@@ -84,7 +87,7 @@ async function getServerSessionResponse(
   options: AuthConfig
 ) {
   options.trustHost ??= true
-  const url = new URL("/api/auth/session", getRequestURL(event))
+  const url = new URL(`${basePath}/session`, getRequestURL(event))
   return Auth(
     new Request(url, { headers: getRequestHeaders(event) as any }),
     options
