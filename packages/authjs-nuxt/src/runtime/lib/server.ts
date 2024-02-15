@@ -4,6 +4,7 @@ import type { H3Event } from "h3"
 import { eventHandler, getRequestHeaders, getRequestURL } from "h3"
 import type { AuthConfig, Session } from "@auth/core/types"
 import { getToken } from "@auth/core/jwt"
+import { parseURL, resolveURL, stringifyParsedURL } from "ufo"
 import { checkOrigin, getAuthJsSecret, getRequestFromEvent, getServerOrigin, makeCookiesFromCookieString } from "../utils"
 
 // @ts-expect-error -- ignore
@@ -19,6 +20,18 @@ if (!globalThis.crypto) {
       configurable: true
     })
   })
+}
+
+/**
+ * Returns the domain part of a given URL.
+ * @param url string|URL - The URL to extract the domain from
+ * @returns The domain part of the URL
+ */
+function getDomain(url: string): string
+function getDomain(url: URL): string
+function getDomain(url: string | URL): string {
+  const { protocol, auth, host } = parseURL(String(url))
+  return stringifyParsedURL({ protocol, auth, host })
 }
 
 /**
@@ -87,7 +100,7 @@ async function getServerSessionResponse(
   options: AuthConfig
 ) {
   options.trustHost ??= true
-  const url = new URL(`${basePath}/session`, getRequestURL(event))
+  const url = resolveURL(getDomain(getRequestURL(event)), basePath, "session")
   return Auth(
     new Request(url, { headers: getRequestHeaders(event) as any }),
     options

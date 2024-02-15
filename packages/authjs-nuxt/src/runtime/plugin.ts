@@ -1,4 +1,5 @@
 import type { Session } from "@auth/core/types"
+import { joinURL } from "ufo"
 import { useAuth } from "./composables/useAuth"
 import { makeCookiesFromCookieString } from "./utils"
 import { defineNuxtPlugin, useRequestHeaders } from "#app"
@@ -11,7 +12,7 @@ export default defineNuxtPlugin(async () => {
   if (process.server) {
     const { updateSession, removeSession, cookies } = useAuth()
     const headers = useRequestHeaders() as any
-    const data = await $fetch<Session>(`${basePath}/session`, {
+    const data = await $fetch<Session>(joinURL(basePath, "session"), {
       headers
     })
     const hasSession = data && Object.keys(data).length
