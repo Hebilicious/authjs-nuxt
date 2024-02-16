@@ -2,35 +2,49 @@ import { addImports, addPlugin, addRouteMiddleware, addTypeTemplate, createResol
 import { defu } from "defu"
 import { configKey } from "./runtime/utils"
 
-const NAME = "@auth/nuxt"
+const PACKAGE_NAME = "@auth/nuxt"
 
 export interface ModuleOptions {
+  secret?: string
+  baseUrl?: string
   verifyClientOnEveryRequest?: boolean
   guestRedirectTo?: string
   authenticatedRedirectTo?: string
-  baseUrl: string
 }
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: NAME,
+    name: PACKAGE_NAME,
     configKey
   },
   defaults: {
+    secret: "",
+    baseUrl: "",
     verifyClientOnEveryRequest: true,
     guestRedirectTo: "/",
-    authenticatedRedirectTo: "/",
-    baseUrl: ""
+    authenticatedRedirectTo: "/"
   },
-  setup(userOptions, nuxt) {
-    const logger = useLogger(NAME)
+  setup(moduleOptions, nuxt) {
+    const logger = useLogger(PACKAGE_NAME)
     const { resolve } = createResolver(import.meta.url)
 
-    logger.info(`Adding ${NAME} module...`, userOptions)
+    logger.info(`Adding ${PACKAGE_NAME} module...`)
 
     // 1. Set up runtime configuration
-    const options = defu(nuxt.options.runtimeConfig.public[configKey], userOptions)
-    nuxt.options.runtimeConfig.public[configKey] = options
+
+    // Private runtime config
+    nuxt.options.runtimeConfig[configKey] = defu(
+      nuxt.options.runtimeConfig[configKey],
+      { secret: moduleOptions.secret }
+    ) as Pick<ModuleOptions, "secret">
+
+    // Public runtime config
+    nuxt.options.runtimeConfig.public[configKey] = defu(nuxt.options.runtimeConfig.public[configKey], {
+      baseUrl: moduleOptions.baseUrl,
+      verifyClientOnEveryRequest: moduleOptions.verifyClientOnEveryRequest,
+      guestRedirectTo: moduleOptions.guestRedirectTo,
+      authenticatedRedirectTo: moduleOptions.authenticatedRedirectTo
+    }) as Omit<ModuleOptions, "secret">
 
     // 3. Add composables
     addImports([{ name: "useAuth", from: resolve("./runtime/composables/useAuth") }])
@@ -72,8 +86,8 @@ export default defineNuxtModule<ModuleOptions>({
     // 6. Add middlewares
     addRouteMiddleware({ name: "auth", path: resolve("./runtime/middleware/auth") })
     addRouteMiddleware({ name: "guest-only", path: resolve("./runtime/middleware/guest-only") })
-    addRouteMiddleware({ name: "client-auth", path: resolve("./runtime/middleware/client-auth"), global: options.verifyClientOnEveryRequest })
+    addRouteMiddleware({ name: "client-auth", path: resolve("./runtime/middleware/client-auth"), global: nuxt.options.runtimeConfig.public[configKey].verifyClientOnEveryRequest })
 
-    logger.success(`Added ${NAME} module successfully.`)
+    logger.success(`Added ${PACKAGE_NAME} module successfully.`)
   }
 })
