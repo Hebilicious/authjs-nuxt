@@ -35,7 +35,7 @@ describe("all", () => {
     expect(cookies["next-auth.hi"]).toBe("there")
   })
 
-  it("can handled splitted cookies from native headers", () => {
+  it("can handle splitted cookies from native headers", () => {
     const headers = new Headers()
     headers.append("set-cookie", "next-auth.greet.0=hello")
     headers.append("set-cookie", "next-auth.greet.1=world")
