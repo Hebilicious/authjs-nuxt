@@ -46,11 +46,19 @@ export function checkOrigin(request: Request, runtimeConfig: Partial<RuntimeConf
   if (serverOrigin !== requestOrigin) throw new Error("CSRF protected")
 }
 
-export function mergeCookieObject(headers: Record<string, string>, cookieName: string) {
+export function mergeCookieObject(
+  headers: Record<string, string>,
+  cookieName: string
+) {
   return Object.entries(headers)
-    .filter(([k]) => k.includes(cookieName))
+    .filter(([k]) => k.startsWith(cookieName))
     .flatMap(([, v]) => v)
     .join("")
+}
+
+export function makeSessionCookie(headers: Record<string, string> | null) {
+  if (!headers) return ""
+  return mergeCookieObject(headers, "next-auth.session-token")
 }
 
 export function makeCookiesFromCookieString(cookieString: string | null) {
@@ -61,10 +69,13 @@ export function makeCookiesFromCookieString(cookieString: string | null) {
   )
 }
 
-export function makeNativeHeadersFromCookieObject(
-  headers: Record<string, string>
-) {
-  return makeNativeHeaders(headers, ([key, value]) => ["set-cookie", `${key}=${value}`])
+export function makeCookiesFromHeaders(headers: Headers) {
+  return Array.from(headers)
+    .filter(([key]) => key === "set-cookie")
+    .reduce<Record<string, string>>(
+      (sum, [, value]) => ({ ...sum, ...makeCookiesFromCookieString(value) }),
+      {}
+    )
 }
 
 /**
@@ -83,13 +94,10 @@ export function makeNativeHeaders(
   )
 }
 
-export function makeObjectFromNativeHeader(headers: Headers) {
-  return Array.from(headers)
-    .filter(([key]) => key === "set-cookie")
-    .reduce<Record<string, string>>(
-      (sum, [, value]) => ({ ...sum, ...makeCookiesFromCookieString(value) }),
-      {}
-    )
+export function makeNativeHeadersFromCookieObject(
+  headers: Record<string, string>
+) {
+  return makeNativeHeaders(headers, ([key, value]) => ["set-cookie", `${key}=${value}`])
 }
 
 /**
