@@ -2,7 +2,7 @@ import type { Session, User } from "@auth/core/types"
 import { produce } from "immer"
 import { type ComputedRef, type Ref, computed, readonly, watch } from "vue"
 import { getProviders, signIn, signOut } from "../lib/client"
-import { mergeCookieObject } from "../utils"
+import { makeSessionCookie } from "../utils"
 import { useState } from "#imports"
 
 // @note the `as Type` statements are necessary for rollup to generate the correct types
@@ -11,7 +11,7 @@ export function useAuth() {
   const session = useState("auth:session", () => null) as Ref<Session | null>
   const cookies = useState("auth:cookies", () => ({})) as Ref<Record<string, string> | null>
   const status = useState("auth:session:status", () => "unauthenticated") as Ref<"loading" | "authenticated" | "unauthenticated" | "error">
-  const sessionToken = computed(() => cookies.value ? mergeCookieObject(cookies.value, "next-auth.session-token") : "")
+  const sessionToken = computed(() => makeSessionCookie(cookies.value))
   const user = computed(() => session.value?.user ?? null) as ComputedRef<User | null>
   watch(session, (newSession: Session | null) => {
     if (newSession === null)
