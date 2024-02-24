@@ -51,7 +51,7 @@ export function mergeCookieObject(
   cookieName: string
 ) {
   return Object.entries(headers)
-    .filter(([k]) => k.startsWith(cookieName))
+    .filter(([k]) => k.includes(cookieName))
     .flatMap(([, v]) => v)
     .join("")
 }
