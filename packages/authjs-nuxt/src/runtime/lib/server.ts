@@ -7,7 +7,6 @@ import { getToken } from "@auth/core/jwt"
 import { parseURL, resolveURL, stringifyParsedURL } from "ufo"
 import { checkOrigin, getAuthJsSecret, getRequestFromEvent, getServerOrigin, makeCookiesFromCookieString } from "../utils"
 
-// @ts-expect-error -- ignore
 import { basePath } from "#auth-config"
 
 if (!globalThis.crypto) {

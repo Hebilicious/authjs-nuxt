@@ -4,7 +4,6 @@ import { useAuth } from "./composables/useAuth"
 import { makeCookiesFromCookieString } from "./utils"
 import { defineNuxtPlugin, useRequestHeaders } from "#app"
 
-// @ts-expect-error -- ignore
 import { basePath } from "#auth-config"
 
 export default defineNuxtPlugin(async () => {

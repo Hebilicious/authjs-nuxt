@@ -8,7 +8,6 @@ import { useAuth } from "../composables/useAuth"
 import type { LiteralUnion, SignInAuthorizationParams, SignInOptions, SignOutParams } from "./types"
 import { navigateTo, reloadNuxtApp, useRouter } from "#imports"
 
-// @ts-expect-error -- ignore
 import { basePath } from "#auth-config"
 
 async function postToInternal({
