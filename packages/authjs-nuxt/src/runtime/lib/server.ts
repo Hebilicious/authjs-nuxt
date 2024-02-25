@@ -27,8 +27,6 @@ if (!globalThis.crypto) {
  * @param url string|URL - The URL to extract the domain from
  * @returns The domain part of the URL
  */
-function getDomain(url: string): string
-function getDomain(url: URL): string
 function getDomain(url: string | URL): string {
   const { protocol, auth, host } = parseURL(String(url))
   return stringifyParsedURL({ protocol, auth, host })
