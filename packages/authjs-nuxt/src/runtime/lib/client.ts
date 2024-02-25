@@ -77,7 +77,7 @@ export async function signIn<P extends RedirectableProviderType | undefined = un
     const isSupportingReturn = isCredentials || isEmail
 
     // TODO: Handle custom base path
-    const signInUrl = joinURL(basePath, isCredentials ? "callback" : "signin", providerId as string)
+    const signInUrl = joinURL(basePath, isCredentials ? "callback" : "signin", providerId || "")
     const _signInUrl = `${signInUrl}?${new URLSearchParams(authorizationParams)}`
 
     // TODO: Handle custom base path
