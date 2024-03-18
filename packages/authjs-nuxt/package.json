@@ -54,6 +54,6 @@
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.5.2",
-    "vitest": "^0.34.6"
+    "vitest": "^1.4.0"
   }
 }
