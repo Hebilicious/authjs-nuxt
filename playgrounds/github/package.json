@@ -12,7 +12,7 @@
     "@hebilicious/authjs-nuxt": "latest"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^0.8.5",
+    "@nuxt/devtools": "^1.1.5",
     "nuxt": "3.7.4"
   }
 }
