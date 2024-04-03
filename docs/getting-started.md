@@ -5,13 +5,7 @@
 Install `@hebilicious/authjs-nuxt` and auth.js `@auth/core`  from npm :
 
 ```bash
-npm i @hebilicious/authjs-nuxt @auth/core
-
-bun i @hebilicious/authjs-nuxt @auth/core
-
-pnpm i @hebilicious/authjs-nuxt @auth/core
-
-yarn add @hebilicious/authjs-nuxt @auth/core
+npx nuxi@latest module add authjs
 ```
 
 ### Import errors
