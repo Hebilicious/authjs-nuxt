@@ -15,7 +15,7 @@ This module uses the [Auth.js](https://github.com/nextauthjs/next-auth) core imp
 
 ## ⚠️ Disclaimer
 
-_🧪 This module is no longer actively maintained. If you're interested in maintaing it, get in touch._
+_This module is no longer actively maintained. If you're interested in maintaining it, get in touch._
 
 Here are alternatives : 
 
