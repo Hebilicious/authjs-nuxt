@@ -15,8 +15,12 @@ This module uses the [Auth.js](https://github.com/nextauthjs/next-auth) core imp
 
 ## ⚠️ Disclaimer
 
-_🧪 This module like Auth.js, is still in developement._
-Contributions are welcome !
+_This module is no longer actively maintained. If you're interested in maintaining it, get in touch._
+
+Here are alternatives : 
+
+- https://github.com/Atinux/nuxt-auth-utils
+- https://github.com/lucia-auth/lucia
 
 ## Documentation
 
@@ -45,15 +49,6 @@ You can also find working examples of this module in the playgrounds, on in this
 - It works everywhere (tested on the edge)
 - It's lightweight
 - It's Nuxt
-
-## 📦 Contributing
-
-Contributions, issues and feature requests are welcome!
-
-1. Fork this repo
-
-2. [Install `bun`.](https://bun.sh/docs/installation)
-
 3. Use `bun i` at the mono-repo root.
 
 4. Make modifications and follow conventional commits.
