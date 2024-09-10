@@ -14,6 +14,7 @@ export default defineNuxtConfig({
   //    guestRedirectTo: "/", // where to redirect if the user is not authenticated
   //    authenticatedRedirectTo: "/", // where to redirect if the user is authenticated
   //    baseUrl: "" // should be something like https://www.my-app.com
+  //    basePath: "/api/auth" // must match catch-all NuxtAuthHandler route
   //  },
   runtimeConfig: {
     authJs: {
