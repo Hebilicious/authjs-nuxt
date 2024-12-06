@@ -39,21 +39,21 @@
     "dev": "nuxi dev"
   },
   "peerDependencies": {
-    "@auth/core": "^0.17.0",
-    "nuxt": "^3.7.4"
+    "@auth/core": "^0.37.4",
+    "nuxt": "^3.14.1592"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.7.4",
-    "@panva/hkdf": "^1.1.1",
+    "@nuxt/kit": "^3.14.1592",
+    "@panva/hkdf": "^1.2.1",
     "cookie": "^0.5.0",
-    "cookie-es": "^1.0.0",
-    "defu": "^6.1.2",
-    "immer": "^10.0.3",
-    "jose": "^4.15.4",
+    "cookie-es": "^1.2.2",
+    "defu": "^6.1.4",
+    "immer": "^10.1.1",
+    "jose": "^4.15.9",
     "unctx": "^2.3.1"
   },
   "devDependencies": {
-    "@nuxt/module-builder": "^0.5.2",
+    "@nuxt/module-builder": "^0.8.4",
     "vitest": "^0.34.6"
   }
 }
