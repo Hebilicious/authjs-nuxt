@@ -1,0 +1,8 @@
+{
+  "name": "basic-fixture",
+  "private": true,
+  "dependencies": {
+    "@hebilicious/authjs-nuxt": "latest",
+    "nuxt": "3.7.4"
+  }
+}
