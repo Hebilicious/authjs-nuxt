@@ -8,7 +8,7 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
-    "@auth/core": "^0.17.0",
+    "@auth/core": "^0.38.0",
     "@hebilicious/authjs-nuxt": "latest"
   },
   "devDependencies": {
