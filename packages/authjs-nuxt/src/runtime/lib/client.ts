@@ -85,7 +85,8 @@ export async function signIn<P extends RedirectableProviderType | undefined = un
 
     const response = await postToInternal({ url: _signInUrl, options, callbackUrl })
     const url = response?._data?.url ?? null
-    const error = url ? new URL(url).searchParams.get("error") : null
+    const searchParams = url ? new URL(url).searchParams : null
+    const error = searchParams?.get("code") ?? searchParams?.get("error") ?? null
     if (error) throw new Error(error)
     if (isCredentials && !redirect) reloadNuxtApp({ persistState: true, force: true })
     if (redirect || !isSupportingReturn) {
