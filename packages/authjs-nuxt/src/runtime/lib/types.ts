@@ -1,4 +1,6 @@
 import type { BuiltInProviderType, ProviderType } from "@auth/core/providers"
+import type { H3Event } from "h3"
+import type { AuthConfig } from "@auth/core/types"
 
 /**
  * Util type that matches some strings literally, but allows any other string as well.
@@ -44,3 +46,4 @@ export interface SignOutParams<R extends boolean = true> {
   /** [Documentation](https://next-auth.js.org/getting-started/client#using-the-redirect-false-option-1 */
   redirect?: R
 }
+export type AuthConfigFunction = (event: H3Event) => Promise<AuthConfig>

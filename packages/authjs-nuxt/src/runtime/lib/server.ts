@@ -5,6 +5,7 @@ import { eventHandler, getRequestHeaders, getRequestURL } from "h3"
 import type { AuthConfig, Session } from "@auth/core/types"
 import { getToken } from "@auth/core/jwt"
 import { checkOrigin, getAuthJsSecret, getRequestFromEvent, getServerOrigin, makeCookiesFromCookieString } from "../utils"
+import type { AuthConfigFunction } from "./types"
 
 if (!globalThis.crypto) {
   // eslint-disable-next-line no-console
@@ -21,12 +22,14 @@ if (!globalThis.crypto) {
 /**
  * This is the event handler for the catch-all route.
  * Everything can be customized by adding a custom route that takes priority over the handler.
- * @param options AuthConfig
+ * @param options AuthConfig | AuthConfigFunction
  * @param runtimeConfig RuntimeConfig
  * @returns EventHandler
  */
-export function NuxtAuthHandler(options: AuthConfig, runtimeConfig: RuntimeConfig) {
+export function NuxtAuthHandler(options: AuthConfig | AuthConfigFunction, runtimeConfig: RuntimeConfig) {
   return eventHandler(async (event) => {
+    if (typeof options === "function") options = await options(event) as AuthConfig
+
     options.trustHost ??= true
     options.skipCSRFCheck = skipCSRFCheck
     const request = await getRequestFromEvent(event)

@@ -40,6 +40,8 @@ You *must* create a catch-all route at `server/api/auth/[...].ts`.
 ```ts
 import GithubProvider from "@auth/core/providers/github"
 import type { AuthConfig } from "@auth/core/types"
+import type { H3Event } from "h3"
+import { D1Adapter } from "@auth/d1-adapter"
 import { NuxtAuthHandler } from "#auth"
 
 // The #auth virtual import comes from this module. You can use it on the client
@@ -57,6 +59,25 @@ export const authOptions: AuthConfig = {
       clientSecret: runtimeConfig.github.clientSecret
     })
   ]
+}
+
+// authOptions can either be passed as an object like above,
+//  or as an async function which has the event as it's argument
+//  this is especially useful for database adapters that need access to the event object,
+//  such as D1Adapter
+export async function authOptionsFunction(event: H3Event) {
+  const authOptions: AuthConfig = {
+    secret: runtimeConfig.authJs.secret,
+    providers: [
+      GithubProvider({
+        clientId: runtimeConfig.github.clientId,
+        clientSecret: runtimeConfig.github.clientSecret
+      })
+    ],
+    adapter: D1Adapter(event.context.cloudflare.env.db)
+  }
+
+  return authOptions
 }
 
 export default NuxtAuthHandler(authOptions, runtimeConfig)
