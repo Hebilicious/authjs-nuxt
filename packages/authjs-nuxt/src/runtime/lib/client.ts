@@ -2,10 +2,13 @@
 // @todo find a way to make this reference work
 import type { BuiltInProviderType, Provider, RedirectableProviderType } from "@auth/core/providers"
 import type { Session } from "@auth/core/types"
+import { joinURL } from "ufo"
 import { makeNativeHeadersFromCookieObject } from "../utils"
 import { useAuth } from "../composables/useAuth"
 import type { LiteralUnion, SignInAuthorizationParams, SignInOptions, SignOutParams } from "./types"
 import { navigateTo, reloadNuxtApp, useRouter } from "#imports"
+
+import { basePath } from "#auth-config"
 
 async function postToInternal({
   url,
@@ -73,7 +76,7 @@ export async function signIn<P extends RedirectableProviderType | undefined = un
     const isSupportingReturn = isCredentials || isEmail
 
     // TODO: Handle custom base path
-    const signInUrl = `/api/auth/${isCredentials ? "callback" : "signin"}/${providerId}`
+    const signInUrl = joinURL(basePath, isCredentials ? "callback" : "signin", providerId || "")
     const _signInUrl = `${signInUrl}?${new URLSearchParams(authorizationParams)}`
 
     // TODO: Handle custom base path
@@ -117,7 +120,7 @@ export async function signOut(options?: SignOutParams) {
     status.value = "unauthenticated"
     const { callbackUrl = window.location.href } = options ?? {}
     // TODO: Custom base path
-    const data = await $fetch<{ url: string }>("/api/auth/signout", {
+    const data = await $fetch<{ url: string }>(joinURL(basePath, "signout"), {
       method: "post",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -148,7 +151,7 @@ export async function signOut(options?: SignOutParams) {
  * See [OAuth Sign In](https://authjs.dev/guides/basics/pages#oauth-sign-in) for more details.
  */
 export async function getProviders() {
-  return $fetch<Record<string, Provider>[]>("/api/auth/providers")
+  return $fetch<Record<string, Provider>[]>(joinURL(basePath, "providers"))
 }
 /**
  * Verify if the user session is still valid
@@ -161,7 +164,7 @@ export async function verifyClientSession() {
     if (cookies.value === null)
       throw new Error("No session found")
 
-    const data = await $fetch<Session>("/api/auth/session", {
+    const data = await $fetch<Session>(joinURL(basePath, "session"), {
       headers: makeNativeHeadersFromCookieObject(cookies.value)
     })
     const hasSession = data && Object.keys(data).length
